@@ -2,6 +2,8 @@
 ---
 This is a fork of fvwm95 meant to be compilable on and play nice with newer versions of Debian (and possibly Ubuntu and other distros, needs testing).
 
+For screenshots, see the [examples folder](https://github.com/mintsuki/fvwm95/tree/master/examples)
+
 It is based off the code from the source package in Debian Sarge, slightly modified so that it compiles without errors on modern Debian, and with a more sane configuration to adapt to modern day needs.
 
 ## How to build
