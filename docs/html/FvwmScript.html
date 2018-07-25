@@ -1,0 +1,563 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmScript - module to build graphic user interface
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmScript must be spawned by Fvwm.  It will not work from
+       the command line.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       FvwmScript is a module which allows to build many  graphi-
+       cal applications such as desktop accessories, button panel
+       with popup menu, modal dialog...  At  the  startup,  Fvwm-
+       Script  reads  the  file which is specified in the command
+       line. This file contains the script.  This script  is  not
+       included in the configuration file of Fvwm.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       FvwmScript  can  be  invoked by inserting the line `Module
+       FvwmScript  name_of_script'  in  the  .fvwmrc  file.   All
+       scripts used by FvwmScript are located in a directory whom
+       is specified in .fvwmrc by the command line  `*FvwmScript-
+       Path path_of_the_script_directory'.  This can be placed on
+       a line by itself, if FvwmScript is to  be  spawned  during
+       fvwm's  initialization, or can be bound to a menu or mouse
+       button or keystroke to invoke it later. Fvwm  will  search
+       directory specified in the ModulePath configuration option
+       to attempt to locate FvwmScript.
+
+       Be sure to set ModulePath in your .fvwmrc file to  include
+       FvwmScript's path.
+
+
+</PRE>
+<H2>ANATOMY OF A SCRIPT</H2><PRE>
+       FvwmScript uses a particular programming langage. A script
+       is composed of four parts. Heading contains general  char-
+       acteristics  of  the window and default properties for all
+       widgets. The second part contains  instructions  whom  are
+       executed at the startup of the script. The third part con-
+       tains periodic tasks whom is executed every 1 second.  And
+       the last one contains the desciption of widgets.  A widget
+       consists of eleven types of items:  text  labels,  single-
+       line  text  inputs, radio buttons, checkbox, push buttons,
+       horizontal and  vertical  scrollbars,  rectangles,  popup-
+       menus, swallowexecs and mini scrollbars.
+
+
+</PRE>
+<H2>HEADING OF A SCRIPT</H2><PRE>
+       The syntaxe is as follow:
+
+
+       WindowTitle <I>string</I>
+              This option sets the window title.
+
+
+       WindowSize <I>width</I> <I>height</I>
+
+
+       WindowPosition <I>x</I> <I>y</I>
+              This option sets  window  position.  <I>x</I>  and  <I>y</I>  are
+              numerical value.
+
+
+       ForeColor {<I>color</I>}
+              This  option  sets the default foreground color for
+              all widgets.
+
+
+       BackColor {<I>color</I>}
+              This option sets the default background  color  for
+              all widgets.
+
+
+       HilightColor {<I>color</I>}
+              This  option sets the default hilight color for all
+              widgets.
+
+
+       ShadowColor {<I>color</I>}
+              This option sets the default shadow color  for  all
+              widgets.
+
+
+       Font {<I>font</I>}
+              This  option  sets  the  default font color for all
+              widgets.
+
+
+
+</PRE>
+<H2>INITIALISATION</H2><PRE>
+       This part contains instructions which will be executed  at
+       the startup.  For example:
+
+            Init
+             Begin
+              Do "Exec cat tada.voc &gt; /dev/dsp"
+              WarpPointer 1
+              Set $ToDo=Restart
+             End
+
+       These  instructions  are  used  to  play a sound, move the
+       pointer to widget 1 and to initialize $ToDo  to  "Restart"
+       at every startup.
+
+
+
+</PRE>
+<H2>PERIODIC TASKS</H2><PRE>
+       This  part  of  the script contains some instructions whom
+
+
+
+            Periodic Task
+             Begin
+              If (RemainderOfDiv (GetTime) 10)==0 Then
+               Do {Exec xcalc}
+             End
+
+       This example shows how to launch xcalc every 10 seconds.
+
+
+
+</PRE>
+<H2>MAIN OF A SCRIPT</H2><PRE>
+       The second part of the script contains the description for
+       every  widget  which  will  be  used  in  the  program.  A
+       description of widget is composed of two parts. Fisrt part
+       describes  initial  properties  and  second  part contains
+       instructions  which  will  be  executed  when  the  widget
+       receives  messages.  All widgets can send and receive mes-
+       sages. All message are identify by a number.  The  message
+       "UserAction"  is  sent  to  a widget when user has altered
+       this one. The syntax is as following:
+
+            Widget         id   # Set the id widget
+            Property
+             Type          string
+             Size width    height
+             Position      x y
+             Title         { string }
+             Value         int
+             MaxValue      int
+             MinValue      int
+             Font          string
+             ForeColor     { color }
+             BackColor     { color }
+             HilightColor  { color }
+             ShadowColor   { Color }
+             Flags         Hidden and/or NoReliefString
+
+       The option 'Flags` is used to specify  if  the  widget  is
+       hidden  or not and if strings are drew with relief or not.
+
+
+            Main
+             Case Message of
+              SingleClic:
+              Begin
+               # list of instructions which will be
+               # executed when widget receives
+               # message "SingleClic". This message is
+               # generated by the user.
+              End
+              1:
+              Begin
+               # message 1
+              End
+             End
+
+
+
+
+</PRE>
+<H2>LIST OF WIDGETS</H2><PRE>
+       There is fifteen types of widgets.
+
+
+       <B>ItemDraw</B>: Display an icon and/or a string.
+
+              <B>Title</B>: string to display.
+
+              <B>Icon</B>: icon to display.
+
+
+       <B>PushButton</B>: Display push button with an icon and/or a
+              string.
+
+              <B>Title</B>:  this string has the following syntax {Title
+              of the button|Option 1|Option 2| Option3|...|Option
+              N}.  "Option  1|Option 2|...|Option N" is the popup
+              menu which is displayed  when  pressing  the  right
+              button.
+
+              <B>Icon</B>: icon to display.
+
+
+       <B>RadioButton</B>: Display radio button with a string.
+
+              <B>Title</B>: title of the radio button.
+
+              <B>Value</B>:  if  Value is equal to 1, the box is checked
+              else it is not.
+
+
+       <B>CheckBox</B>: Display check box with a string.
+
+              <B>Title</B>: title of the check box.
+
+              <B>Value</B>: if Value is equal to 1, the box  is  checked
+              else it is not.
+
+
+       <B>TextField</B>:  Display  a text input field. The text input
+              field can be used to edit a single-line string.
+
+              <B>Title</B>: content of text field.
+
+              <B>Value</B>: position of the insert point.
+
+
+              <B>Value</B>: position of the thumb.
+
+              <B>MaxValue</B>: upper limit of Value.
+
+              <B>MinValue</B>: lower limit of Value.
+
+
+       <B>VScrollBar</B>: Display a vertical scrollbar.
+
+              <B>Value</B>: position of the thumb.
+
+              <B>MaxValue</B>: upper limit of Value.
+
+              <B>MinValue</B>: lower limit of Value.
+
+
+       <B>MiniScrollBar</B>: Display a very small vertical scrollbar.
+
+              <B>Value</B>: position of the thumb.
+
+              <B>MaxValue</B>: upper limit of Value.
+
+              <B>MinValue</B>: lower limit of Value.
+
+
+       <B>Rectangle</B>:  Display  a rectangle. This type of widget can
+              be used to decorate window.
+
+
+       <B>SwallowExec</B>:  This  type  of widget causes FvwmScript to
+              spawn an      process, and capture the first window
+              whose name or  resource  is     equal to Title, and
+              display it in the script window.
+
+              <B>Title</B>: specify the window name  which  be  captured
+              and displayed in the script window.
+
+              <B>SwallowExec</B>: specify the command line to execute to
+              spawn the process. Modules canalso be swallowed.
+
+              <B>Value</B>: specify the looking of the border.  Possible
+              value: -1, 0, 1.
+
+
+       <B>PopupMenu</B>: Display a popup menu.
+
+              <B>Value</B>: specify what option is selected.
+
+              <B>Title</B>:  the title has the following syntax: {Option
+              1|Option    2|...|Option    N}."Option     1|Option
+              2|...|Option  N"  is  the  popup menu which is dis-
+              be used to display disk usage.
+
+              <B>Value</B>: specify the current value of the dipstick.
+
+              <B>MinValue</B>: specify the minimum  value  of  the  dip-
+              stick.
+
+              <B>MaxValue</B>:  specify  the  maximum  value of the dip-
+              stick.
+
+
+       <B>VDipstick</B>: Display a vertical dipstick.
+
+              <B>Value</B>: specify the current value of the dipstick.
+
+              <B>MinValue</B>: specify the minimum  value  of  the  dip-
+              stick.
+
+              <B>MaxValue</B>:  specify  the  maximum  value of the dip-
+              stick.
+
+
+       <B>List</B>: Display a list. List lets user to  choose  between
+              various options.
+
+              <B>Value</B>: specify which option is selected.
+
+              <B>Title</B>: title  contains  options  displayed  in  the
+              list.   The   syntaxe  is  the  following:  {Option
+              1|Option 2|...|Option N}. All menus  are  displayed
+              at the top of window.
+
+
+       <B>Menu</B>: Display a menu whom lets user to choose a option.
+
+              <B>Value</B>: specify which option is selected.
+
+              <B>Title</B>:  title  contains  options  displayed  in the
+              menu.  The  syntaxe  is  the   following:   {Option
+              1|Option 2|...|Option N}.
+
+
+
+</PRE>
+<H2>INSTRUCTIONS</H2><PRE>
+       Here is the description of all instructions.
+
+
+       HideWidget <I>id</I> : hide the widget numbered <I>id</I>.
+
+
+       ShowWidget <I>id</I>: show the widget numbered <I>id</I>.
+
+
+              <I>id1</I> to <I>id2</I>.
+
+
+       ChangeMaxValue  <I>id1</I> <I>id2</I>: set the maximum value of the
+              widget num- bered <I>id1</I> to <I>id2</I>.
+
+
+       ChangeMinValue  <I>id1</I> <I>id2</I>: set the minimum value of the
+              widget num- bered <I>id1</I> to <I>id2</I>.
+
+
+       ChangeTitle  <I>id1</I> <I>id2</I>: set the title of the widget numbered
+              <I>id1</I> to <I>id2</I>.
+
+
+       ChangeIcon  <I>id1</I>  <I>id2</I>:  set the icon of the widget numbered
+              <I>id1</I> to <I>id2</I>.
+
+
+       ChangeForeColor <I>id1</I> {<I>color</I>}: set the foreground color of
+              the wid- get numbered <I>id1</I> to {<I>color</I>}.
+
+
+       ChangeBackColor <I>id1</I> {<I>color</I>}: set the background color of
+              the wid- get numbered <I>id1</I> to {<I>color</I>}.
+
+
+
+       ChangePosition  <I>id1</I> <I>x</I> <I>y</I>: move the widget numbered <I>id1</I> to
+              position (<I>x</I>,<I>y</I>).
+
+
+       ChangeSize  <I>id1</I> <I>width</I> <I>height</I>: set the size of the widget
+              numbered <I>id1</I> to (<I>width</I>,<I>height</I>).
+
+
+       ChangeFont  <I>id1</I>  <I>newfont</I>: set the font of the widget
+              numbered <I>id1</I> to <I>newfont</I>.
+
+
+       WarpPointer  <I>id</I>:  warp the mouse pointer into the widget
+              numbered <I>id</I>.
+
+
+       WriteToFile  <I>filename</I>  {<I>str1</I>} {<I>str2</I>} etc: write to the
+              file <I>file-</I>             <I>name</I> the string which is the
+              concatenation of all arguments <I>str1</I>, <I>str2</I>, etc.
+
+
+       Do {<I>str1</I>} {<I>str2</I>} etc: execute the command which is the
+              concatena- tion of all arguments <I>str1</I>, <I>str2</I>, etc.
+
+              string and set the variable $<I>var</I> to this string.
+
+
+       Quit: quit the program.
+
+
+       SendSignal <I>id1</I> <I>id2</I>: send a message numbered <I>id2</I> to widget
+              <I>id1</I>.
+
+
+       SendToScript <I>id</I><B>_</B><I>script</I> {<I>str1</I>1} {<I>str2</I>} etc: send a message
+              to  the        script  identified by id_script. The
+              message is the concatenation of str1, str2...
+
+
+
+</PRE>
+<H2>ARGUMENTS</H2><PRE>
+       Most of commands use arguments.  There  is  two  kinds  of
+       argument:  numbers and strings.  A numerical argument is a
+       value which is between -32000  and  +32000.  A  string  is
+       always  surrounded with brace. Variables always begin with
+       the character "$" and can contains both number and string.
+
+
+
+</PRE>
+<H2>FUNCTIONS</H2><PRE>
+       All  functions  are used as argument. Functions can return
+       both string and number.  The syntax is:
+
+            (function argument1 argument2 etc)
+
+       Here is the complete list of arguments:
+
+
+       (GetTitle <I>id</I>): return the title of the widget numbered <I>id</I>.
+
+
+       (GetValue  <I>id</I>):  return  the current value of the widget
+              numbered <I>id</I>.
+
+
+       (GetOutput  {<I>str</I>}  <I>int1</I> <I>int2</I>): executes the command <I>str</I>,
+              gets the standart output and returns the word which
+              is in  the  line  <I>int1</I>       and  in  the  position
+              <I>int2</I>.  If  <I>int2</I> is equal to -1, GetOutput   returns
+              the complete line.
+
+
+       (NumToHex <I>int</I>): return the hexadecimal value of <I>int</I>.
+
+
+       (HexToNum {<I>str</I>}): return the decimal value of <I>str</I>, <I>str</I>
+              must be an hexadecimal value.
+
+
+
+       (Mult <I>int1</I> <I>int2</I>): return the result of (<I>int1</I>*<I>int2</I>).
+
+
+       (Div <I>int1</I> <I>int2</I>): return the result of (<I>int1</I>/<I>int2</I>).
+
+
+       (StrCopy {<I>str</I>} <I>int1</I> <I>int2</I>): return  the  string  whom  is
+              between   position  int1  and  int2.  For  example,
+              (StrCopy  {Hello} 1 2) returns {He}
+
+
+       (LaunchScript {<I>str</I>}): this function launch the script
+              named  str    and  return an identification number.
+              This number is necessary to     use these functions
+              SendToScript and ReceivFromScript. The string   str
+              contains the script name and some arguments.
+
+
+       (GetScriptArgument  {<I>int</I>}):  this  function  return  the
+              argument  script used in the function LaunchScript.
+              If  int  is  equal  to      zero, GetScriptArgument
+              return the name of the script.
+
+
+       (GetScriptFather): this function return the identification
+              number of the script father.
+
+
+       (ReceivFromScript {<I>int</I>}): this function return the message
+              sended by the script numbered int.
+
+
+       (RemainderOfDiv {<I>int1</I> <I>int2</I>}): this function return the
+              remainder of the division (<I>int1</I>/<I>int2</I>).
+
+
+       (GetTime): this function return the time in second.
+
+
+
+</PRE>
+<H2>CONDITIONAL LOOPS</H2><PRE>
+       There is three kind of conditional loops. The  instruction
+       "If-Then-Else" has the following syntax:
+
+            If $ToDo=={Open xcalc} Then
+             Do {Exec xcalc &amp;}            # List of instructions
+            Else
+            Begin
+             Do {Exec killall xcalc &amp;}    # List of instructions
+             Do {Exec echo xcalc killed &gt; /dev/console}
+            End
+
+       contains only one instruction, Begin and End can be  omit-
+       ted. The instruction "While-Do" as the following syntax:
+
+            While $i&lt;5 Do
+            Begin
+             Set $i=(Add i 1)             # List of instructions
+            End
+
+       Two  strings can be compared with "==" and two numbers can
+       be compared with "&lt;", "&lt;=",  "==",  "&gt;=",  "&gt;".  The  loop
+       "For-Do-Begin-End" has the following syntax:
+
+            For $i=1 To 20 Do
+            Begin
+             Do {Exec xcalc &amp;}            # List of instructions
+            End
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+              Frederic   Cordier   (cordie97@cui.unige.ch  or  f-
+       cord96@univ-lyon1.fr).
+
+
+</PRE>
+<H2>CONTRIBUTOR</H2><PRE>
+              Eddy J. Gurney (eddy@gizmo.aa.ans.net).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

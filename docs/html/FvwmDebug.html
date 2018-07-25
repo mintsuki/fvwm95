@@ -1,0 +1,78 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmDebug - the FVWM module debugger
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmDebug  is  spawned by fvwm, so no command line invoca-
+       tion will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The FvwmDebug captures the stream of module packets coming
+       from fvwm, and displays them on stderr.
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       The  FvwmDebug  program,  and  the concept for interfacing
+       this module to the Window Manager, are all  original  work
+       by Robert Nation
+
+       Copyright 1994, Robert Nation. No guarantees or warranties
+       or anything are provided or implied in any way whatsoever.
+       Use  this program at your own risk. Permission to use this
+       program for any purpose is given, as long as the copyright
+       is kept intact.
+
+
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       During  initialization,  the  FvwmDebug requests that fvwm
+       dump a complete window list into its pipe.  These  packets
+       are terminated with and "end Send_WindowList" message.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       FvwmDebug  can  be  invoked  by inserting the line 'Module
+       FvwmDebug' in the .fvwmrc file. This can be  placed  on  a
+       line  by  itself,  if  FvwmDebug  is  to be spawned during
+       fvwm's initialization, or can be bound to a menu or  mouse
+       button  or  keystroke to invoke it later. Fvwm will search
+       directory specified in the ModulePath configuration option
+       to attempt to locate FvwmDebug.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       There are no configuration options.
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Robert Nation
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

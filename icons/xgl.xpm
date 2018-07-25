@@ -1,0 +1,38 @@
+/* XPM */
+static char * xgl_xpm[] = {
+/* width height ncolors chars_per_pixel */
+"28 27 5 1",
+/* colors */
+" 	c black",
+".	c wheat1",
+"X	c grey50",
+"o	c red",
+"O	c wheat2",
+/* pixels */
+"                            ",
+"  ........................  ",
+"  ..                    ..  ",
+"  . XXXXXXXXXXXXXXXXXXXX .  ",
+"  . XXXXoooXoXXooooXXXXX .  ",
+"  . XXXooXXooXXXooXXXXXX .  ",
+"  . XXooXXXXoXXXooXXXXXX .  ",
+"  . XXooXXXXXXXXooXXXXXX .  ",
+"  . XXooXXXXXXXXooXXXXXX .  ",
+"  . XXooXXooooXXooXXXXXX .  ",
+"  . XXooXXXooXXXooXXXoXX .  ",
+"  . XXXooXXooXXXooXXooXX .  ",
+"  . XXXXooooXXXoooooooXX .  ",
+"  . XXXXXXXXXXXXXXXXXXXX .  ",
+"  ..                    ..  ",
+"  ........................  ",
+"                            ",
+"                            ",
+" OOOOOOOOOOOOOOOOOOOOOOOOOO ",
+" OOOOOOOOOOOOOOOOOOOOOOOOOO ",
+" OOOOOOOOOOOOOOOOOOO      O ",
+" OOOOOOOOOOOOOOOOOOOOOOOOOO ",
+"                            ",
+"  O O O O O O O O O O O O O ",
+" O O O O O O O O O O O O O  ",
+"  O O O O O O O O O O O O O ",
+"                            "};

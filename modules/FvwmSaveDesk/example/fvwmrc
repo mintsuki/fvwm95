@@ -1,0 +1,284 @@
+# needed 'cause of M4
+undefine(`include')
+
+StdForeColor		Black
+StdBackColor		grey
+HiForeColor 		Black
+HiBackColor 		DarkTurquoise
+StickyForeColor		Black
+StickyBackColor		#908090
+MenuForeColor           Black
+MenuBackColor           DarkTurquoise
+MenuStippleColor        DeepSkyBlue
+
+Font			fixed
+WindowFont		fixed
+IconFont		fixed
+
+MWMBorders
+MWMButtons
+MWMMenus
+MWMDecorHints
+MWMFunctionHints
+
+DecorateTransients
+
+IconBox -305 -295 -1 -105
+IconBox -105 5 -5 400
+
+ButtonStyle 1 50x22
+ButtonStyle 2 50x50
+ButtonStyle 4 22x22
+
+ModulePath /usr/lib/X11/fvwm
+
+PixmapPath	     /usr/include/X11/pixmaps
+IconPath	     /usr/include/X11/bitmaps
+
+DeskTopSize 1x1
+
+DeskTopScale 32
+
+RandomPlacement
+SmartPlacement
+
+Style "*" Color black/grey,Icon unknown1.xpm,HandleWidth 7,BorderWidth 4
+
+Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0
+Style "Fvwm Pager" BorderWidth 4
+Style "FvwmPager"  BorderWidth 4
+Style "FvwmBanner" StaysOnTop
+Style "GoodStuff"  NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 4
+Style "xterm"      Icon xterm.xpm, Color black/grey
+Style "xcalc"      Icon xcalc.xpm
+Style "xman"	   Icon xman.xpm
+Style "xmag"	   Icon mag_glass.xpm
+Style "GoodStuff"  Icon toolbox.xpm
+
+
+Popup "Quit-Verify"
+	Title	"Really Quit Fvwm?	"
+	Quit	"Yes, Really Quit	"
+	Restart "Restart Fvwm	" fvwm
+	Restart "Start mwm	" mwm
+	Nop	""
+	Nop	"No, Don't Quit	"
+EndPopup
+
+Popup "Module-Popup"
+	Title	"Modules"
+	Module	"GoodStuff"	GoodStuff
+	Module	"NoClutter"	FvwmClean
+	Module	"FvwmIdentify"	FvwmIdent
+	Module  "Banner"        FvwmBanner
+	Module	"Debug"		FvwmDebug
+	Module  "SaveDesktop"   FvwmSaveDesk
+	Module  "Pager"         FvwmPager 0 3
+	Module  "FvwmWinList"   FvwmWinList
+EndPopup
+
+
+Popup "Utilities"
+	Title 	"Utilities	"
+	Exec    "Xterm	"		exec xterm -ls &
+	Exec	"Calculator	"	exec xcalc &
+	Exec	"Xman	"		exec xman &
+	Exec	"Xmag	"		exec xmag &
+	Nop	""
+	Popup	"Modules"	Module-Popup
+	Nop	""
+	Popup	"Exit Fvwm	"	Quit-Verify
+EndPopup
+
+# This defines the change workspace menu
+Popup "Occupy-Workspace"
+	Title "Occupy Workspace"
+	WindowsDesk "Workspace &1"	0
+	WindowsDesk "Workspace &2"	1
+	WindowsDesk "Workspace &3"	2
+	WindowsDesk "Workspace &4"	3
+EndPopup
+
+# This defines the most common window operations
+Popup "Window Ops"
+	Title	"Window Ops	"
+ 	PopUp   "Occupy Workspace"	Occupy-Workspace
+	Move    "&Move	Alt+F7"
+	Resize  "&Size	Alt+F8" 
+	Lower   "&Lower	Alt+F3"
+	Raise   "Raise	"
+	Stick	"(Un)Stick	"
+	Iconify "(Un)Mi&nimize	Alt+F9"
+	Maximize "(Un)Ma&ximize	Alt+F10"
+	Maximize "(Un)Maximize Vertical	"	0 100
+	Nop     ""
+	Delete  "&Close	Alt+F4"
+	Destroy "&Kill!	"
+EndPopup
+
+Popup "Window Ops2"
+ 	PopUp   "Occupy Workspace"	Occupy-Workspace
+	Move    "&Move	Alt+F7"
+	Resize  "&Size	Alt+F8" 
+	Iconify "(Un)Mi&nimize	Alt+F9"
+	Maximize "(Un)Ma&ximize	Alt+F10"
+	Lower   "&Lower	Alt+F3"
+	Nop     ""
+	Delete  "&Close	Alt+F4"
+	Nop 	""
+	Module	"&ScrollBar" 	FvwmScroll 2 2
+EndPopup
+Function "Iconify-and-Raise"
+	Iconify	"Motion"
+	Raise "Motion"
+EndPopup
+
+Function "Move-or-Lower"
+	Move 		"Motion"
+	Lower		"Motion"
+	Lower		"Click"
+	RaiseLower	"DoubleClick"
+EndFunction
+
+Function "Move-or-Iconify"
+	Move 		"Motion"
+	PopUp		"Click" Window Ops2
+	Iconify		"DoubleClick"
+EndFunction
+
+Function "windowops-or-die"
+	PopUp		"Motion" Window Ops2
+	PopUp		"Click" Window Ops2
+	Delete		"DoubleClick"
+EndFunction
+
+Function "Move-or-Raise"
+	Move            "Motion"
+	Raise           "Motion"
+	Raise           "Click"
+	Iconify      "DoubleClick" 
+EndFunction
+
+Function "Move-or-Lower"
+	Move            "Motion"
+	Lower           "Click"
+	RaiseLower      "DoubleClick"
+EndFunction
+Function "Resize-or-Raise"
+	Resize          "Motion"
+	Raise           "Motion"
+	Raise           "Click"
+	RaiseLower      "DoubleClick"
+EndFunction
+Function "Resize-or-Lower"
+	Resize          "Motion"
+	Lower           "Click"
+	RaiseLower      "DoubleClick"
+EndFunction
+
+Mouse 1		R   	A       PopUp "Utilities"
+Mouse 2		R    	A      	PopUp "Window Ops"
+Mouse 3		R    	A      	WindowList
+
+Mouse 0		1    	A      	Function "windowops-or-die"
+Mouse 0		2    	A     	Maximize
+Mouse 0		4    	A     	Iconify
+
+Mouse 1         FS      A       Function "Resize-or-Raise"
+Mouse 2         FS      A       Function "Resize-or-Lower"
+Mouse 1         T       A       Function "Move-or-Raise"
+Mouse 2         T       A       Function "Move-or-Lower"
+
+Mouse 1		I	A	Function "Move-or-Iconify"
+Mouse 2		I	A	Function "Move-or-Iconify"
+Mouse 3		I	A	PopUp "Window Ops2"
+Mouse 3		FST    	A      	Function "windowops-or-die"
+
+Key Left	A	C	Scroll -100 0
+Key Right	A	C	Scroll +100 +0
+Key Up		A	C	Scroll +0   -100
+Key Down	A	C	Scroll +0   +100
+
+Key Left	A	M	Scroll -10 +0
+Key Right	A	M	Scroll +10 +0
+Key Up		A	M	Scroll +0   -10
+Key Down	A	M	Scroll +0   +10
+
+Key Left	A	SC	CursorMove -1 0
+Key Right	A	SC	CursorMove +1 +0
+Key Up		A	SC	CursorMove +0   -1
+Key Down	A	SC	CursorMove +0   +1
+
+Key Left	A	SM	CursorMove -10 +0
+Key Right	A	SM	CursorMove +10 +0
+Key Up		A	SM	CursorMove +0   -10
+Key Down	A	SM	CursorMove +0   +10
+
+Key F1		A	M	Popup "Window Ops"
+Key F2		A	M	Popup "Utilities"
+Key F3		A	M	Lower
+Key F4		A	M	Destroy
+Key F5		A	M	CirculateUp
+Key F6		A	M	CirculateDown
+Key F7		A	M	Move
+Key F8		A	M	Resize
+Key F9		A	M	Iconify
+Key F10		A	M	Maximize
+
+Key L5                IW      N       RaiseLower
+Key L5                IW      S       Lower
+Key L5                IW      C       Raise
+Key L7                IW      A       Iconify
+
+#############################################################################
+# Stuff to do at start-up
+
+sinclude(`.fvwmdesk')
+
+Function "InitFunction"
+	Exec	 "I"	xsetroot -solid steelblue
+	Module	 "I"	GoodStuff
+	Module	 "I"	FvwmPager 0 3
+        Function "I"    StartupFunction
+EndFunction
+
+Function "RestartFunction"
+	Exec	"I"	xsetroot -solid steelblue
+	Module	"I"	GoodStuff
+	Module	"I"	FvwmPager 0 3
+EndFunction
+
+*GoodStuffFore Black
+*GoodStuffBack #908090
+*GoodStuffFont fixed
+*GoodStuffGeometry -5-5
+*GoodStuffRows 1
+
+*GoodStuff Xterm   xterm.xpm   Exec "xterm" exec xterm -ls &
+*GoodStuff Seyon   modem.xpm   Exec "Seyon" exec seyon &
+*GoodStuff Mail    mail2.xpm   Exec "xterm" exec xterm -geometry 80x40 -e elm &
+*GoodStuff News    news.xpm   Exec "xterm" exec xterm -geometry 80x40 -e tin &
+*GoodStuff SaveDesc desk.xpm   Module  "SaveDesktop"   FvwmSaveDesk
+
+*FvwmPagerBack #908090
+*FvwmPagerFore #484048
+*FvwmPagerHilight #cab3ca
+*FvwmPagerGeometry x80-5-80
+*FvwmPagerLabel 0 General
+*FvwmPagerLabel 1 Tmp
+*FvwmPagerLabel 2 Mail/News
+*FvwmPagerLabel 3 Compile/Modem
+*FvwmPagerSmallFont 5x8
+
+*FvwmIdentBack MidnightBlue
+*FvwmIdentFore Yellow
+*FvwmIdentFont -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
+
+*FvwmWinListBack #908090
+*FvwmWinListFore Black
+*FvwmWinListFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmWinListAction Click1 Iconify -1,Raise
+*FvwmWinListAction Click2 Iconify 1
+*FvwmWinListAction Click3 Module "FvwmIdent" FvwmIdent
+*FvwmWinListUseSkipList
+*FvwmWinListGeometry +0-1

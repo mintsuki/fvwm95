@@ -1,0 +1,26 @@
+
+SHELL=/bin/sh
+
+prefix=@prefix@
+fvwm_dir=${prefix}/lib/X11/@fvwm_name@
+
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+RM=@RM@
+SCRIPTS=BellSetup Buttons Date DeskSetup FileBrowser KeyboardSetup \
+	PointerSetup Quit ScreenDump ScreenSetup 
+
+
+all:
+
+install:
+	mkdir -p ${fvwm_dir}/scripts
+	@for i in ${SCRIPTS}; do \
+	echo Installing $$i ; \
+	(${INSTALL_DATA} $$i ${fvwm_dir}/scripts) \
+	done
+clean: 
+
+distclean: 
+

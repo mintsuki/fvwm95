@@ -1,0 +1,70 @@
+.\" t
+.\" @(#)FvwmSaveDesk.1	6/20/95
+.TH FvwmSaveDesk 1.0 "Jul 20 1995"
+.UC
+.SH NAME
+FvwmSaveDesk \- another FVWM desktop-layout saving module
+.SH SYNOPSIS
+FvwmSaveDesk is spawned by fvwm, so no command line invocation will work.
+
+.SH DESCRIPTION
+When called, this module will attempt to save your current desktop
+layout as a fvwm function definition into the file
+.I .fvwmdesk
+in your home directory. The function is named
+.I StartupFunction
+\. This Function can be called in Function
+.I InitFunction
+to startup all Programms on all Workspaces.
+If fvwm is compiled with the M4 option, you can include this file in
+.I .fvmrc
+else you have to insert this file by hand.
+Your applications must supply certain hints to the X window system.
+Emacs, for example, does not, so FvwmSaveDesk can't get any
+information from it.  
+ 
+Also, FvwmSaveDesk assumes that certain command line options are
+globally accepted by applications, which may not be the case.
+
+.SH SETUP IF FVWM IS COMPILED WITH THE M4 OPTION
+Fvwm has to be called with the option
+
+-m4opt -I$HOME.
+
+The first line in .fvwmrc should be
+
+undefine(`include`),
+
+to avoid problems.
+You can the include the file
+.I .fvwmdesk
+with 
+
+sinclude(`.fvwmdesk') .
+
+Insert the following line into the Function
+.I InitFunction
+
+Function "I"    StartupFunction
+
+If you have GNU's m4 another possiblity is to compile fvwm with
+GNU_M4_OPTION_P and use
+
+m4_include(`.fvwmdesk')m4_dnl
+
+So you don't need to undefine `include'.
+
+.SH INVOCATION
+FvwmSaveDesk can be invoked by inserting the line 'Module FvwmSaveDesk' in
+the 
+.I .fvwmrc
+file.
+This should be bound to a menu or mouse button or keystroke
+to invoke it later. Fvwm will search directory specified in the ModulePath
+configuration option to attempt to locate FvwmSaveDesk.
+
+.SH AUTHOR
+Carsten Paeth (calle@calle.in-berlin.de)
+
+based on FvwmSave written by Robert Nation
+and Mr. Per Persson <pp@solace.mh.se> (Omnion on IRC)

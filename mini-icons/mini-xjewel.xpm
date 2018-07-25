@@ -1,0 +1,29 @@
+/* XPM */
+static char * mini_xjewel_xpm[] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 7 1 0 0",
+/* colors */
+" 	s none	m none	c none",
+".	s iconColor1	m black	c black",
+"X	s iconColor7	m white	c cyan",
+"o	s iconColor2	m white	c white",
+"O	c #808080",
+"+	s iconColor4	m white	c green",
+"@	c #FFA000",
+/* pixels */
+"      ...       ",
+"     .XoX.      ",
+"     .oXX.O     ",
+"     .XXX.O     ",
+"      ...OO     ",
+"      OOOO      ",
+"     .+o+.      ",
+"     .o++.O     ",
+"     .+++.O     ",
+"      ...OO     ",
+"      OOOO      ",
+"     .@o@.      ",
+"     .o@@.O     ",
+"     .@@@.O     ",
+"      ...OO     ",
+"       OOO      "};

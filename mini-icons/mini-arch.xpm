@@ -1,0 +1,27 @@
+/* XPM */
+static char * mini_arch1_xpm[] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 4 1 0 0",
+/* colors */
+" 	s none	m none	c none",
+".	s iconColor1	m black	c black",
+"X	c #c06432",
+"o	c #ffa032",
+/* pixels */
+"  ..............",
+" .XXoXXoXXXXoX..",
+"..............X.",
+".XoXXXXoXoXXX.X.",
+".XXXoXXXXXooX.X.",
+".XoXX....XXXX.X.",
+".XXX..   .Xoo.X.",
+".oX.X.    .oX.X.",
+".XX.X.    .XX.X.",
+".oo.X.    .Xo.X.",
+".oX.X.    .oo.X.",
+".XX.X.    .XX.X.",
+".oo.X.    .oX.X.",
+".Xo..     .oo.. ",
+"....      ....  ",
+"                "};
+

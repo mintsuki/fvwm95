@@ -1,0 +1,20 @@
+Wed Feb 4 1998 Emmanuel Rouat <rouat@dsys.ceng.cea.fr>
+	* created system.fvwm95rc.in
+	
+Wed Jan 28 1998 Emmanuel Rouat <rouat@dsys.ceng.cea.fr>
+	* Makefile of FvwmConsole corrected (FvwmConsoleC was missing)
+
+Tue Jan 27 1998 Emmanuel Rouat <rouat@dsys.ceng.cea.fr>
+	* Makefiles updated - should compile and install smoothly now
+
+Thu Jan 22 1998 Emmanuel Rouat <rouat@dsys.ceng.cea.fr>
+	* Scripts for FvwmScripts adapted
+	
+Tue Jan 20 1998 Emmanuel Rouat <rouat@dsys.ceng.cea.fr>
+	* sample/system.fvwm95rc lots of tweaking (on going work)
+	* FvwmScript module added (from fvwm-2.0.46)
+	* FvwmForm module updated ( ''    ''    '' )
+	* FvwmWharf module added  ( ''    ''    '' )
+
+Tue Jan 6 1998 Emmanuel Rouat <rouat@dsys.ceng.cea.fr>
+	* modules/FvwmTaskBar 'Enhanced FvwmTasbar' instead of regular one

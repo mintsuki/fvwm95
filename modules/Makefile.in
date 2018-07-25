@@ -1,0 +1,45 @@
+
+SHELL=/bin/sh
+
+@SET_MAKE@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+subdirs=FvwmAudio FvwmAuto FvwmBacker FvwmBanner FvwmButtons FvwmConsole \
+	FvwmCpp FvwmDebug FvwmForm FvwmIconBox FvwmIconMan FvwmIdent FvwmM4 \
+	FvwmPager FvwmSave FvwmSaveDesk FvwmScript FvwmScroll FvwmTalk \
+	FvwmTaskBar FvwmWinList FvwmWharf
+modules_dir=${prefix}/lib/X11/@fvwm_name@
+
+all:
+	@for i in ${subdirs}; do \
+		echo Making all in $$i ; \
+		(cd $$i; ${MAKE} all) \
+	done
+
+install:
+	mkdir -p ${modules_dir}
+	@for i in ${subdirs}; do \
+		echo Installing in $$i ; \
+		(cd $$i; ${MAKE} install) \
+	done
+
+depend:
+	@for i in ${subdirs}; do \
+		echo Depending in $$i ; \
+		(cd $$i; ${MAKE} depend) \
+	done
+
+clean:
+	@for i in ${subdirs}; do \
+		echo Cleaning in $$i ; \
+		(cd $$i; ${MAKE} clean) \
+	done
+
+distclean:
+	@for i in ${subdirs}; do \
+		echo Distribution Cleaning in $$i ; \
+		(cd $$i; ${MAKE} distclean) \
+	done
+	rm -f config.cache config.status config.log
+	find . -name Makefile -exec rm {} \; -print

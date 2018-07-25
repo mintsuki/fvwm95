@@ -1,0 +1,38 @@
+/* XPM */
+static char * owl_xpm[] = {
+/* width height ncolors chars_per_pixel */
+"31 27 5 1",
+/* colors */
+" 	s None	c None",
+".	c #9C9C9C",
+"X	c #6F6F6F",
+"o	c #BFBFBF",
+"O	c #E7E7E7",
+/* pixels */
+"               ..XXXXX         ",
+"         XXXXXXXXXX X          ",
+"     XXX    XXoXXXX .  XXX     ",
+"      XoXXXXXXoXXXXXXXXoX      ",
+"       XoXoXoXXXXXoXoXoX       ",
+"        XoXXXoXoXoXXXoX        ",
+"        XXXOOXoXoXOOXXX        ",
+"        XXOo.OXoXO.oOXX        ",
+"        XXOXXOXXXOXXOXX        ",
+"        XXOo.OXXXO.oOXX        ",
+"        XoXOOXXOXXOOXoX        ",
+"        X.oXXXOXOXXXo.X        ",
+"         X.o.XOXOX.o.X         ",
+"        X...oXOOOXo...X        ",
+"       X...ooXXOXXoo...X       ",
+"       XX.o.ooXXXoo.o.XX       ",
+"      X....o.ooXoo.o....X      ",
+"      XX..o.o.o.o.o.o..XX      ",
+"      X.X..o.o.o.o.o..X.X      ",
+"      XX..o.o.o.o.o.o..XX      ",
+"      X.X..o.o.o.o.o..X.X      ",
+"       XXX..o.o.o.o..XXX       ",
+"       X.XX.........XX.X       ",
+"        XX.X.XX.XX.X.XX        ",
+"XXXXXXXXXOXOXOXXXOXOXOXXXXXXXXX",
+"OOOOOOOOXOXOXOXOXOXOXOXOOOOOOOO",
+"         X X XX XX X X         "};

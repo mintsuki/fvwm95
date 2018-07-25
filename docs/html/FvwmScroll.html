@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmScroll - the FVWM scroll-bar module
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmScroll  is spawned by fvwm, so no command line invoca-
+       tion will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The FvwmScroll module prompts the user to select a  target
+       window,  if the module was not launched from within a win-
+       dow context in Fvwm.  After that, it adds scroll  bars  to
+       the  selected  window,  to  reduce the total desktop space
+       consumed by the window.
+
+
+       FvwmScroll reads the same .fvwmrc file as fvwm reads  when
+       it starts up, and looks for lines similar to "*FvwmScroll-
+       Fore green".
+
+       FvwmScroll should not be used with windows which  move  or
+       resize  themselves,  nor  should  it  be used with windows
+       which set the WM_COLORMAP_WINDOWS property.  Operation  is
+       fine with windows that have a private colormap.
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       The  FvwmScroll  program,  and the concept for interfacing
+       this module to the Window Manager, are all  original  work
+       by Robert Nation.
+
+       Copyright 1994, Robert Nation. No guarantees or warranties
+       or anything are provided or implied in any way whatsoever.
+       Use  this program at your own risk. Permission to use this
+       program for any purpose is given, as long as the copyright
+       is kept intact.
+
+
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       During initialization, <I>FvwmScroll</I> will eventually search a
+       configuration file which describes the colors to use.  The
+       configuration  file is the same file that fvwm used during
+       initialization.
+
+       If the FvwmScroll executable is linked to another name, ie
+       ln  -s  FvwmScroll  MoreScroll, then another module called
+       MoreScroll can be started,  with  a  completely  different
+       configuration than FvwmScroll, simply by changing the key-
+       word  FvwmScroll to MoreScroll.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       file.  The parameter x and y are integers, which  describe
+       the  horizontal  and vertical window size reduction.  Fvwm
+       will search directory specified in the ModulePath configu-
+       ration  option  to  attempt to locate FvwmScroll. Although
+       nothing keeps you from launching  FvwmScroll  at  start-up
+       time, you probably don't want to.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       FvwmScroll  reads the same .fvwmrc file as fvwm reads when
+       it starts up, and looks for lines as listed below:
+
+
+       *FvwmScrollFore <I>color</I>
+              Tells the module to use <I>color</I> instead of  grey  for
+              scroll bars themselves.
+
+
+       *FvwmScrollBack <I>color</I>
+              Tells  the module to use <I>color</I> instead of black for
+              the window background.
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       When the scroll bars are removed by clicking on the button
+       in the lower right corner, the window does not restore its
+       location correctly.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Robert Nation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

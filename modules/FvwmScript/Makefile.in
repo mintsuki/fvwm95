@@ -1,0 +1,84 @@
+#
+SHELL=/bin/sh
+
+@SET_MAKE@
+
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bin_dir=@exec_prefix@/bin
+x_includes=@x_includes@
+x_libraries=@x_libraries@
+fvwm_icons=@fvwm_icons@
+fvwm_rc=@fvwm_rc@
+fvwm_name=@fvwm_name@
+#
+# This is where the modules will be installed
+fvwm_dir=${prefix}/lib/X11/@fvwm_name@
+man_dir=${prefix}/man/man1
+
+#
+# Libs
+X_LIBRARY=-lX11 @LIBS@
+XPM_LIBRARY=-lXpm
+XEXT_LIBRARY=-lXext
+FVWM_LIBRARY=-l${fvwm_name}
+LOCAL_LIBRARY = ./Widgets/libWidgets.a
+LIBS=-L${top_srcdir}/libs ${x_libraries} ${FVWM_LIBRARY} ${XPM_LIBRARY} ${XEXT_LIBRARY} ${X_LIBRARY} ${LOCAL_LIBRARY}
+
+PATH_DEFINES=-DFVWM_ICONDIR=\"${fvwm_icons}\" \
+               -DFVWMDIR=\"${fvwm_dir}\"
+
+EXTRA_DEFINES=-DXPM -DSHAPE ${PATH_DEFINES} -DI18N
+CC=@CC@
+INCLUDES=-I${top_srcdir}/include ${x_includes}
+CFLAGS=${INCLUDES} @CFLAGS@ ${EXTRA_DEFINES} 
+MAKEDEPEND=@MAKEDEPEND@
+INSTALL=@INSTALL@
+INSTALL_PROGRAM=@INSTALL_PROGRAM@
+INSTALL_DATA=@INSTALL_DATA@
+RM=@RM@
+
+PROG=FvwmScript
+
+BUILDSUBDIRS = Widgets
+SAMPLESUBDIRS = Scripts Scripts/some_nice_icons
+SUBDIRS = $(BUILDSUBDIRS) $(SAMPLESUBDIRS)
+
+
+SRCS = libyywrap.c lex.yy.c y.tab.c Instructions.c FvwmScript.c
+
+OBJS = libyywrap.o lex.yy.o y.tab.o Instructions.o FvwmScript.o
+
+
+
+all: subdirs ${PROG}
+
+depend:
+	${MAKEDEPEND} ${CFLAGS} ${SRCS}
+
+install: all
+	${INSTALL_PROGRAM} ${PROG} ${fvwm_dir}
+	${INSTALL_DATA} ${PROG}.man ${man_dir}/${PROG}.1 
+	cd Scripts; ${MAKE} install
+
+
+clean:
+	${RM} ${PROG} ${OBJS} *~ core *.bak
+	@for i in ${SUBDIRS}; do \
+		echo Cleaning all in $$i ; \
+		(cd $$i; ${MAKE} distclean) \
+	done
+
+distclean: clean
+
+subdirs: 
+	@for i in ${SUBDIRS}; do \
+		echo Making all in $$i ; \
+		(cd $$i; ${MAKE} all) \
+	done
+
+${PROG}: ${OBJS}
+	${CC} -o ${PROG} ${OBJS} ${LIBS}
+

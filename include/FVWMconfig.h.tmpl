@@ -1,0 +1,85 @@
+/***************************************************************************
+ *                         include/FVWMconfig.h.tmpl
+ * This is the only file you should have to edit to build and install Fvwm2.
+ * Copy to FVWMconfig.h when done.
+ ***************************************************************************/
+
+/*************************************************************************
+ * #define BROKEN_SUN_HEADERS          
+ *
+ * Really, no one but Rob should need this 
+ ************************************************************************/
+#if 0
+#if defined __sun__ && !defined SYSV
+#define BROKEN_SUN_HEADERS          
+#endif
+#endif /* 0 */
+
+/***************************************************************************
+ *
+ * In theory, this stuff can be replaced with GNU Autoconf 
+ *
+ **************************************************************************/
+
+#if defined _POSIX_SOURCE || defined SYSV || defined __sun__
+
+#define HAVE_WAITPID  1
+#define HAVE_SYSCONF 1
+#define HAVE_UNAME 1
+#undef HAVE_GETHOSTNAME 
+
+#else
+
+/**************************************************************************
+ *
+ * Do it yourself here if you don't like the above!
+ *
+ **************************************************************************/
+/***************************************************************************
+ * Define if you have waitpid.  
+ **************************************************************************/
+#define HAVE_WAITPID  1
+
+/***************************************************************************
+ * Define if you have sysconf
+ **************************************************************************/
+#define HAVE_SYSCONF 1
+
+/***************************************************************************
+ * Define if you have uname. Otherwise, define gethostname
+ ***************************************************************************/
+#define HAVE_UNAME 1
+/* #define HAVE_GETHOSTNAME 1 */
+
+#endif /* End of do-it-yourself OS support section */
+
+#ifdef __alpha
+#define NEEDS_ALPHA_HEADER
+#undef BROKEN_SUN_HEADERS
+#endif /* (__alpha) */
+
+
+/* Allows gcc users to use inline. This doesn't cause problems for others. */
+#ifndef __GNUC__
+#define FVWM_INLINE /*nothing*/
+#else
+#if defined(__GNUC__) && !defined(inline)
+#define FVWM_INLINE __inline__
+#else
+#define FVWM_INLINE inline
+#endif
+#endif
+
+
+/*
+** if you would like to see lots of debug messages from fvwm, for debugging
+** purposes, uncomment the next line
+*/
+/* #define FVWM_DEBUG_MSGS */
+#ifdef FVWM_DEBUG_MSGS
+#define DBUG(x,y) fvwm_msg(DBG,x,y)
+#else
+#define DBUG(x,y) /* no messages */
+#endif
+
+/* end of configure.h */

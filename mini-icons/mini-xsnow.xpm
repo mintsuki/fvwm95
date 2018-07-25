@@ -1,0 +1,27 @@
+/* XPM */
+static char * mini_xsnow_xpm[] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"16 16 5 1 0 0",
+/* colors */
+" 	c #7090B0",
+".	s iconColor2	m white	c white",
+"X	s iconColor4	m white	c green",
+"o	c #C0C0C0",
+"O	c #000080",
+/* pixels */
+"                ",
+"             .  ",
+"     .          ",
+"              . ",
+"          X     ",
+"         X X    ",
+"        XX XX   ",
+"    .   XXXXX   ",
+"          X     ",
+"                ",
+"                ",
+"  ... ..   .... ",
+" ..oo.......oo..",
+"  oooooooooooooo",
+"  oOOOOOOOOOOOOO",
+"  oOOOOOOOOOOOOO"};

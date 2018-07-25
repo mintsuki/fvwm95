@@ -1,0 +1,47 @@
+#
+# Makefile for FVWM95
+#
+# Copyright (C) 1996 Peter G. Williams
+#
+#
+SHELL=/bin/sh
+
+@SET_MAKE@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+subdirs=libs fvwm modules utils sample.fvwmrc xpmroot icons mini-icons
+
+CFLAGS= @CFLAGS@
+
+all:
+	@for i in ${subdirs}; do \
+		echo Making all in $$i ; \
+		(cd $$i; ${MAKE} all) \
+	done
+
+install:
+	@for i in ${subdirs}; do \
+		echo Installing in $$i ; \
+		(cd $$i; ${MAKE} install) \
+	done
+
+depend:
+	@for i in ${subdirs}; do \
+		echo Depending in $$i ; \
+		(cd $$i; ${MAKE} depend) \
+	done
+
+clean:
+	@for i in ${subdirs}; do \
+		echo Cleaning in $$i ; \
+		(cd $$i; ${MAKE} clean) \
+	done
+
+distclean:
+	@for i in ${subdirs}; do \
+		echo Distribution Cleaning in $$i ; \
+		(cd $$i; ${MAKE} distclean) \
+	done
+	rm -f config.cache config.status config.log sample.fvwmrc/system.fvwm95rc
+	find . -name Makefile -exec rm {} \; -print

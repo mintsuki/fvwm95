@@ -1,0 +1,392 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmForm - input form module for Fvwm
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmForm  must  be spawned by Fvwm.  It will not work from
+       the command line.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       FvwmForm provides a mechanism to get user  input  and  act
+       accordingly.  This is achieved by means of a form that the
+       user can fill out, and from  which  the  user  can  select
+       actions  he  wants  Fvwm to take.  A form consists of five
+       types of items:  text  labels,  single-line  text  inputs,
+       mutually-exclusive selections, multiple-choice selections,
+       and action buttons.  These items are arranged into several
+       lines, with a very flexible layout.
+
+       A  text  label only serves the purpose of explanation.  It
+       cannot accept any input.  A text input field can  be  used
+       to  edit  a  single-line  string.  FvwmForm accepts Emacs-
+       style cursor movement keys.  No copying and pasting  func-
+       tions exist.
+
+       A  selection  consists  of several choices.  The selection
+       itself is a logical entity that doesn't have  any  display
+       feature.   Each  choice is displayed as a push-button fol-
+       lowed by a explanatory  text  label.   When  selected,  an
+       exclusive  choice  shows  a  circle in the middle, while a
+       multiple choice shows a check.
+
+       An action button, when clicked on, will send a set of com-
+       mands to Fvwm.  FvwmForm will do variable substitutions in
+       the command text to reflect the user's input.
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       FvwmForm uses the same configuration file (usually .fvwmrc
+       in  the  user's  home directory) as Fvwm.  To use FvwmForm
+       for multiple input forms,  simply  create  symbolic  links
+       with  different names, and they will be treated as differ-
+       ent modules.  Or, you can invoke FvwmForm with an optional
+       parameter,  which  it  will  use as the name instead (e.g.
+       'Module FvwmForm QuitVerify').  That way  you  don't  even
+       have to make a symbolic link for it!
+
+       Be  sure to set ModulePath in your .fvwmrc file to include
+       FvwmForm's path.
+
+       When FvwmForm is invoked with a window context, e.g.  from
+       a  window  menu,  all  commands it sends to Fvwm will have
+       that window context.
+
+
+</PRE>
+<H2>CONFIGURATION</H2><PRE>
+       The following options can be  set  in  the  .fvwmrc  file.
+
+       The order of the options DOES matter.  In general,  colors
+       and  fonts should be specified first.  Lines, text labels,
+       and input items should appear in their logical order.
+
+       <B>*FvwmFormGrabServer</B>
+           This option makes FvwmForm grab the mouse  pointer  on
+           startup.   This  feature  is  useful  for  things like
+           logout verification.
+
+       <B>*FvwmFormWarpPointer</B>
+           This option makes FvwmForm warp the mouse pointer into
+           its  window on startup.  It saves the user some mouse-
+           travelling.
+
+       <B>*FvwmFormPosition</B> <I>x</I> <I>y</I>
+           Puts the FvwmForm window at location  (<I>x</I>,  <I>y</I>)  on  the
+           screen.   By  convention, a negative <I>x</I> (resp. <I>y</I>) value
+           measures distance from the right (resp. bottom) of the
+           screen.
+
+           If  this option is omitted, FvwmForm will start at the
+           center of the screen.
+
+       <B>*FvwmFormBack</B> <I>color</I>
+           Specifies the background color of the FvwmForm window.
+
+       <B>*FvwmFormFore</B> <I>color</I>
+           Specifies  the  foreground  color for displaying plain
+           text.
+
+       <B>*FvwmFormItemBack</B> <I>color</I>
+           Specifies the background color for the text input win-
+           dows, and the buttons.
+
+       <B>*FvwmFormItemFore</B> <I>color</I>
+           Specifies  the  foreground  color  for  the text input
+           strings and button markers.
+
+       <B>*FvwmFormFont</B> <I>font</I>
+           Specifies the font for displaying plain text.
+
+       <B>*FvwmFormButtonFont</B> <I>font</I>
+           Specifies the font for text marked in the action  but-
+           tons.
+
+       <B>*FvwmFormInputfont</B> <I>font</I>
+           Specifies  the  font  for  text input.  This font must
+           have fixed width.
+
+       <B>*FvwmFormLine</B> <I>justification</I>
+           Starts a new line.  A line can  contain  an  arbitrary
+           The width of the window is that of the longest line.
+
+           Justification  of  items  in  the line is specified by
+           <I>justification</I>, which can be one of the following:
+
+       <I>left</I>            Items are justified to  the  left  of  the
+                       window.
+
+       <I>right</I>           Items  are  justified  to the right of the
+                       window.
+
+       <I>center</I>          Items are placed in the center of the win-
+                       dow.
+
+       <I>expand</I>          If there is only one item in the line, the
+                       item is centered in the window.  If two or
+                       more  items are present, they are spreaded
+                       to fill the whole width of the window.
+
+       <B>*FvwmFormText</B> <I>string</I>
+           Displays <I>string</I> as plain text.  Line  breaks  must  be
+           achieved  by  multiple *FvwmFormLine and *FvwmFormText
+           options.  Blanks may be used to provide extra  padding
+           between items.
+
+       <B>*FvwmFormInput</B> <I>name</I> <I>size</I> <I>init</I><B>_</B><I>string</I>
+           Specifies a text input item with name <I>name</I>.  A subwin-
+           dow of <I>size</I> characters in width will be used for edit-
+           ting.   If <I>init</I><B>_</B><I>string</I> is present, it will be the ini-
+           tial string when FvwmForm  starts  or  resets  itself.
+           The default initial string is "".
+
+       <B>*FvwmFormSelection</B> <I>name</I> <I>type</I>
+           This  option  starts  a selection item with name <I>name</I>.
+           Its choices should  be  specified  on  the  subsequent
+           lines.  The option <I>type</I> is one of the following:
+
+       <I>single</I>          The selections are mutually exclusive.
+
+       <I>multiple</I>        This is a multiple-choice selection.
+
+       <B>*FvwmFormChoice</B> <I>name</I> <I>value</I> <B>on</B> <B>|</B> <B>off</B> <I>string</I>
+           Specifies  a  choice for a selection.  The choice item
+           has a <I>name</I> and a <I>value</I>.  The <I>string</I> will be  displayed
+           to the right of the choice button as a label.
+
+           The  choice  will  assume  the specified initial state
+           ("on" means selected) when FvwmForm starts or  resets.
+           Note  that  if  the selections are mutually exclusive,
+           FvwmForm will NOT detect inconsistencies in  the  ini-
+           tial  states  of  the choices, i.e. two or none of the
+           choices can  be  selected.   However,  once  the  user
+
+       <B>*FvwmFormButton</B> <I>type</I> <I>string</I> <B>[</B><I>key</I><B>]</B>
+           This option specifies an action  button.   The  button
+           has  <I>string</I> as a label, and excutes a set of Fvwm <I>com-</I>
+           <I>mand</I> when it is activated.   The  commands  should  be
+           specified using the *FvwmFormCommand option.
+
+           The  optional  <I>key</I>  specifies a keyboard shortcut that
+           activates the button.  It is in either a control char-
+           acter,  specified  as  ^@,  ^A, ..., ^_, or a function
+           key, specified as F1, F2, ..., F35.  Control keys that
+           are used for cursor movement in text input fields can-
+           not activate any buttons, with the exception  of  TAB,
+           RETURN, LINEFEED, which can activate a button when the
+           cursor is in the last text input field.
+
+           The behavior of the button is determined by <I>type</I>:
+
+       continue        FvwmForm will resume execution after send-
+                       ing the commands.
+
+       restart         After  sending the commands, FvwmForm will
+                       reset all the values to the initial  ones,
+                       and then resume execution.
+
+       quit            FvwmForm  will quit after sending the com-
+                       mands.
+
+       <B>*FvwmFormCommand</B> <I>command</I>
+           This option specifies an Fvwm command associated  with
+           the  current  button.  Commands that appear before any
+           *FvwmFormButton option will be  executed  at  start-up
+           time.   This  is  usually  a beep that gets the user's
+           attention.
+
+           Before sending each command to Fvwm,  FvwmForm  recog-
+           nizes  variables  of  the  following forms, and supply
+           values to them.
+
+       <B>$(</B><I>name</I><B>)</B>         If <I>name</I> corresponds to a text input field,
+                       the  result  is  the  user's input string.
+                       Special chars such as ", ', and   will  be
+                       preceded by a backslash.
+
+                       If  <I>name</I>  corresponds  to  a  choice,  the
+                       result is the  value  of  the  choice  (as
+                       specified   in   *FvwmFormChoice)  if  the
+                       choice is selected.  If the choice is  not
+                       selected, the result is a blank string.
+
+                       If  <I>name</I>  corresponds  to a selection, the
+                       result will be a list of the selected val-
+                       value is not an empty string,  the  result
+                       is <I>string</I>, with recursive variable substi-
+                       tution applied.  If  the  input  value  is
+                       empty, the result is empty.
+
+                       If  <I>name</I>  is  a choice and it is selected,
+                       the result is <I>string</I>, with recursive vari-
+                       able  substitution applied.  If the choice
+                       is not selected, the result is empty.
+
+       <B>$(</B><I>name</I><B>!</B><I>string</I><B>)</B>  The same as the  above,  except  that  the
+                       converse conditions are taken.
+
+
+</PRE>
+<H2>EXAMPLE 1 - QuitVerify</H2><PRE>
+       This example simulates the mwm way of confirming logout.
+
+       *QuitVerifyGrabServer
+       *QuitVerifyWarpPointer
+       *QuitVerifyFont          *helvetica*m*r*n*14*
+       *QuitVerifyButtonFont    *helvetica*m*o*n*14*
+       *QuitVerifyFore          Black
+       *QuitVerifyBack          Light Gray
+       *QuitVerifyItemFore Wheat
+       *QuitVerifyItemBack Gray50
+       # begin items
+       *QuitVerifyCommand  Beep
+       *QuitVerifyLine          center
+       *QuitVerifyText          "Do you really want to logout?"
+       *QuitVerifyLine          expand
+       *QuitVerifyButton   quit      "Logout"  ^M
+       *QuitVerifyCommand  Quit
+       *QuitVerifyButton   quit      "Cancel"  ^[
+       *QuitVerifyCommand  Nop
+       # Fvwm window style
+       Style "QuitVerify" NoTitle, NoHandles, BorderWidth 3
+
+
+
+</PRE>
+<H2>EXAMPLE 2 - Remote Login</H2><PRE>
+       This example lets the user type in a hostname, and option-
+       ally a user name on the remote machine, and opens an xterm
+       window from the remote host.
+
+       *RloginWarpPointer
+       *RloginFont         *helvetica*m*r*n*14*
+       *RloginButtonFont   *helvetica*m*o*n*14*
+       *RloginInputFont    *cour*m*r*n*14*
+       *RloginFore         Black
+       *RloginBack         Light Gray
+       *RloginItemFore          Wheat
+       *RloginItemBack          Gray50
+       # begin items
+       *RloginLine         center
+       *RloginText         "Host:"
+       *RloginInput        HostName  20   ""
+       *RloginLine         center
+       *RloginSelection    UserSel   single
+       *RloginChoice       Default   Default   on   "same user"
+       *RloginChoice       Custom    Custom    off  "user:"
+       *RloginInput        UserName  10   ""
+       *RloginLine         expand
+       *RloginButton       quit "Login"        ^M
+       *RloginCommand Exec   exec  rsh  $(Custom?-l  $(UserName))
+       $(HostName) xterm -T xterm@$(HostName) -display  $HOSTDIS-
+       PLAY &amp;
+       *RloginButton       restart   "Clear"
+       *RloginButton       quit "Cancel"  ^[
+       *RloginCommand Nop
+
+
+
+</PRE>
+<H2>EXAMPLE 3 - Capture Window</H2><PRE>
+       This example provides a front-end to xwd, xwud, and xpr.
+
+       *CaptureFont        *helvetica*m*r*n*14*
+       *CaptureButtonFont  *helvetica*m*o*n*14*
+       *CaptureInputFont   *cour*m*r*n*14*
+       *CaptureLine        center
+       *CaptureText        "Capture Window"
+       *CaptureLine        left
+       *CaptureText        "File: "
+       *CaptureInput       file      25   "/tmp/Capture"
+       *CaptureLine        left
+       *CaptureText        "Printer: "
+       *CaptureInput       printer        20   "ps1"
+       *CaptureLine        expand
+       *CaptureSelection   PtrType   single
+       *CaptureChoice      PS   ps   on   "PostScript"
+       *CaptureChoice      Ljet ljet off  "HP LaserJet"
+       *CaptureLine        left
+       *CaptureText        "xwd options:"
+       *CaptureLine        expand
+       *CaptureSelection   Options   multiple
+       *CaptureChoice      Brd  -nobdrs   off  "No border"
+       *CaptureChoice      Frm  -frame    on   "With frame"
+       *CaptureChoice      XYZ  -xy  off  "XY format"
+       *CaptureLine        expand
+       *CaptureButton      continue  "Capture" ^M
+       *CaptureCommand     Exec  exec xwd -out $(file) $(Options)
+       &amp;
+       *CaptureButton      continue  "Preview"
+       *CaptureCommand     Exec exec xwud -in $(file) &amp;
+       *CaptureButton      continue  "Print"
+       *CaptureCommand     Exec xpr -device $(PtrType) $(file)  |
+       lpr -P $(printer) &amp;
+       *CaptureButton      quit      "Quit"
+       There is a hard-coded limit on the number of items.
+
+       Report bugs to ztfeng@math.princeton.edu.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       FvwmForm is original work of Thomas Zuwei Feng.
+
+       Copyright  Feb  1995, Thomas Zuwei Feng.  No guarantees or
+       warantees are provided or implied in any  way  whatsoever.
+       Use  this  program  at  your own risk.  Permission to use,
+       modify, and redistribute this  program  is  hereby  given,
+       provided that this copyright is kept intact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

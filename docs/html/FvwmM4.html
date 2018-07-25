@@ -1,0 +1,178 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmM4 - the FVWM  M4 pre-processor
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmM4  is  spawned by fvwm, so no command line invocation
+       will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       When called, this module will attempt to have M4  pre-pro-
+       cess  the  file specified in its invocation, and then have
+       fvwm read the resulting file.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       FvwmM4 can be invoked by inserting the  line  'FvwmM4'  in
+       the  .fvwmrc  file.  It  can also be called from a menu or
+       mouse binding.  If the user wants his entire .fvwmrc  file
+       pre-processed  with FvwmM4, then fvwm should be invoked as
+       fvwm -f "FvwmM4 .fvwmrc". Note that the  argument  to  the
+       option  "-f"  should  be  enclosed in quotes, and no other
+       quoting should be used. For example, a typical  invocation
+       might be
+
+            fvwm -f "FvwmM4 -m4-squote { -m4-equote } .fvwmrc"
+
+
+       Some options can be specified on the command line:
+
+       -m4-prefix
+              I  think  this  makes all the m4 directives require
+              the prefix "m4_".
+
+
+       -m4opt Lets you pass an option to the m4 program.
+
+
+       -m4-squote
+              Lets you change the m4 start-of-quote character  to
+              <I>character</I>.
+
+       -m4-equote
+              Lets  you  change  the m4 end-of-quote character to
+              <I>character</I>.
+
+       -m4prog
+              Instead of invoking "m4", fvwm will invoke <I>name</I>.
+
+       -debug Causes the  temporary  file  create  by  m4  to  be
+              retained.  This file is usually called "/tmp/fvwmr-
+              cXXXXXX"
+
+
+       FvwmM4 defines some values for use  in  the  pre-processor
+       file:
+
+
+       TWM_TYPE
+              Always set to "fvwm".
+
+       SERVERHOST
+              The name of the machine running the X Server.
+
+       CLIENTHOST
+              The name of the machine running fvwm.
+
+       HOSTNAME
+              The hostname of the machine running fvwm. Generally
+              the same as CLIENTHOST.
+
+       OSTYPE The operating system for CLIENTHOST.
+
+       USER   The name of the person running fvwm.
+
+       VERSION
+              The X11 version.
+
+       REVISION
+              The X11 revision number.
+
+       VENDOR The X server vendor.
+
+       RELEASE
+              The X server release number.
+
+       WIDTH  The screen width in pixels.
+
+       HEIGHT The screen height in pixels.
+
+       X_RESOLUTION
+              Some distance/pixel measurement for the  horizontal
+              direction, I think.
+
+       Y_RESOLUTION
+              Some  distance/pixel  measurement  for the vertical
+              direction, I think.
+
+       PLANES Number of color planes for the X server display
+
+       BITS_PER_RGB
+              Number of bits in each rgb triplet.
+
+       CLASS  The X11 visual class, ie PsuedoColor.
+
+       COLOR  Yes or No, Yes if  the  display  class  is  neither
+              The fvwm version number, ie 2.0
+
+       OPTIONS
+              Some  combination of SHAPE, XPM, NO_SAVEUNDERS, and
+              M4, as defined in configure.h at compile time.
+
+       FVWMDIR
+              The directory where fvwm looks for .fvwmrc and mod-
+              ules by default, as determined at compile time.
+
+
+
+</PRE>
+<H2>EXAMPLE PROLOG</H2><PRE>
+            define(TWM_TYPE,``fvwm'')dnl
+            define(SERVERHOST,``spx20'')dnl
+            define(CLIENTHOST,``grumpy'')dnl
+            define(HOSTNAME,``grumpy'')dnl
+            define(OSTYPE,``SunOS'')dnl
+            define(USER,``nation'')dnl
+            define(HOME,``/local/homes/dsp/nation'')dnl
+            define(VERSION,``11'')dnl
+            define(REVISION,``0'')dnl
+            define(VENDOR,``HDS human designed systems, inc. (2.1.2-D)'')dnl
+            define(RELEASE,``4'')dnl
+            define(WIDTH,``1280'')dnl
+            define(HEIGHT,``1024'')dnl
+            define(X_RESOLUTION,``3938'')dnl
+            define(Y_RESOLUTION,``3938'')dnl
+            define(PLANES,``8'')dnl
+            define(BITS_PER_RGB,``8'')dnl
+            define(CLASS,``PseudoColor'')dnl
+            define(COLOR,``Yes'')dnl
+            define(FVWM_VERSION,``1.24l'')dnl
+            define(OPTIONS,``SHAPE XPM M4 '')dnl
+            define(FVWMDIR,``/local/homes/dsp/nation/modules'')dnl
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       FvwmM4  is  the  result of a random bit mutation on a hard
+       disk, presumably a result of a  cosmic-ray  or  some  such
+       thing.
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

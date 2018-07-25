@@ -1,0 +1,241 @@
+# *****************************************************************************
+#  Name: FvwmTaskBar-plugins.patch.README
+#  Athr: Michael D. Beynon (mdb) - beynon@acm.org
+#  Date: 07/21/1997 : mdb - Created.
+#        08/12/1997 : mdb - Added several config options per suggestions.
+#        09/18/1997 : mdb - Fixed memory overwrite problem with mail format.
+#  Desc: Mods to FvwmTaskBar with plugins.
+#        http://www.cs.umd.edu/~beynon/fvwm95.html
+#        ftp://mitac11.uia.ac.be/pub/FvwmTaskBar-with-plugins-970416.tgz
+#          was used as the basis.
+# *****************************************************************************
+
+Note: I am no longer supplying patches, since this is a patch to my
+      last patch.  I also am aware of several people who have made
+      changes themselves.  The full directory makes the most sense.
+
+I am assuming you rename the FvwmTaskBar that comes with fvwm95-2.0.43a
+to be something like FvwmTaskBar.orig, and put the taskbar with plugins
+in its place.
+
+Now run make distclean, configure and build as you normally would,
+from the top level of the fvwm95 source tree.  Be sure to do the
+distclean, since the changes I made to Makefile.in will only be seen
+if the Makefiles are re-created.  Neglecting this will most likely
+cause compile time errors about FVWM_ICONDIR, which I added to the
+Makefile.
+
+Check the Makefile created.  It is by default setup for my environment,
+which is Solaris 2.5.  Dynamic linking is different on many platforms,
+so uncomment the Linux region, and comment the Solaris region in the
+Makefile if needed.
+
+
+Bugs in FvwmTaskBar:
+
+I also fixed a couple small existing bugs in the task bar.  The
+checking for .fvwm95rc options was not correct for anything starting
+with Auto, due to an incorrect length when checking for "AutoHide".
+LoopOnEvents made the assumption that all the X Event structures had a
+time field in the same place.  Since this is obviously wrong, I made a
+change to fix this.
+
+The list of buttons used in ButtonArray.{c,h} does not include the id
+of the window.  It seems, iconized and sticky windows were in the
+windows list and also fvwm messages caused them to be added twice.  I
+tried to hack a quick fix, but it needs to be done like FvwmWinList
+current code does.
+
+Also, I ran gcc with -Wall, and this revealed many unused variables,
+so I went through and cleaned all this up.
+
+I made a simple fix to the bug reported to the fvwm95 mailing list
+by Christian Worley <cworley@altatech.com>.  The problem was an
+inconsistency between the module load fcn declarations and how it
+was called.
+
+
+My Changes to FvwmTaskBar:
+
+I have made some changes FvwmTaskBar (and the plugins) to optionally
+see new unread mail on the taskbar.  See the man page for FvwmTaskBar
+for more details.  I modified the Tip window to be able to handle
+multiple lines.  Then I used this to show entries from the users mail
+spool file.  The location of this file is the same as for the mail fcn
+the taskbar had before.  I also made a mod to allow an arbitrary
+command to be run on the hour.  I use this to play sounds indicating
+that another hour of my life has slipped away.  :^)
+
+Note that I needed to change the interface for a GoodyModule to
+include the loadable module's integer id in the init call.  This
+allows me to decide if the AutoMailTip window is still open when the
+mail file becomes empty, and the tip needs to be removed.  All
+provided goody modules have been changed.
+
+There is a small problem with the AutoMailTips as it stands now.  If
+the screen is xlock'ed when the mail tip is displayed, it seems to
+"fight" with xlock for control.  This shows my lack of knowledge in
+programming X, but I think it has to do with responding to the unmap
+call from xlock.  This is not fatal, and is acutally a nice way to see
+if I have mail w/o unlocking the screen.  (Yeah, I know I am just
+trying to justify it to myself)
+
+There was also a problem with FvwmTaskBar needing a line in
+~/.fvwm95rc to find the icon files (specifically for the start menu).
+I changed the Makefile to pass the default FVWM_ICONDIR as it does for
+fvwm.  (I also changed all the Makefiles to support installing not in
+/usr/lib/...  since I don't have root access where I am -- these
+changes are not in any diffs) Now icons do not have to be fully
+qualified pathnames, and can just use the same icon directory as every
+other part of fvwm.
+
+08/12/1997
+
+I received several customization requests, that I decided to implement.
+The options are documented below.
+
+
+Details and sample .fvwm95rc:
+
+     *FvwmTaskBarMaxTipLines [num]
+          This controls the maximum number of lines allowed in a
+          multi-line tip window.  The first [num] are displayed,
+          and if more than [num] lines are in the tip text, the
+          last line will read "(more...)" to indicate it.  The
+          default for this is 30.
+
+
+     *FvwmTaskBarMailCheckModuleAutoMailTip<id> [type]
+          This option controls the auto-display of new mail in  a
+          multi-line  tip  window.   Three  possible  values  are
+          allowed  for  the   optional   type   argument:   Mail-
+          FileTouched,   MailFileBigger,   or  MailFileAnyChange.
+          MailFileTouched means the  mail  spool  file  has  been
+          modified  since the last access, MailFileBigger is when
+          the mail spool file gets  larger  in  size,  and  Mail-
+          FileAnyChange  is  when the mail spool file gets larger
+          or  smaller.   These  conditions   control   when   the
+          AutoMailTip  window is displayed.  The default is Mail-
+          FileAnyChange.
+
+
+     *FvwmTaskBarMailCheckModuleMailTipFormat.MAIL [l] [if] [wf] [is] [ws]
+          This options allows specification of how to display the
+          mail information in the tip.  [l] can be either 1 for
+          a single line per mail message, or 2 for a double line
+          format where the From: info appears on one line, and the
+          Subject: appears on the next line.  [if] is the number of
+          spaces to indent the From: info, and [wf] is the max width.
+          [is] and [ws] are the indent and width of the Subject: info.
+          The default is 1 0 20 2 30.
+
+
+     *FvwmTaskBarMailCheckModuleMailTipNoSmartFrom
+          If set, this flag shuts off the automatic name extraction
+          for the From: field.  The format seen in email is largely
+          formatted by convention, and this allows this process to
+          be shut off when it does not work.
+
+          The smart name extraction algorithm works as follows.  Step 1:
+          all substrings delimited by <> and [] are removed, since
+          they usually contain an email address.  If nothing is left,
+          this step is reversed.  Step 2: if any string delimited by ""
+          or () is found, it is used as the smart name.  Otherwise the
+          result from Step 1 is used at the result.  For most email I
+          have, this results in nicely formatted names.
+
+
+     *FvwmTaskBarMailCheckModuleMailTipUnblankScreen<id>
+          If set, the screen will be un-blanked when the mail tip
+          is drawn.
+
+
+     *FvwmTaskBarShowDateModuleHourlyCommand<id> command
+          Executes the command every hour.
+
+
+# .fvwm95rc taskbar section - this is an excerpt from my init
+# file to illustrate how to use my changes.
+
+# TaskBar module
+Style "FvwmTaskBar" NoTitle,BorderWidth 4,HandleWidth 4,Sticky,StaysOnTop,Circul
+ateSkip,ClickToFocus,Icon
+*FvwmTaskBarDeskOnly
+*FvwmTaskBarUseSkipList
+#*FvwmTaskBarUseIconNames
+*FvwmTaskBarGeometry +0-0
+*FvwmTaskBarFore Black
+*FvwmTaskBarBack #c0c0c0
+*FvwmTaskBarTipsFore black
+*FvwmTaskBarTipsBack bisque
+*FvwmTaskBarFont -adobe-helvetica-medium-r-*-*-*-120-*-*-*-*-*-*
+*FvwmTaskBarSelFont -adobe-helvetica-bold-r-*-*-*-120-*-*-*-*-*-*
+*FvwmTaskBarAction Click1 Iconify -1,Raise,Focus
+*FvwmTaskBarAction Click2 Iconify
+*FvwmTaskBarAction Click3 Module "FvwmIdent" FvwmIdent
+*FvwmTaskBarAutoStick
+*FvwmTaskBarStartName Start
+*FvwmTaskBarStartMenu menuStart
+*FvwmTaskBarStartIcon mini-startmenu.xpm
+*FvwmTaskBarShowTips
+#*FvwmTaskBarMaxTipLines 30
+#*FvwmTaskBarShowTransients
+#*FvwmTaskBarHighlightFocus
+#*FvwmTaskBarAutoHide
+
+*FvwmTaskBarGoodyLoadableQuiet
+#*FvwmTaskBarGoodyLoadablePlugins /fs/unsupported/fvwm95-2.0.43a/lib/solaris-tes
+t
+
+#-------------------------------------------------------------------
+# Core dump
+#
+*FvwmTaskBarGoodyLoadableSymbol CheckLockModuleSymbol
+*FvwmTaskBarGoodyLoadableId .CORE
+
+*FvwmTaskBarCheckLockModuleIcon.CORE mini-bomb.xpm
+*FvwmTaskBarCheckLockModuleTip.CORE Core Dump 
+#*FvwmTaskBarCheckLockModuleCommand.CORE Popup menuApplications
+*FvwmTaskBarCheckLockModuleLockFile.CORE $HOME/core
+
+#-------------------------------------------------------------------
+# Sound Control
+#
+*FvwmTaskBarGoodyLoadableSymbol GoodyModuleSymbol
+*FvwmTaskBarGoodyLoadableId .SPEAKER
+
+*FvwmTaskBarGoodyModuleIcon.SPEAKER mini-speaker.xpm
+*FvwmTaskBarGoodyModuleTip.SPEAKER Audio Control Panel
+*FvwmTaskBarGoodyModuleCommand.SPEAKER Exec /usr/demo/SOUND/bin/gaintool -Wp 845 738
+
+#-------------------------------------------------------------------
+# Date Control
+#
+*FvwmTaskBarGoodyLoadableSymbol ShowDateModuleSymbol
+*FvwmTaskBarGoodyLoadableId .DATE
+
+*FvwmTaskBarShowDateModuleTip.DATE Date
+*FvwmTaskBarShowDateModuleCommand.DATE Function fcnFindOrRun "Calendar" Exec ical &
+*FvwmTaskBarShowDateModuleClockFormat.DATE %m/%d %I:%M%p
+*FvwmTaskBarShowDateModuleHourlyCommand.DATE Exec play /usr/demo/SOUND/sounds/cuckoo.au
+
+#-------------------------------------------------------------------
+# MailCheck Control
+#
+*FvwmTaskBarGoodyLoadableSymbol MailCheckModuleSymbol
+*FvwmTaskBarGoodyLoadableId .MAIL
+
+*FvwmTaskBarMailCheckModuleMailIcon.MAIL mini-mail.xpm
+*FvwmTaskBarMailCheckModuleCommand.MAIL Exec xterm -T Mail -e XtermReadMail.csh
+*FvwmTaskBarMailCheckModuleNewMailIcon.MAIL mini-newmail.xpm
+*FvwmTaskBarMailCheckModuleNewMailCommand.MAIL Exec play /usr/demo/SOUND/sounds/doorbell.au
+*FvwmTaskBarMailCheckModuleUnreadMailIcon.MAIL mini-unreadmail.xpm
+*FvwmTaskBarMailCheckModuleMailFile.MAIL /var/spool/mail/$USER
+
+*FvwmTaskBarMailCheckModuleAutoMailTip.MAIL
+*FvwmTaskBarMailCheckModuleMailTipUnblankScreen.MAIL
+#*FvwmTaskBarMailCheckModuleMailTipFormat.MAIL 1 0 20 2 30
+
+
+
+# *****************************************************************************

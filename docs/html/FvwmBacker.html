@@ -1,0 +1,134 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmBacker - the FVWM background changer module
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmBacker  is spawned by fvwm, so no command line invoca-
+       tion will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The FvwmBacker module provides functionality to change the
+       background  when  changing  desktops.   Any command can be
+       executed to change the backgrounds.  The commands used  to
+       change  the  backgrounds must exit after changing the root
+       window, (i.e. 'xv -root zzz.gif'  does  not,  without  the
+       -quit option) otherwise FvwmBacker will hang.
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       The FvwmBacker module is the original work of Mike Finger.
+
+       Copyright 1994, Mike Finger. The author makes  no  guaran-
+       tees  or warranties of any kind about the use of this mod-
+       ule.  Use this modules at your own risk.  You  may  freely
+       use  this  module  or any portion of it for any purpose as
+       long as the copyright is kept intact.
+
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       During initialization, <I>FvwmBacker</I> will scan the same  con-
+       figuration  file that FVWM used during startup to find the
+       options that pertain to it.  These options  are  discussed
+       in a later section.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       FvwmBacker can be invoked by fvwm during initialization by
+       inserting the line  'Module  FvwmBacker'  in  the  .fvwmrc
+       file.
+
+       FvwmBacker  must  reside  in a directory that is listed in
+       the ModulePath option of FVWM for it  to  be  executed  by
+       FVWM.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       The following is the only supported option at present:
+
+
+       *FvwmBackerDesk <I>DeskNumber</I> <I>command</I>
+              Specifies the <I>command</I> to execute when the specified
+              <I>DeskNumber</I> becomes active.
+
+              If the command begins with <I>-solid</I>  FvwmBacker  uses
+              ing  a  system  call  to xsetroot. Only single word
+              color names may be used.
+
+
+
+</PRE>
+<H2>SAMPLE CONFIGURATION</H2><PRE>
+       The following  are  excepts  from  a  .fvwmrc  file  which
+       describe FvwmBacker initialization commands:
+
+
+       ####
+       # Set Up Backgrounds for different desktops.
+       ####
+       *FvwmBackerDesk 0 -solid steelblue
+       *FvwmBackerDesk 1 -solid midnightblue
+       *FvwmBackerDesk 2 -solid yellow
+       *FvwmBackerDesk 3 xpmroot /usr/include/X11/pixmaps/background2.xpm
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Mike Finger (mfinger@mermaid.micro.umn.edu)
+                   (Mike_Finger@atk.com)
+                   (doodman on IRC, check the #linux channel)
+
+
+</PRE>
+<H2>Modified by</H2><PRE>
+       Andrew Davison (davison@cs.monash.edu.au)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+#
+SHELL=/bin/sh
+
+@SET_MAKE@
+
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+lib_dir=@exec_prefix@/lib
+x_includes=@x_includes@
+x_libraries=@x_libraries@
+fvwm_icons=@fvwm_icons@
+fvwm_rc=@fvwm_rc@
+fvwm_name=@fvwm_name@
+
+EXTRA_DEFINES=-DXPM -DSHAPE
+CC=@CC@
+INCLUDES=-I${top_srcdir}/include ${x_includes}
+CFLAGS=${INCLUDES} @CFLAGS@ ${EXTRA_DEFINES}
+MAKEDEPEND=@MAKEDEPEND@
+INSTALL=@INSTALL@
+INSTALL_DATA=@INSTALL_DATA@
+RM=@RM@
+AR=@AR@
+RANLIB=@RANLIB@
+
+
+
+SRCS = \
+	Tools.c \
+	CheckBox.c \
+	HScrollBar.c \
+	VScrollBar.c \
+	ItemDraw.c \
+	PushButton.c \
+	RadioButton.c \
+	TextField.c \
+	PopupMenu.c \
+	Rectangle.c \
+	MiniScroll.c \
+	Swallow.c \
+	HDipstick.c \
+	VDipstick.c \
+	List.c \
+	Menu.c \
+	Widget.c
+
+OBJS = \
+	Tools.o \
+	CheckBox.o \
+	HScrollBar.o \
+	VScrollBar.o \
+	ItemDraw.o \
+	PushButton.o \
+	RadioButton.o \
+	TextField.o \
+	PopupMenu.o \
+	Rectangle.o \
+	MiniScroll.o \
+	Swallow.o \
+	HDipstick.o \
+	VDipstick.o \
+	List.o \
+	Menu.o \
+	Widget.o
+
+all:: libWidgets.a
+
+libWidgets.a: $(OBJS) 
+	$(RM) $@
+	$(AR) $@ $(OBJS)
+	$(RANLIB) $@
+
+
+clean:
+	${RM}  ${OBJS} *~ core *.bak *.a
+
+distclean: clean
+

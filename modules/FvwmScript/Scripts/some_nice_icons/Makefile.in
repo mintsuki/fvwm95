@@ -1,0 +1,21 @@
+
+SHELL=/bin/sh
+
+prefix=@prefix@
+icon_dir=${prefix}/lib/X11/icons
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+
+ICONS=*.xpm
+
+all:
+
+install:
+	mkdir -p ${icon_dir}
+	${INSTALL_DATA} ./${ICONS} ${icon_dir}
+
+clean:
+
+distclean:
+

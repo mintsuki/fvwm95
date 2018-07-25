@@ -1,0 +1,23 @@
+/* XPM */
+static char * mini-xmahjongg_xpm[] = {
+"16 16 4 1",
+" 	c None s None",
+".	c #808080",
+"X	c yellow",
+"o	c black",
+"                ",
+" .............  ",
+" .XXXXXXXXXXXoo ",
+" .XXXXXooXXXXoo ",
+" .XXXXXooXXXXoo ",
+" .X.oooooooXXoo ",
+" .XooXXoX.ooXoo ",
+" .X.oXXoXX.oXoo ",
+" .XXo.XoXXXoXoo ",
+" .XX.oooooo.Xoo ",
+" .XXXXXoXXXXXoo ",
+" .XXXXXoXXXXXoo ",
+" .XXXXXoXXXXXoo ",
+" .ooooooooooooo ",
+"  ooooooooooooo ",
+"                "};

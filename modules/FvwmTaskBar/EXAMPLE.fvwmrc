@@ -1,0 +1,94 @@
+######################################################################
+#                                                                    #
+#  This is an example of the new FvwmTaskBar commands.               #
+#  Add them to your .fvwm95rc configuration file, keeping the        #
+#  old ones for setting the colors, fonts, etc.                      #
+#                                                                    #
+#  See the README.CHANGES file for additional information.           #
+#                                                                    #
+######################################################################
+
+# Tell FvwmTaskBar not to print info about plugins loaded :
+#*FvwmTaskBarGoodyLoadableQuiet
+
+# Specify the plugins directory:
+*FvwmTaskBarGoodyLoadablePlugins /var/X11R6/lib/fvwm95-2/plugins
+
+# Goodies appear in the taskbar in the same order they are specified
+# here, from left to right. For example, if you specify the ShowDateModule
+# as the last one, then the clock will be the rightmost goody in the
+# tray window.
+
+#-------------------------------------------------------------------
+# First goody is a "CheckLockModule" used for testing whether the
+# modem is being used or not. It shows a mini-connect.xpm icon if
+# so, and a "Modem is in use" tip. When double-clicked, it will
+# popup the Network menu. 
+#
+*FvwmTaskBarGoodyLoadableSymbol CheckLockModuleSymbol
+*FvwmTaskBarGoodyLoadableId Modem
+# Modem specific settings
+*FvwmTaskBarCheckLockModuleIconModem /usr/local/icons/mini-connect.xpm
+*FvwmTaskBarCheckLockModuleTipModem Modem is in use
+*FvwmTaskBarCheckLockModuleCommandModem Popup Network
+*FvwmTaskBarCheckLockModuleLockFileModem /var/lock/LCK..modem
+
+#-------------------------------------------------------------------
+# This one uses also "CheckLockModule" just for testing purposes.
+# The behaviour is similar to the previously defined only, but
+# it is activated if a file named 'test' exists in the $HOME dir.
+#
+*FvwmTaskBarGoodyLoadableSymbol CheckLockModuleSymbol
+*FvwmTaskBarGoodyLoadableId Test
+# Test specific settings
+*FvwmTaskBarCheckLockModuleIconTest /usr/local/icons/mini-connect.xpm
+*FvwmTaskBarCheckLockModuleTipTest Test 
+*FvwmTaskBarCheckLockModuleCommandTest Popup Network
+*FvwmTaskBarCheckLockModuleLockFileTest $HOME/test
+
+#-------------------------------------------------------------------
+# This one uses a "GoodyModule" in order to implement a control
+# for the sound mixer. It shows a speaker.xpm icon and executes
+# the xmix program (available from ftp://sunsite.unc.edu) when
+# is double-clicked.
+#
+*FvwmTaskBarGoodyLoadableSymbol GoodyModuleSymbol
+*FvwmTaskBarGoodyLoadableId Speaker
+# Speaker specific settings
+*FvwmTaskBarGoodyModuleIconSpeaker /usr/local/icons/mini-speaker.xpm
+*FvwmTaskBarGoodyModuleTipSpeaker Mixer
+*FvwmTaskBarGoodyModuleCommandSpeaker Exec xmix
+
+#-------------------------------------------------------------------
+# This is the "ShowDateModule", which implements the
+# traditional clock. The tip here is the date.
+#
+*FvwmTaskBarGoodyLoadableSymbol ShowDateModuleSymbol
+*FvwmTaskBarGoodyLoadableId Date
+# Date specific settings
+*FvwmTaskBarShowDateModuleTipDate Date 
+*FvwmTaskBarShowDateModuleCommandDate Exec xmessage `date`
+*FvwmTaskBarShowDateModuleClockFormatDate %I:%M%p
+
+#-------------------------------------------------------------------
+# The last goody here is the "MailCheckModule", the function is the
+# same as the envelope icon in previous versions of the taskbar,
+# but quite enhanced. For example, it can show three different
+# pixmaps for no-mail, new-mail and unread-mail situations.
+# It can also execute a command each time a new mail arrives.
+#
+# If you want to check the status of several mail boxes, just setup
+# a new MailCheckModule goody for each of the mail boxes.
+#
+*FvwmTaskBarGoodyLoadableSymbol MailCheckModuleSymbol
+*FvwmTaskBarGoodyLoadableId Mailbox
+# Mailbox specific settings
+*FvwmTaskBarMailCheckModuleMailIconMailbox /usr/local/icons/mini-mail.xpm
+*FvwmTaskBarMailCheckModuleTipMailbox You have mail
+*FvwmTaskBarMailCheckModuleCommandMailbox Exec xterm -T Mail -ls -e elm
+*FvwmTaskBarMailCheckModuleNewMailIconMailbox /usr/local/icons/mini-newmail.xpm
+*FvwmTaskBarMailCheckModuleNewMailTipMailbox You have new mail
+*FvwmTaskBarMailCheckModuleNewMailCommandMailbox Exec cat /usr/local/wbeeps/NewMail.snd > /dev/dsp
+*FvwmTaskBarMailCheckModuleUnreadMailIconMailbox /usr/local/icons/mini-unreadmail.xpm
+*FvwmTaskBarMailCheckModuleUnreadMailTipMailbox You have unread mail
+*FvwmTaskBarMailCheckModuleMailFileMailbox /var/spool/mail/$USER

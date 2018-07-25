@@ -1,0 +1,30 @@
+0. Restore the files under fvwm/modules
+
+1. Change the current directory to FvwmConsole
+
+2. Add lines below in your configure.h file under fvwm directory.
+
+	#define HAVE_READLINE
+
+	#ifdef HAVE_READLINE
+	#define READLINE_LIBRARIES -lreadline
+	/* #define  READLINE_INCLUDES -I/usr/local/include */
+	#endif
+
+   Comment out the first line, '#define HAVE_READLINE', if you are
+   not using (GNU) readline library.
+
+3.   And add these lines in your makefile.h under fvwm directory.
+
+	#ifndef READLINE_INCLUDES
+	#define READLINE_INCLUDES
+	#endif
+	#ifndef READLINE_LIBRARIES
+	#define READLINE_LIBRARIES
+	#endif
+
+4. Run 'xmkmf;make'.
+
+5. Run 'make install'.
+
+6. Invoke FvwmConsole from .fvwm2rc file or a menu

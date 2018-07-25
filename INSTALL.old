@@ -1,0 +1,46 @@
+Installation procedure:
+-----------------------
+
+Login as root, copy the .tgz file to the /usr/local/src directory 
+and cd to that directory, then unpack the file: 
+
+   cd /usr/local/src
+   tar zxvf fvwm95-xxx.tgz
+
+A new fvwm95-xxx directory will be created, cd to that directory, then
+compile and install the package:
+
+   cd fvwm95-xxx
+   ./configure
+   make
+   make install
+
+By default, everything will install in /usr/local - this can be changed
+with the --prefix option of configure (eg: ./configure --prefix=/usr/X11R6)
+
+Everything should work right out of the box. However, you can 
+take the system.fvwm95rc config file, rename to .fvwm95rc and
+copy it to your home directory. Check it to make sure that the ModulePath,
+IconPath and PixmapPath options point to the correct directories.
+
+Note: this (unofficial) version of fvwm95 has new modules, and
+the taskbar has been modified - your own .fvwm95rc might not
+work completely well. I suggest that you study the new system.fvwm95rc
+or read the man pages (also available in html format).
+
+The default configuration was designed to work best with some
+xclass clients, so getting that package should be a good idea ;-)
+
+After that, modify your .xinitrc or .xsession in order to start fvwm95. 
+Remove or comment out the line executing your previous window manager
+(usually the last line in the file), then add at the end a command like
+the following: 
+
+   exec fvwm95
+
+Start the X session, hopefully, a cyan screen with a taskbar and button
+bar will appear. You may have to modify further the .fvwm95rc file
+according to your needs. If you are not very familiar with the standard
+fvwm2, you can take a look at the man pages, the syntax of the config
+commands is explained there . 
+

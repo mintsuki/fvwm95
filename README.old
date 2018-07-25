@@ -1,0 +1,81 @@
+This is fvwm-2.0.43 hacked for a look and feel similar to Windows-95.
+
+The installation process is more or less the same as for the standard
+fvwm2, the only difference is that the program name will be fvwm95, and
+the modules will be copied to /usr/X11R6/lib/X11/fvwm95. Refer to the
+file INSTALL for more details. 
+
+I also have included a hacked version of the Win95WinList module from
+David Barth (original from Mike Finger), whichs looks very close to the
+Windows-95 task bar. There is a clock and incoming mail indicator on it,
+it can also swallow other modules. The module is named FvwmTaskBar, for
+more information read the README file in the modules/FvwmTaskBar
+directory.
+
+For best results, use the supplied example.fvwm2rc95 as your initial
+.fvwm2rc95 file, and customize it as necessary. I have tried to use the
+same colors as in Windows-95, as well as similar-looking fonts for the
+title bar and menus. Basically, the format used in the file is the same as
+in the standard .fvwm2rc, with some minor differences and additional
+commands, they are briefly explained in the example file. 
+
+I have included in the directory mini-icons some 16x16 pixmaps that can be
+used for the menus (the example.fvwm95rc uses some of them). All they
+together use no more than 8 colors, and they look best over a light gray
+background (such the #c0c0c0 used in the example configuration). You have
+to move them manually to /usr/local/mini-icons or some other directory,
+and update the PixmapPath setting in the .fvwm95rc
+
+
+There is a new mailing list for fvwm95-related questions and discussions.
+The address is:
+
+  fvwm95@physik.uni-muenchen.de
+
+To subscribe or unsubscribe a message should be sent to:
+
+  fvwm95-request@physik.uni-muenchen.de
+
+with the word "subscribe" or "unsubscribe" in the message body.
+The messages will be archived and could be requested from:
+
+  majordomo@physik.uni-muenchen.de
+
+A weekly (or when 40kByte of size is reached) digest is also available: 
+
+  fvwm95-digest-request@physik.uni-muenchen.de
+
+Please, do not send fvwm95 specific questions to the fvwm mailing list or
+to the fvwm mantainer (Charles Hines, chuck_hines@vnet.ibm.com).
+
+
+The Fvwm-95 home page is being moved to:
+
+  http://www.linux-kheops.com/pub/fvwm95
+
+There previous mirror site is still at:
+
+  http://www.terraware.net/ftp/pub/Mirrors/FVWM95/fvwm95.html
+
+
+Fvwm95 is available from the following ftp sites:
+
+  http://www.medfac.unimelb.edu.au/staff/raul/bin/  (Australia)
+  ftp://mitac11.uia.ac.be/pub/                      (Belgium)
+  ftp://ekf2.vsb.cz/pub/linux/fvwm-95/              (Czech Republic)
+  ftp://ftp.plig.org/pub/fvwm95/                    (UK)
+  ftp://ftp.terraware.net/pub/Mirrors/FVWM95/       (USA)
+
+
+Enjoy!
+Hector Peraza.
+peraza@mitac11.uia.ac.be
+peraza@uia.ua.ac.be
+
+
+NOTE: this version of fvwm95 is hacked even further. The taskbar has been
+modified and some new modules are included. Also the system.fvwm95rc has
+been heavily modified and commented.
+
+Emmanuel Rouat
+rouat@dsys.ceng.cea.fr

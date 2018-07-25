@@ -1,0 +1,18 @@
+
+07/31/1997 : mdb - FvwmTaskBar mods needed
+
+0. Apply patch for LoadableLoad_f prototype error caught by Christian Worley
+   *** Done
+1. option for time auto tip stays visible.
+   specify AutoMailTipDisplayTime: 5  (stay visible 5 min, or -1 = as done now)
+2. look into polling interval
+3. pop3 support (maybe)
+   -> instead use hack to create a diff mail file like spool file
+4. better name/email extraction in From: field
+   *** Added smart from field extraction
+5. specify MailTipDisplayMax: 25 (# of entries to display)
+   *** Added *FvwmTaskBarMaxTipLines 25
+   specify MailTipDisplayLine: singleline 10 2 20 (from, space, subj)
+   specify MailTipDisplayLine: doubleline 0 10 2 20   (space, from, space, subj)
+   *** Added MailCheckModuleMailTipFormat 
+

@@ -1,0 +1,27 @@
+3/25/96		Version 0.4:
+			FvwmIconMan put into fvwm 2.0 distribution.
+			support for fvwm 1 discontinued
+			one bug fix: wouldn't work without a numManagers
+					line in .fvwm2rc
+
+2/06/96		Version 0.3:
+			added sort option
+			added followfocus option
+			added plain, focus, select, and focusandselect
+				styles
+			added select action
+			can now specify which manager takes which windows
+				by regular expressions against the
+				resource, class, icon, and title names
+				of a window
+			started migration to using libfvwm.a (probably won't
+				finish until I stop supporting fvwm 1)	
+			made an Imakefile
+			including a patch to fvwm's focus function
+			many bug fixes
+
+6/23/95         Version 0.2.
+                        added option to use title names
+                        added linux config
+
+6/17/95         Announced Version 0.1 to fvwm mailing list

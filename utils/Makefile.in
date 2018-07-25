@@ -1,0 +1,35 @@
+#
+SHELL=/bin/sh
+
+@SET_MAKE@
+
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bin_dir=@exec_prefix@/bin
+fvwm_name=@fvwm_name@
+fvwm_dir=${prefix}/lib/X11/${fvwm_name}
+
+INSTALL=@INSTALL@
+INSTALL_PROGRAM=@INSTALL_PROGRAM@
+RM=@RM@
+
+SCRIPTS=fvwmrc_convert quantize_pixmaps
+
+all: 
+
+depend:
+
+install: 
+	@for i in ${SCRIPTS} ; do \
+		${INSTALL_PROGRAM} ./$$i ${fvwm_dir} ; \
+	done
+
+clean:
+	${RM} *~ core *.bak
+
+distclean: clean
+
+
+#

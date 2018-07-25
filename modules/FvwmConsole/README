@@ -1,0 +1,32 @@
+     The FvwmConsole allows the user to type fvwm  commands  into
+     xterm,  and  have  them executed immediately. These commands
+     are usually specfified in the .fvwmrc file, or are bound  to
+     menu/mouse  items  as  specified in that file. This tools is
+     particularly useful for testing new configuration ideas,  or
+     for implementing temporary changes to your environment.
+
+
+     GNU readline library is called to edit command line.
+     A perl script is supplied as an alternative command editor
+     for those who don't have the readline library.
+
+     FvwmConsole takes any options xterm will take,  except -e,
+     such as:
+
+          FvwmConsole -g 40x10 -fg black -bg green3
+
+     Or Xresources can be set in .Xdefaults file.
+
+          FvwmConsole*font: 8x15
+
+
+
+
+     Any comments will be appreciated.
+
+     Thanks to Makoto `MAR_kun' MATSUSHITA for advice
+
+
+     toshi_isogai@maxtor.com
+
+    

@@ -1,0 +1,35 @@
+#
+SHELL=/bin/sh
+
+@SET_MAKE@
+
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bin_dir=@exec_prefix@/bin
+fvwm_rc=@fvwm_rc@
+fvwm_name=@fvwm_name@
+fvwm_dir=${prefix}/lib/X11/${fvwm_name}
+
+INSTALL=@INSTALL@
+INSTALL_DATA=@INSTALL_DATA@
+RM=@RM@
+LN=@LN_S@
+
+RC=system${fvwm_rc}
+
+all: 
+
+depend:
+
+install: 
+	${INSTALL_DATA} ${RC} ${fvwm_dir} 
+	${LN} ${fvwm_dir}/${RC} ${fvwm_dir}/${fvwm_rc}  
+clean:
+	${RM} *~ core *.bak
+
+distclean: clean
+
+
+#

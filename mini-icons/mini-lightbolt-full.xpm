@@ -1,0 +1,28 @@
+/* XPM */
+static char *mini-lightbolt-full[] = {
+/* width height num_colors chars_per_pixel */
+"    18    18        3            1",
+/* colors */
+". c #414141",
+"# c #b6b6b6",
+"a c #828282",
+/* pixels */
+"#################.",
+"################..",
+"##aaaaaaaaaa.aaa..",
+"##aaaaaaaaa#.aaa..",
+"##aaaaaaaa#.aaaa..",
+"##aaaaaaa#a.aaaa..",
+"##aaaaaa#aa.aaaa..",
+"##aaaaa#aa.aaaaa..",
+"##aaaa#aaa.####a..",
+"##aaa....#aaa.aa..",
+"##aaaaaaa#aa.aaa..",
+"##aaaaaa#aa.aaaa..",
+"##aaaaaa#a.aaaaa..",
+"##aaaaaa#.aaaaaa..",
+"##aaaaa#.aaaaaaa..",
+"##aaaaa.aaaaaaaa..",
+"#.................",
+".................."
+};

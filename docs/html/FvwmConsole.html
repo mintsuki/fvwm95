@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmConsole - the FVWM command input interface
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmConsole is spawned by fvwm, so no command line invoca-
+       tion will work.  From within the .fvwm2rc file or  from  a
+       menu,  FvwmConsole  takes  any  options  xterm  will take,
+       except -e, -name, and -title.
+
+              Module FvwmConsole -g 40x10 -fg black -bg green3
+
+       Also X resources can be set in .Xdefaults file
+
+              FvwmConsole*geometry: 40x4
+              FvwmConsole*font: 7x14
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The FvwmConsole allows the user to type fvwm commands into
+       xterm,  and have them executed immediately. These commands
+       are usually specfified in the .fvwmrc file, or  are  bound
+       to  menu/mouse items as specified in that file. This tools
+       is  particularly  useful  for  testing  new  configuration
+       ideas, or for implementing temporary changes to your envi-
+       ronment.
+
+       GNU readline library is called to edit command line.  Also
+       a  perl  script is supplied as alternative command editor.
+       Its commands are similar to emacs.
+
+              Cntl-A  - begining of line
+              Cntl-B  - previous char
+              Cntl-D  - delete char
+              Cntl-E  - end of line
+              Cntl-F  - next char
+              Cntl-H  - backspace
+              Cntl-K  - erase to the end of line
+              Cntl-N  - next line
+              Cntl-P  - previous line
+              Cntl-R  - search reverse
+              Cntl-U  - delete line
+              Meta-B  - previous word
+              Meta-F  - next word
+              Esc &lt;   - begining of history
+              Esc &gt;   - end of history
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       Copyright 1996, Toshi Isogai. No guarantees or  warranties
+       are  provided.  Use this program at your own risk. Permis-
+       sion to use this program for any purpose is given, as long
+       as the copyright is kept intact.
+
+       FvwmConsole  can  be invoked by inserting the line 'Module
+       FvwmConsole' in the .fvwmrc file. This can be placed on  a
+       line  by  itself,  if  FvwmConsole is to be spawned during
+       fvwm's initialization, or can be bound to a menu or  mouse
+       button  or  keystroke to invoke it later. Fvwm will search
+       directory specified in the ModulePath configuration option
+       to attempt to locate FvwmConsole.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       FvwmConsole  uses  xterm.  All resources set for xterm are
+       inherited unless overiden by command line options.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>xterm(1)</B>, GNU readline library
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Toshi Isogai  toshi_isogai@maxtor.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

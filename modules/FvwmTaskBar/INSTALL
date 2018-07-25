@@ -1,0 +1,26 @@
+
+           Compilation
+
+Makefile  may need adjustment !
+This will not run on a non-elf platform
+You need libxpm and libdl, I got them from sunsite.unc.edu.
+
+Those messages (especially for modules) are OK.
+They should come from struct GoodyLoadable declared inside
+the modules.
+
+          Installation
+
+Put the modules (*.so files) in some nice directory, 
+/var/X11R6/lib/fvwm95-2/plugins is recommended.
+
+A corresponding piece of fvwmrc is in EXAMPLE.fvwmrc
+A speaker icon is supplied, the plug icon should be
+among the icons that came with fvwm
+
+          Running
+FvwmTaskBar prints the names of all loaded modules on stdout.
+You can read them in .xsession-errors . 
+
+                 Volodya Dergachev
+

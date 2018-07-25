@@ -1,0 +1,496 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmTaskBar - the FVWM taskbar module - with plugins
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmTaskBar is spawned by FVWM, so no command line invoca-
+       tion will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The FvwmTaskBar module provides a taskbar made up of  but-
+       tons arranged by rows, each corresponding to a window that
+       FVWM is managing.  Clicking on first button gives focus to
+       the  corresponding toplevel window; clicking on the middle
+       button will hide a toplevel window; third mouse button  is
+       reserved  for a future extension (context menu).  Like the
+       other modules, FvwmTaskBar only works when fvwm is used as
+       the window manager.
+
+       When started, the taskbar shows up as a single row of but-
+       tons filling the full width of the screen, but during  the
+       work  can  be  resized to accomodate up to 8 rows. In adi-
+       tion, if the AutoStick option is used,  the  taskbar  will
+       autoposition  itself  at  the top or bottom of the screen,
+       and can be dragged from one position  to  another  with  a
+       normal move operation.
+
+       The  first button of the taskbar, labelled "Start" sends a
+       "Popup StartMenu" command to the FVWM, which can  be  used
+       to  pop-up  a  general-purpose  menu  when  the  button is
+       pressed.
+
+       The FvwmTaskBar also displays at the right side  a  window
+       showing  the  current  time and the built-in incoming mail
+       indicator.
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       The FvwmTaskBar module is  derivated  from  Mike  Finger's
+       FvwmWinList.
+
+       Copyright  1994,  Mike Finger. The author makes no guaran-
+       tees or warranties of any kind about the use of this  mod-
+       ule.   Use  this modules at your own risk.  You may freely
+       use this module or any portion of it for  any  purpose  as
+       long as the copyright is kept intact.
+
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       During initialization, <I>FvwmTaskBar</I> will scan the same con-
+       figuration file that FVWM used during startup to find  the
+       options  that  pertain to it.  These options are discussed
+       in a later section.
+
+       FvwmTaskBar can be invoked by fvwm  during  initialization
+       by  inserting the line 'Module FvwmTaskBar' in the .fvwmrc
+       file.
+
+       FvwmTaskBar must reside in a directory that is  listed  in
+       the  ModulePath  option  of  FVWM for it to be executed by
+       FVWM.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       The following options can be placed in the .fvwm95rc file
+
+
+       *FvwmTaskBarGeometry <I>{+-}&lt;X&gt;x{+-}&lt;Y&gt;</I>
+              Specifies the location and  gravity  of  the  Fvwm-
+              TaskBar  window.   At  the current version, size is
+              not supported and the taskbar will resize itself to
+              fill the full witdh of the screen. If the AutoStick
+              option is also specified, the module will automati-
+              cally  "stick"  to  the  top  or  the bottom of the
+              screen, whichever is closest to the geometry speci-
+              fication.
+
+
+       *FvwmTaskBarFont <I>font</I>
+              Specifies  the default font to be used for labeling
+              the buttons, when they are not  depressed.  If  not
+              specified, fixed font is assumed.
+
+
+       *FvwmTaskBarSelFont <I>font</I>
+              Specifies  the  font  to  be used for the depressed
+              buttons. Note that the Start button will use always
+              this font even if is not pressed. If this option is
+              not specified, the default font is used instead.
+
+
+       *FvwmTaskBarStatusFont <I>font</I>
+              Specifies the font to be used for the clock and tip
+              windows.  If  this  option  is not specified, fixed
+              font is used.
+
+
+       *FvwmTaskBarFore <I>color</I>
+              Specifies the color to use for the button names.
+
+
+       *FvwmTaskBarBack <I>color</I>
+              Specifies the background color for the bar and but-
+              tons.
+
+
+              Specifies  the color to be used for the text in the
+              tips windows.
+
+
+       *FvwmTaskBarTipsBack <I>color</I>
+              Specifies the background color for  the  tips  win-
+              dows.
+
+
+       *FvwmTaskBarGeometry <I>geometry</I>
+              This  option  specifies  the geometry of the window
+              (only the Y coordinate is useful)
+
+
+       *FvwmTaskBarAutoStick
+              This option causes the taskbar to "stick" either to
+              the top or bottom of the screen, whichever is clos-
+              est to the initial window  placement.  Any  further
+              move operation is also subject to that behaviour.
+
+
+       *FvwmTaskBarAutoHide
+              This option causes the taskbar to disappear leaving
+              a narrow strip at the bottom  of  the  screen,  and
+              reappears  only  when  the  mouse  is moved to that
+              strip. This option automatically enables AutoStick.
+
+
+       *FvwmTaskBarUseSkipList
+              Tells  FvwmTaskBar to not show the windows that are
+              listed on a WindowListSkip line in  the  configura-
+              tion file.
+
+
+       *FvwmTaskBarDeskOnly
+              Tells FvwmTaskBar to show the windows that are only
+              on  the  current  desktop.    When   desktops   are
+              switched,  the list of windows changes accordingly.
+
+
+       *FvwmTaskBarUseIconNames
+              Tells FvwmTaskBar to use the icon name of the  win-
+              dow  instead of the full window name.  This is use-
+              ful to keep the width of the buttons small.
+
+
+       *FvwmTaskBarShowTransients
+              Tells FvwmTaskBar to show the application transient
+              windows also. By default they are not shown.
+
+
+       *FvwmTaskBarAction <I>action</I> <I>response[,response...]</I>
+              Click2,  Click3.  The currently supported <I>response</I>s
+              are any fvwm built-in commands,  including  modules
+              and  functions.   The  configuration  example below
+              shows the default values.
+
+
+       *FvwmTaskBarButtonWidth <I>width</I>
+              Indicates the maximum  width  that  window  buttons
+              should reach.  (the minimum is hardcoded at 32).
+
+
+       *FvwmTaskBarHighlightFocus
+              If  the mouse pointer is over the taskbar, the win-
+              dow under the current button is active. This behav-
+              ior  is like the TVTWM Icon Manager or FvwmIconMan.
+              <I>Note:</I> If you use this option combined with  Follow-
+              Mouse  focus  style,  you'll want the taskbar to be
+              ClickToFocus.
+
+
+       *FvwmTaskBarShowTips
+              Enables the tips windows (by default disabled).
+
+
+       *FvwmTaskBarMaxTipLines <I>[num]</I>
+              This controls the maximum number of  lines  allowed
+              in  a  multi-line  tip window.  The first [num] are
+              displayed, and if more than [num] lines are in  the
+              tip  text,  the  last line will read "(more...)" to
+              indicate it.  The default for this is 30
+
+
+       *FvwmTaskBarUpdateInterval <I>seconds</I>
+              Specifies how often the  clock  display  should  be
+              refreshed,  so  that times of the form HH:MM:SS can
+              be used. By default 60 seconds.
+
+
+
+
+
+       The following options deal with the Start  button  at  the
+       left of the taskbar:
+
+
+       *FvwmTaskBarStartName <I>string</I>
+              This  option  specifies the string displayed in the
+              Start button.  ('Start' by default).
+
+
+       *FvwmTaskBarStartMenu <I>string</I>
+              This option specifies the popup to invoke when  the
+              fvwm window manager.
+
+
+       *FvwmTaskBarStartIcon <I>icon-name</I>
+              This  option specifies the name of the icon to dis-
+              play at the left of the Start button.
+
+
+
+
+
+       The following options deal with the goodies and modules of
+       the taskbar:
+
+
+
+       *FvwmTaskBarGoodyLoadablePlugins <I>directory</I>
+              Specifies  a directory to search for plugins. After
+              each occurence of this  command  FvwmTaskBar  scans
+              the  directory  for files with ".so" at the end and
+              attempts   to   load   them.   The    default    is
+              "/usr/local/lib/X11/fvwm95"
+
+
+       *FvwmTaskBarGoodyLoadableQuiet
+              Tells  FvwmTaskBar to skip information about loaded
+              modules. This information is  extremely  useful  in
+              determining  if FvwmTaskBar loads them at all. How-
+              ever once you got a stable  configuration  you  may
+              want to omit it.
+
+
+       *FvwmTaskBarGoodyLoadableSymbol <I>Symbol</I>
+              Create  a  new  goody. Symbol is the name of struct
+              GoodyLoadable in one of the modules. Note that  you
+              can  use  the  same  module  more than once and you
+              don't have to know which module has this symbol.
+
+
+       *FvwmTaskBarGoodyLoadableId <I>id</I>
+              "Id" is an arbitrary character string passed to the
+              initialization  routine  of the module. The idea is
+              that since the module can be used more the once  we
+              need  a  mean  to  distinguish  between  strings in
+              .fvwmrc corresponding to  different  goodies.  It's
+              recommended   not   to  use  dots,spaces  or  empty
+              strings..
+
+
+       *FvwmTaskBarGoodyModuleIcon&lt;id&gt; <I>mini-icon</I> <I>name</I>
+              Specifies which mini-icon should be inserted in the
+              taskbar for goody &lt;id&gt;.  Default path is "<I>IconPath</I>"
+              Sets the tip for goody &lt;Id&gt;
+
+
+       *FvwmTaskBarGoodyModuleCommand&lt;id&gt; <I>command</I>
+              Sets the command to be executed when  double-click-
+              ing on goody &lt;id&gt;'s icon.
+
+
+
+          <I>Date</I> <I>Module:</I> <I>ShowDateModule</I>
+
+
+       *FvwmTaskBarShowDateModuleClockFormat&lt;id&gt; <I>format-string</I>
+              This option specifies the time format for the digi-
+              tal clock.  It is a <I>stfrtime(3)</I>  compatible  format
+              string  (see the manual page of the 'date' command)
+              By default it is "%R".
+
+
+       *FvwmTaskBarShowDateModuleHourlyCommand&lt;id&gt; <I>command</I>
+              Specifies a command to be executed every hour.
+
+
+
+          <I>Mail</I> <I>Module:</I> <I>MailCheckModule</I>
+
+
+       *FvwmTaskBarMailCheckModuleNewMailCommand&lt;id&gt; <I>command</I>
+              Specifies which command is to be executed when  new
+              mail arrives.
+
+
+       *FvwmTaskBarMailCheckModuleAutoMailTip&lt;id&gt; <I>[type]</I>
+              This  option  controls the auto-display of new mail
+              in a multi-line tip window.  Three possible  values
+              are  allowed  for the optional type argument: Mail-
+              FileTouched, MailFileBigger, or  MailFileAnyChange.
+              MailFileTouched  means the mail spool file has been
+              modified since the last access,  MailFileBigger  is
+              when  the  mail spool file gets larger in size, and
+              Mail-FileAnyChang is when the mail spool file  gets
+              larger  or smaller.  These  conditions control when
+              the AutoMailTip  window is displayed.  The  default
+              is Mail-FileAnyChange.
+
+
+       *FvwmTaskBarMailCheckModuleMailTipFormat.MAIL  <I>[l]</I> <I>[if]</I>
+              <I>[wf]</I> <I>[is]</I> <I>[ws]</I>
+              This options allows specification of how to display
+              the mail information in the tip.  [l] can be either
+              1  for  a  single line per mail message, or 2 for a
+              double line format where the From: info appears  on
+              From:  info,  and  [wf]  is the max width. [is] and
+              [ws] are the indent and width of the Subject: info.
+              The default is 1 0 20 2 30.
+
+
+       *FvwmTaskBarMailCheckModuleMailTipNoSmartFrom
+              If  set,  this  flag  shuts  off the automatic name
+              extraction for the From: field.  The format seen in
+              email  is largely formatted by convention, and this
+              allows this process to be shut off when it does not
+              work.  The smart name extraction algorithm works as
+              follows.  Step 1: all substrings  delimited  by  &lt;&gt;
+              and  []  are removed, since they usually contain an
+              email address.  If nothing is left,  this  step  is
+              reversed.  Step 2: if any string delimited by "" or
+              () is found, it is used as the smart name.   Other-
+              wise  the result from Step 1 is used at the result.
+              For most email I have, this results in nicely  for-
+              matted names.
+
+
+       *FvwmTaskBarMailCheckModuleMailTipUnblankScreen&lt;id&gt;
+              If set, the screen will be un-blanked when the mail
+              tip is drawn.
+
+
+       *FvwmTaskBarShowDateModuleHourlyCommand&lt;id&gt; <I>command</I>
+              Executes the command every hour.
+
+
+
+          <I>Modem</I> <I>Module:</I> <I>CheckLockModule</I>
+
+       <I>To</I> <I>be</I> <I>done</I> <I>....</I>
+
+
+
+
+</PRE>
+<H2>SAMPLE CONFIGURATION</H2><PRE>
+       The following are excepts  from  a  <I>.fvwm95rc</I>  file  which
+       describe FvwmTaskBar initialization commands:
+
+
+       #
+       # Start the taskbar on fvwm startup and restart
+       #
+
+       AddToFunc "InitFunction" "I" Module FvwmTaskBar
+
+       AddToFunc "RestartFunction" "I" Module FvwmTaskBar
+
+       #
+       # Set the style for the taskbar window, keep always on top of another
+
+
+       Style "FvwmTaskBar" NoTitle,BorderWidth 4,HandleWidth 4,Sticky,\
+                           StaysOnTop,WindowListSkip,CirculateSkip
+
+       *FvwmTaskBarGeometry +0-0
+       *FvwmTaskBarFore Black
+       *FvwmTaskBarBack #c0c0c0
+       *FvwmTaskBarFont -adobe-helvetica-medium-r-*-*-*-120-*-*-*-*-*-*
+       *FvwmTaskBarSelFont -adobe-helvetica-bold-r-*-*-*-120-*-*-*-*-*-*
+       *FvwmTaskBarStatusFont fixed
+       *FvwmTaskBarTipsFore black
+       *FvwmTaskBarTipsBack bisque
+       *FvwmTaskBarAction Click1 Iconify -1,Raise,Focus
+       *FvwmTaskBarAction Click2 Iconify
+       *FvwmTaskBarAction Click3 PopUp Window-Ops2
+       *FvwmTaskBarUseSkipList
+       *FvwmTaskBarAutoStick
+       *FvwmTaskBarStartName Start
+       *FvwmTaskBarStartMenu StartMenu
+       *FvwmTaskBarStartIcon mini-penguin.xpm
+       *FvwmTaskBarShowTips
+       *FvwmTaskBarShowTransients
+       *FvwmTaskBarHighlightFocus
+       *FvwmTaskBarAutoHide
+       *FvwmTaskBarDeskOnly
+       *FvwmTaskBarMaxTipLines 5
+
+
+       # Now the goodies....
+
+       *FvwmTaskBarGoodyLoadablePlugins /usr/local/lib/X11/fvwm95/
+       *FvwmTaskBarGoodyLoadableQuiet
+
+       # Modem
+       *FvwmTaskBarGoodyLoadableSymbol CheckLockModuleSymbol
+       *FvwmTaskBarGoodyLoadableId .Modem
+       *FvwmTaskBarCheckLockModuleIcon.Modem mini-connect.xpm
+       *FvwmTaskBarCheckLockModuleTip.Modem Modem is in use
+       *FvwmTaskBarCheckLockModuleCommand.Modem Popup Network
+       *FvwmTaskBarCheckLockModuleLockFile.Modem /var/lock/LCK..modem
+
+       # Sound mixer
+       *FvwmTaskBarGoodyLoadableSymbol GoodyModuleSymbol
+       *FvwmTaskBarGoodyLoadableId .SPEAKER
+       *FvwmTaskBarGoodyModuleIcon.SPEAKER mini-speaker.xpm
+       *FvwmTaskBarGoodyModuleTip.SPEAKER Audio Control Panel
+       *FvwmTaskBarGoodyModuleCommand.SPEAKER Exec OXmixer
+
+       # Date
+       *FvwmTaskBarGoodyLoadableSymbol ShowDateModuleSymbol
+       *FvwmTaskBarGoodyLoadableId .DATE
+       *FvwmTaskBarShowDateModuleClockFormat.DATE %H:%M
+       #*FvwmTaskBarShowDateModuleHourlyCommand.DATE exec xmessage hourly command
+
+       # Mail
+       *FvwmTaskBarGoodyLoadableSymbol MailCheckModuleSymbol
+       *FvwmTaskBarGoodyLoadableId .MAIL
+       *FvwmTaskBarMailCheckModuleMailIcon.MAIL mini-mail.xpm
+       *FvwmTaskBarMailCheckModuleCommand.MAIL Exec xterm -T Mail -e mail
+       *FvwmTaskBarMailCheckModuleNewMailIcon.MAIL mini-newmail.xpm
+       *FvwmTaskBarMailCheckModuleNewMailTip.MAIL You have new mail
+       #*FvwmTaskBarMailCheckModuleNewMailCommand.MAIL beep
+       *FvwmTaskBarMailCheckModuleUnreadMailIcon.MAIL mini-unreadmail.xpm
+       *FvwmTaskBarMailCheckModuleMailFile.MAIL /var/spool/mail/$USER
+       *FvwmTaskBarMailCheckModuleAutoMailTip.MAIL
+       #*FvwmTaskBarMailCheckModuleMailTipUnblankScreen.MAIL
+       *FvwmTaskBarMailCheckModuleMailTipFormat.MAIL 1 0 10 2 10
+
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       At present the <I>FvwmTaskBar</I> works only with <I>fvwm95</I>.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       David  Barth  (barth@di.epfl.ch)  Modules  and  plugins by
+       Volodya Dergachev and  Michael D. Beynon (beynon@acm.org)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

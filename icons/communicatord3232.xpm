@@ -1,0 +1,71 @@
+/* XPM */
+static char *communicatord3232[] = {
+/* width height num_colors chars_per_pixel */
+"    32    32        9            1",
+/* colors */
+". c #000000",
+"# c #000084",
+"a c #0000ff",
+"b c #008484",
+"c c #848484",
+"d c #c6c6c6",
+"e c #ffff00",
+"f c #ffffff",
+"g c None",
+/* pixels */
+"babababababababababababababababa",
+"aba###.####.....abababababababc.",
+"ba#dccccccccccc...babababababc.g",
+"abddddddddddddcc...bababababc.gg",
+"baddeffffffffddc..a.babababc.ggg",
+"a#defbdbfbffffdc#..aabababc.gggg",
+"badefdffffffffdc#.a.bababc.ggggg",
+"aadefbbfbbfbffdc#..aababc.gggggg",
+"badeffffffffffdc#.a.babc.ggggggg",
+"aadefbbfbbfbbfdc#..aabc.gggggggg",
+"badeffffffffffdc#.a.bc.ggggggggg",
+"aaddefefefeffddc...cb.gggggggggg",
+"baaddddddddddec#..ac.ggggggggggg",
+"aaaaaaaaaaa#dd#...c.gggggggggggg",
+"ba.a.a.a.a.a.d#.#ccggggggggggggg",
+"aba.a.a.a.a.aa####cggggggggggggg",
+"baba.a.a.a.ab##c#c.ggggggggggggg",
+"ababababababab#c#dc.........dcgg",
+"bababababababcb#dedddddddccc.dcg",
+"ababababababc.addefefeffdddcc.dc",
+"babababababc.gadefffffffffddc.dc",
+"abababababc.ggadebbfbffddffdc.dc",
+"bababababc.gggadeffffffffdfdc#dc",
+"ababababc.ggggadebbfbbfbbdbdc#dc",
+"babababc.gggggadeffffffffffdc#dc",
+"abababc.ggggggadeffbbfbbfbfdc#dc",
+"bababc.gggggggadeffffffffffdc.dc",
+"ababc.ggggggggaddefefeffffddc#dc",
+"babc.ggggggggggaaaaaaaaaaaaa#.dc",
+"abc.gggggggggggc........#....ddc",
+"bc.gggggggggggggccddddddddddddcc",
+"a.gggggggggggggggccccccccccccccg"
+};
+SIMPLE  =                    T                                                  BITPIX  =                    8                                                  NAXIS   =                    2                                                  NAXIS1  =      
+             32                                                  NAXIS2  =                   32                                                  HISTORY Written by XV 3.10a                                                     END                           
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                               
+                                                                           '
+ÿÿÿÿÿÿÿÆ„
+ÆÆÆÆÆÆ„„„
+'
+
+
+
+
+
+
+
+

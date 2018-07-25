@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmIdent - the FVWM identify-window module
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmIdent  is  spawned by fvwm, so no command line invoca-
+       tion will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The FvwmIdent module prompts the user to select  a  target
+       window,  if the module was not launched from within a win-
+       dow context in Fvwm.  After that, it pops up a window with
+       information about the window which was selected.
+
+       FvwmIdent  reads  the same .fvwmrc file as fvwm reads when
+       it starts up, and looks for lines similar to  "*FvwmIdent-
+       Fore green".
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       The  FvwmIdent  program,  and  the concept for interfacing
+       this module to the Window Manager, are all  original  work
+       by Robert Nation Nobutaka Suzuki.
+
+       Copyright  1994,  Robert  Nation  and  Nobutaka Suzuki. No
+       guarantees or  warranties  or  anything  are  provided  or
+       implied  in  any  way whatsoever. Use this program at your
+       own risk. Permission to use this program for  any  purpose
+       is given, as long as the copyright is kept intact.
+
+
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       During  initialization, <I>FvwmIdent</I> will eventually search a
+       configuration file which describes the colors and font  to
+       use.   The  configuration  file is the same file that fvwm
+       used during initialization.
+
+       If the FvwmIdent executable is linked to another name,  ie
+       ln  -s  FvwmIdent MoreIdentify, then another module called
+       MoreIdentify can be started, with a  completely  different
+       configuration  than FvwmIdent, simply by changing the key-
+       word  FvwmIdent to MoreIdentify. This way  multiple  clut-
+       ter-reduction programs can be used.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       FvwmIdent  can  be  invoked  by binding the action 'Module
+       FvwmIdent' to a menu or key-stroke in  the  .fvwmrc  file.
+       Fvwm  will  search  directory  specified in the ModulePath
+       configuration  option  to  attempt  to  locate  FvwmIdent.
+       Although  nothing  keeps  you  from launching FvwmIdent at
+       start-up time, you probably don't want to.
+       FvwmIdent reads the same .fvwmrc file as fvwm  reads  when
+       it starts up, and looks for lines as listed below:
+
+
+       *FvwmIdentFore <I>color</I>
+              Tells  the module to use <I>color</I> instead of black for
+              text.
+
+
+       *FvwmIdentBack <I>color</I>
+              Tells the module to use <I>color</I> instead of black  for
+              the window background.
+
+
+       *FvwmIdentFont <I>fontname</I>
+              Tells  the  module to use <I>fontname</I> instead of fixed
+              for text.
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Robert Nation and  and Nobutaka Suzuki  (nobuta-s@is.aist-
+       nara.ac.jp).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

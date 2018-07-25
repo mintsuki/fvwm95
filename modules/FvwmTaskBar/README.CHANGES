@@ -1,0 +1,205 @@
+
+Hello all !
+
+   Here is an _alpha_ version of FvwmTaskBar..
+   
+   Why alpha ? Well it's usable but not clean. I checked all the parts as
+   best as I could do,but there remains a few things yet to be done.
+   
+   What is done :
+   
+      It works !
+   
+      Support for loadable goodies (modules).
+      Four plugins: GoodyModule.c,CheckLockModule.c,ShowDateModule.c and
+      MailCheckModule.c
+
+      Status window now uses only modules.
+      
+      You can load one module more than one time. (Which in particular
+      means that you can have indicators for many mailboxes instead of
+      just one)
+
+      All modules can execute an externally specified command when double
+      clicked
+
+      I made a point of letting FvwmTaskBar run even if there are
+      some errors.. I do hope that the only thing that can crash
+      it is a bad  module - but I hope that writing them is relatively
+      simple(you can use the mentioned above as examples)
+      
+   What is half done:
+   
+      GoodyLoadable.h haven't stabilized yet. In particular I was 
+      thinking of adding a few fields.
+      
+   What is not done:
+    
+      Support of animation - the CheckLockModule renews it status when
+      the whole thing is redrawn..
+      
+      More sane configuration file.. using dots can be an advantage.
+
+      Support of compiled in modules - relatively easy, but I have to check
+      a few exceptional situations
+      
+ 
+Specifics :
+ 
+1. FvwmTaskBar
+ 
+  Four new configuration commands :
+  
+  *FvwmTaskBarGoodyLoadablePlugins directory
+  
+   Specifies a directory to search for plugins. 
+   After each occurence of this command FvwmTaskBar scans the directory for
+   files with ".so" at the end and attempts to load them. 
+   
+   If you do not specify this line the default will be 
+   "/var/X11R6/lib/fvwm95-2/plugins"
+   
+  *FvwmTaskBarGoodyLoadableQuiet
+
+   Tells FvwmTaskBar to skip information about loaded modules. This 
+  information is extremely useful in determining if FvwmTaskBar loads them
+  at all. However once you got a stable configuration you may want to omit
+  it.
+
+  *FvwmTaskBarGoodyLoadableSymbol Symbol
+  
+  Create a new goody. Symbol is the name of struct GoodyLoadable in one
+  of the modules. Note that you can use the same module more than once
+  and you don't have to know which module has this symbol.
+  
+  *FvwmTaskBarGoodyLoadableId id
+  
+  id is an arbitrary character string passed to the initialization routine
+  of the module. The idea is that since the module can be used more the
+  once we need a mean to distinguish between strings in .fvwmrc corresponding
+  to different goodies. It's recommended not to use dots,spaces or empty 
+  strings..
+  
+  By default id is set to some integer number - so I advise not use integer
+  only id's as well.
+  
+  
+2. GoodyModule.
+
+Symbol : GoodyModuleSymbol
+
+Function : displays an icon in the status window. you can configure a tip to
+           display and command to execute when double clicked.
+           
+.fvwmrc :
+# Goody Loadable - we add a new goody "speaker"
+*FvwmTaskBarGoodyLoadableSymbol GoodyModuleSymbol
+*FvwmTaskBarGoodyLoadableId Speaker
+# Goody Speaker specific resources
+*FvwmTaskBarGoodyModuleIconSpeaker /usr/local/icons/mini-speaker.xpm
+*FvwmTaskBarGoodyModuleTipSpeaker Mixer
+*FvwmTaskBarGoodyModuleCommandSpeaker Exec xmix
+
+Here we set Id to Speaker. Notice that the string Speaker is appended 
+at the end of each configuration line.
+We specify an icon to display, a tip to show and a command to execute.
+
+
+3. CheckLockModule.
+
+Symbol : CheckLockModuleSymbol
+
+Function : if a certain specified file is present displays an icon which
+          can show a specified tip and execute a command.
+           if a file is not present nothing is displayed.
+           
+           Existence of a file is checked approximately every 30 sec,
+           (or every 'UpdateInterval' seconds, see the corresponding
+           taskbar command in the man pages).
+           
+.fvwmrc :
+# Goody Loadable - creating a new Goody Modem
+*FvwmTaskBarGoodyLoadableSymbol CheckLockModuleSymbol
+*FvwmTaskBarGoodyLoadableId Modem
+# Modem specific settings
+*FvwmTaskBarCheckLockModuleIconModem /usr/local/icons/mini-connect.xpm
+*FvwmTaskBarCheckLockModuleTipModem Modem is in use
+*FvwmTaskBarCheckLockModuleCommandModem Popup Network
+*FvwmTaskBarCheckLockModuleLockFileModem /var/lock/LCK..modem
+
+This fragment creates an icon of plug when the modem lock is present.
+when double clicked it produce a network menu (which for me has two
+entries - ppp-on and ppp-off)
+Notice that we can use fvwm commands as well..          
+
+Also, the 'CheckLockModuleLockFile' command does standard (i.e, $VAR,
+${VAR}) environment variable expansions. 
+
+
+4. ShowDateModule
+
+Symbol: ShowDateModuleSymbol
+
+Function: Replaces the show date function in FvwmTaskBar. 
+
+.fvwmrc:
+*FvwmTaskBarGoodyLoadableSymbol ShowDateModuleSymbol
+*FvwmTaskBarGoodyLoadableId Date
+# Test specific settings
+*FvwmTaskBarShowDateModuleTipDate Date 
+*FvwmTaskBarShowDateModuleCommandDate Exec /usr/local/bin/time_popup.sh
+*FvwmTaskBarShowDateModuleClockFormatDate %I:%M%p
+
+
+5. MailCheckModule
+
+Symbol: MailCheckModuleSymbol
+
+Function: Displays the status of a mailbox.
+
+.fvwmrc:
+*FvwmTaskBarGoodyLoadableSymbol MailCheckModuleSymbol
+*FvwmTaskBarGoodyLoadableId Mailbox
+# Mailbox specific settings
+*FvwmTaskBarMailCheckModuleMailIconMailbox /usr/local/icons/mini-mail.xpm
+*FvwmTaskBarMailCheckModuleTipMailbox You have mail
+*FvwmTaskBarMailCheckModuleCommandMailbox Exec xterm -T Mail -ls -e elm
+
+*FvwmTaskBarMailCheckModuleNewMailIconMailbox /usr/local/icons/mini-newmail.xpm
+*FvwmTaskBarMailCheckModuleNewMailTipMailbox You have new mail
+*FvwmTaskBarMailCheckModuleNewMailCommandMailbox Exec /usr/local/bin/wbeep /usr/local/wbeeps/NewMail.snd
+
+*FvwmTaskBarMailCheckModuleUnreadMailIconMailbox /usr/local/icons/mini-unreadmail.xpm
+*FvwmTaskBarMailCheckModuleUnreadMailTipMailbox You have unread mail
+
+*FvwmTaskBarMailCheckModuleMailFileMailbox /var/spool/mail/volodya
+
+Lot's of options ! Basically there are four groups of them :
+   * General configuration options
+   * Options for state HasNewMail
+   * Options for state HasUnreadMail
+   * Options for state HasMail
+
+When no mail is present no icon is displayed. You have the ability to execute
+a command when mail arrives, thus HasNewMail state usually don't last 
+more than 2 sec.
+
+Environment variables can be specified in the MailCheckModuleMailFile
+command, for example:
+
+*FvwmTaskBarMailCheckModuleMailFileMailbox /var/spool/mail/$USER
+
+
+Tips: 
+
+ it's better not to delete *any* lines of .fvwmrc. Just comment them out.
+
+ you may wish to change the FvwmTaskBarUpdateInterval setting in order to allow
+ for more frequent redraws of the status window.
+
+
+                
+
+                        Volodya Dergachev
+                        
+                        

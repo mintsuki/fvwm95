@@ -1,0 +1,25 @@
+/* XPM */
+static char * mini-tetris_xpm[] = {
+"16 16 5 1",
+" 	c None s None",
+".	c #808080",
+"X	c yellow",
+"o	c black",
+"O	c red",
+"                ",
+"                ",
+"                ",
+"     ......     ",
+"     .XXXXo     ",
+"     .XOOOo     ",
+"     .XOOOo     ",
+"     .XOOOo     ",
+"......OOOOoooooo",
+".XXXXOXXXXOXXXXo",
+".XOOOOXOOOOXOOOo",
+".XOOOOXOOOOXOOOo",
+".XOOOOXOOOOXOOOo",
+".ooooooooooooooo",
+"                ",
+"                "};
+

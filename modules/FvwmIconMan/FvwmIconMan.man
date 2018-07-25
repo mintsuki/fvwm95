@@ -1,0 +1,234 @@
+.\" t
+.\" @(#)FvwmIconMan.1	3/25/96
+.TH FvwmIconMan 0.4 "Mar 25 1996"
+.UC
+.SH NAME
+FvwmIconMan \- an Fvwm Icon Manager
+.SH SYNOPSIS
+FvwmIconMan is spawned by fvwm, so no command line invocation will work.
+
+.SH DESCRIPTION
+FvwmIconMan is an icon manager modeled after the TWM icon manager. 
+The user may have multiple icon managers, each of which are armed with a list
+of window types which it manages. For example, the user may have one manager
+which lists only emacs windows, and another which lists everything else. You
+may also specify what resolution each icon manager uses, for example, one
+icon manager may manage windows on all desks, and another may manage only 
+those on the current desk, or page.
+
+Unlike the TWM icon manager, FvwmIconMan is limited in only having the icons 
+listed vertically. Also unlike the TWM icon manager, it sports a three 
+dimensional look (when the display depth is sufficient). 
+
+You may bind fvwm functions to mouse buttondown events, and to the event 
+where the mouse enters one of the buttons. For example, you could bind the
+first mouse button to the Iconify function, and the second mouse button to
+the Identify function.
+
+FvwmIconMan can be set to display which window currently has the keyboard
+focus, and by binding the select event (see below) to the fvwm Focus function,
+you can emulate the TWM icon manager's behavior. Unfortunately, the Focus
+function warps the cursor to the target window. This FvwmIconMan distribution
+includes a patch to fvwm 2.0.41 which modifes the behavior of Focus so that
+it takes an argmument to control whether or not it warps the cursor.
+
+.SH INITIALIZATION
+During initialization, FvwmIconMan searches though the fvwm configuration file
+for the options which are described below. It is highly recommended that you
+make FvwmIconMan be a sticky window. And if you want to make use of the 
+followfocus option, and/or binding an action to Focus, then you should make
+FvwmIconMan clicktofocus.
+
+.SH INVOCATION
+FvwmIconMan can be invoked by inserting the line 'Module FvwmIconMan' in the .fvwmrc file. If FvwmIconMan is to be spawned during fvwm's initialization,
+then this line should be placed in the InitFunction and ResetFunction
+declarations, or it can be bound to a menu, mouse button, or keystroke to
+invoke it later. FvwmIconMan should be placed in the ModulePath (defined in
+the .fvwmrc file) in order for fvwm to find it.
+
+.SH CONFIGURATION OPTIONS
+With the exception of the nummanagers option, all of the options may be
+defined on a per-manager basis. So, for example, the user may have his emacs
+manager with a red foreground, and his xterm manager with a blue one. A
+configuration line may therefore have one of two forms:
+
+.IP "*FvwmIconMan*optionname optionvalue"
+To specify that the \fIoptionname\fP takes the value \fIoptionvalue\fP 
+for all managers.
+.IP "*FvwmIconMan*managerid*optionname optionvalue"
+To specify that the option \fIoptionname\fP takes the value \fIoptionvalue\fP
+for manager \fImanagerid\fP.
+
+The following options may be specified:
+
+.IP "*FvwmIconMan*nummanagers \fInum\fP"
+\fInum\fP is a positive integer specifying the total number of icon managers.
+Since FvwmIconMan would like to know how many managers there are before
+handling any manager specific options, this should come first. Default is 1.
+
+.IP "*FvwmIconMan*[id*]resolution \fIresolution\fP"
+Specifies when the manager will display an entry for a certain
+window. \fIresolution\fP may take one of the following values: global, desk,
+or page. If global, then all windows of the appropriate type (see the show
+and dontshow options below) will be shown. If desk, then only those windows 
+on the current desk will be down. And if page, then only those windows on the 
+current page will be shown. Default is global.
+
+.IP "*FvwmIconMan*[id*]showtitle \fIboolean\fP"
+If \fItrue\fP, then print the window title names in the
+manager, if \fIfalse\fP, then print the icon names. Default is false.
+
+.IP "*FvwmIconMan*[id*]font \fIfont\fP"
+Specifies the font to be used for labeling the buttons.
+
+.IP "*FvwmIconMan*[id*]geometry \fIgeometry\fP"
+Specified the geometry of the manager. If the geometry is specified with a 
+negative y coordinate, then the window manager will grow upwards. Otherwise,
+it will shrink downwards.
+
+.IP "*FvwmIconMan*[id*]foreground \fIforeground\fP"
+Specifies the default foreground color.
+
+.IP "*FvwmIconMan*[id*]background \fIbackground\fP"
+Specifies the default background color.
+
+.IP "*FvwmIconMan*[id*]plainbutton \fIstyle\fP [\fIforecolor\fP \fIbackcolor\fP]"
+Specifies how normal buttons look. \fIstyle\fP may be one of \fIflat\fP,
+\fIup\fP, or \fIdown\fP, and describes how the button is drawn. The
+color options are both optional, and if not set, then the default
+colors are used. If on a monochrome screen, then the \fIstyle\fP option is
+ignored, but must still be set.
+
+.IP "*FvwmIconMan*[id*]selectbutton \fIstyle\fP [\fIforecolor\fP \fIbackcolor\fP]"
+Same as the plainbutton option, but specifies the look of buttons when the
+mouse is over them.
+
+.IP "*FvwmIconMan*[id*]focusbutton \fIstyle\fP [\fIforecolor\fP \fIbackcolor\fP]"
+Same as the plainbutton option, but specifies the look of buttons whose
+windows have the keyboard focus.
+
+.IP "*FvwmIconMan*[id*]focusandselectbutton \fIstyle\fP [\fIforecolor\fP \fIbackcolor\fP]"
+Same as the plainbutton option, but specifies the look of buttons which are
+both selected, and have the keyboard focus.
+
+.IP "*FvwmIconMan*[id*]action \fIevent\fP \fIresponse\fP[,\fIresponse...\fP]
+Tells FvwmIconMan to send the commands in \fIresponse\fP to fvwm when 
+\fIevent\fP is done. \fIEvent\fP may take on one of the values: select, 
+click1, click2, or click3. Default is iconify for all three buttons and nop 
+for select.  Select refers to the cursor entering a button in the manager.
+
+The two following options control which windows get handled by which
+managers. A manager can get two lists, one of windows to show, and one of
+windows to ignore. If only the \fIshow\fP list is given, then that manager
+will show only the windows in the list. If only the \fIdontshow\fP list is
+given, then the manager will show all windows except those in the list. If
+both lists are given, then a window will be shown if it is not in the
+\fIdontshow\fP list, and in the \fIshow\fP list. And finally, if neither list
+is given, then the manager will handle all windows. Each list is made up of
+patterns of the form \fItype=pattern\fP, where type is one of \fIclass\fP,
+\fIresource\fP, \fItitle\fP, or \fIicon\fP, and pattern is a regular
+expression of the same format used in the fvwm style command. Quotes around
+the pattern will be taken as part of the regular expression. If a window could
+be handled by more than one manager, then the manager with the lowest id gets 
+it.
+
+.IP "*FvwmIconMan*[id*]show \fIpattern list\fP"
+If a window matches one of the patterns in the list, then it may be handled
+by this manager.
+
+.IP "*FvwmIconMan*[id*]dontshow \fIpattern list\fP"
+If a window matches one of the patterns in the list, then it may not be
+handled by this manager.
+
+.IP "*FvwmIconMan*[id*]followfocus \fIboolean\fP"
+If \fIboolean\fP is \fItrue\fP, then the button appearance reflects
+which window currently has focus.  Default is false.
+
+.IP "*FvwmIconMan*[id*]sort \fIboolean\fP"
+If \fIboolean\fP is \fItrue\fP, then the icon manager is kept sorted. Default
+is true.
+
+.SH SAMPLE CONFIGURATION
+This first example is of a the simplest invocation of FvwmIconMan, which only
+has one manager, and handles all windows:
+
+.nf
+.sp
+##############################################################
+# Load any modules which should be started during 
+# fvwm initialization
+ModulePath /usr/lib/X11/fvwm:/usr/bin/X11
+Module FvwmIconMan
+
+# Make FvwmIconMan title-bar-less, sticky, and give it an icon	
+Style "Fvwm*"      Icon toolbox.xpm,NoTitle,NoHandles,Sticky
+Style "FvwmIconMan" HandleWidth 5, Handles, BorderWidth 5
+
+
+##############################################################
+##############################################################
+#Definitions used by the modules
+
+*FvwmIconMan*nummanagers 1
+*FvwmIconMan*resolution  global
+*FvwmIconMan*background  slategrey
+*FvwmIconMan*foreground  white
+*FvwmIconMan*font        7x13
+*FvwmIconMan*geometry    194x100-0+73
+.sp
+.fi
+
+This example is my personal configuration. It has two managers, one for emacs
+and one for everything else, minus things with no icon title. Only windows on
+the current page are displayed. Notice the argument to Focus in the select
+action. This only works if you apply the included patch for fvwm. A nonzero
+argument to focus, or no argument results in Focus warping the cursor to the
+target window, and the value of 0 makes Focus not warp the cursor. Note how
+the geometry and show options are specified per manager, and the others are
+common to all:
+
+.nf
+.sp
+*FvwmIconMan*numManagers 2
+*FvwmIconMan*Resolution  page
+*FvwmIconMan*background  steelblue
+*FvwmIconMan*foreground  white
+*FvwmIconMan*font        7x13
+*FvwmIconMan*action      click1 Iconify
+*FvwmIconMan*action      click2 Iconify
+*FvwmIconMan*action      click3 Module "FvwmIdent" FvwmIdent
+*FvwmIconMan*action      select Focus 0
+*FvwmIconMan*showtitle   false
+*FvwmIconMan*followfocus true
+*FvwmIconMan*sort        true
+*FvwmIconMan*plainbutton          up white steelblue
+*FvwmIconMan*selectbutton         down white steelblue
+*FvwmIconMan*focusbutton          up white brown
+*FvwmIconMan*focusandselectButton down white brown
+
+*FvwmIconMan*1*geometry   194x100-204-90
+*FvwmIconMan*1*show       resource=emacs resource=gemacs
+
+*FvwmIconMan*2*geometry   194x100-0-90
+*FvwmIconMan*2*dontshow   icon=Untitled
+
+.sp
+.fi
+
+.SH UNFINISHED BUSINESS
+There is one bug that I know of. A honest to goodness solution to this would
+be appreciated. When an icon manager is set to grow upwards, on some machines
+it may wander occasionally.
+
+When a manager is in page resolution, and the page is switched, the manager
+updates the windows after every fvwm event comes in, causing it to rapidly
+grow and shrink until it finally settles into the new configuration. This
+doesn't happen when in desk resolution.
+
+It doesn't handle windows without resource names as gracefully as it should.
+
+.SH AUTHOR
+Brady Montz (bradym@cs.arizona.edu).
+
+.SH THANKS
+Thanks to David Berson (berson@cs.pitt.edu).

@@ -1,0 +1,43 @@
+/* XPM */
+static char *window[] = {
+/* width height ncolors chars_per_pixel */
+"32 32 4 1",
+/* colors */
+"` c black",
+"a c grey",
+"b c white",
+"c c slate grey",
+/* pixels */
+"bbb``````````````````````````bbb",
+"bbbb````````````````````````bbbb",
+"bbbbb``aaaaaaaaaaaaaaaaaa``cccbb",
+"bbbbb``acccccccccccccccca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbcbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbcbbca``ccbbb",
+"bbbbb``acbbbbbbcbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbcbbbcbbbbca``ccbbb",
+"bbbbb``acbbbbcbbbcbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbccccbbbbbca``ccbbb",
+"bbbbb``````````````````````ccbbb",
+"bbbbb``aaaaaaaaaaaaaaaaaa``ccbbb",
+"bbbbb``acccccccccccccccca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbcbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbcbbbca``ccbbb",
+"bbbbb``acbbbbbcbbbbbbbbca``ccbbb",
+"bbbbb``acbbbbcbbbcbbbbbca``ccbbb",
+"bbbbb``acbbbcbbbcbbbbbbca``ccbbb",
+"bbbbb``acbbbbbbbbbbbbbbca``ccbbb",
+"bbbbb``acccccccccccccccca``ccbbb",
+"bbbbb``aaaaaaaaaaaaaaaaaa``ccbbb",
+"bbbb````````````````````````ccbb",
+"bbbb````````````````````````ccbb",
+"bbbbbbccccccccccccccccccccccccbb",
+"bbbbbbccccccccccccccccccccccccbb"
+};

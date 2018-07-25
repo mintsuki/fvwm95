@@ -1,0 +1,5 @@
+read README.CHANGES, INSTALL and EXAMPLE.fvwmrc
+
+New files: GoodyLoadable.c, GoodyModule.c, CheckLockModule.c
+
+

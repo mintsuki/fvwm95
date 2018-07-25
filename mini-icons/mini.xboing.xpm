@@ -1,0 +1,28 @@
+/* XPM */
+static char *maximize[] = {
+/* width height num_colors chars_per_pixel */
+"    14    14        7            1",
+/* colors */
+". c None",
+"a c Green2",
+"b c Yellow2",
+"c c Cyan2",
+"d c Red2",
+"e c Blue2",
+"# c White",
+/* pixels */
+"bbbbbb.aaaaaa.",
+"bbbbbb.aaaaaa.",
+"..............",
+"cccccc.dddddd.",
+"cccccc.dddddd.",
+"..............",
+"dddddd.cccccc.",
+"dddddd.cccccc.",
+"..............",
+".....##.......",
+".....##.......",
+"..eeeeee......",
+"..eeeeee......",
+"..eeeeee......"
+};

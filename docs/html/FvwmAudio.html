@@ -1,0 +1,180 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       <B>FvwmAudio</B> - the FVWM Audio module
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>FvwmAudio</B>  is  spawned by <B>fvwm</B>, so no command line invoca-
+       tion will work.  From within the <I>.fvwmrc</I>  file,  <B>FvwmAudio</B>
+       is spawned as follows:
+
+       Module FvwmAudio
+
+       or from within an fvwm pop-up menu:
+
+       AddToMenu Module-Popup "Modules"      Title
+       +                      "Audio"        Module FvwmAudio
+       +                      "Auto"         Module FvwmAuto 200
+       +                      "Buttons"      Module FvwmButtons
+       +                      "Ident"        Module FvwmIdent
+       +                      "Banner"       Module FvwmBanner
+       +                      "Pager"        Module FvwmPager 0 3
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  <B>FvwmAudio</B>  module  communicates  with the Fvwm window
+       manager to bind audio sounds to  window  manager  actions.
+       Different  audio queues may be assigned to any window man-
+       ager action.  <B>FvwmAudio</B> can be used with  any  independent
+       audio  player,  and  therefore  requires  no special audio
+       library APIs of its own.  Simple in its design, it  merely
+       binds  the audio filenames to particular actions and forks
+       off the audio player program with the appropriate filename
+       when that action occurs.
+
+       <B>FvwmAudio</B>  can  also  have  builtin  support for the rplay
+       library.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       <B>FvwmAudio</B> reads the same <I>.fvwm2rc</I> file  as  <B>fvwm(1)</B>  reads
+       when  it  starts  up,  and looks for certain configuration
+       options:
+
+
+       *FvwmAudioPlayCmd <I>/usr/bin/X11/demos/auplay</I>
+              This determines the independent audio  player  pro-
+              gram  that  will  actually play the sounds.  If the
+              play command  is  set  to  <I>builtin-rplay</I>  then  the
+              builtin rplay support will be used.  For example:
+
+              *FvwmAudioPlayCmd <I>builtin-rplay</I>
+
+
+       *FvwmAudioDir <I>/usr/lib/sounds</I>
+              Specifies  the  directory  to  look  for  the audio
+              Specifies  that sound events will only be played if
+              they occur at least 5 seconds  after  the  previous
+              event.   Sounds  events that occur during the delay
+              period are ignored.  This option is useful  if  you
+              don't want several sounds playing at the same time.
+              The default delay is 0  which  disables  the  audio
+              delay.
+
+
+       *FvwmAudioRplayHost <I>hostname</I>
+              Specifies  what  host the sounds will play on.  The
+              <I>hostname</I> can also be an environment  variable  such
+              as  $HOSTDISPLAY.   This  option is only valid with
+              builtin rplay support.
+
+
+       *FvwmAudioRplayPriority <I>0</I>
+              Specifies what priority will  be  assigned  to  the
+              sounds  when  they are played.  This option is only
+              valid with builtin rplay support.
+
+
+       *FvwmAudioRplayVolume <I>127</I>
+              Specifies what  volume  will  be  assigned  to  the
+              sounds  when  they are played.  This option is only
+              valid with builtin rplay support.
+
+
+       *FvwmAudio <I>window-manager</I><B>_</B><I>action</I> <I>audio</I><B>_</B><I>filename</I>
+              Binds particular window manager  actions  to  sound
+              queues.
+
+              *FvwmAudio startup TaDa.au
+              *FvwmAudio shutdown Elvis_Left.au
+              *FvwmAudio unknown doh.au
+              *FvwmAudio add_window drip.au
+              *FvwmAudio raise_window swoosh.au
+              *FvwmAudio lower_window swoosh.au
+              *FvwmAudio focus_change boing.au
+              *FvwmAudio destroy_window explosion.au
+              *FvwmAudio iconify ploop.au
+              *FvwmAudio deiconify ploop.au
+              *FvwmAudio toggle_paging fwop.au
+              *FvwmAudio new_page beam_trek.au
+              *FvwmAudio new_desk beam_trek.au
+              *FvwmAudio configure_window huh.au
+              *FvwmAudio window_name beep.au
+              *FvwmAudio icon_name beep.au
+              *FvwmAudio res_class beep.au
+              *FvwmAudio res_name beep.au
+              *FvwmAudio end_windowlist twang.au
+
+       The  invocation  method was shown in the synopsis section.
+       No command line invocation is possible. <B>FvwmAudio</B> must  be
+       invoked by the <B>fvwm</B> window manager.
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       It's REALLY noisy when fvwm starts and restarts.
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       This  module  is  heavily  based  on a similar Fvwm module
+       called <B>FvwmSound</B> by Mark  Boyns.  <B>FvwmAudio</B>  simply  takes
+       Mark's  original program and extends it to make it generic
+       enough to work with any  audio  player.  The  concept  for
+       interfacing this module to the Window Manager, is original
+       work by Robert Nation.
+
+       Copyright 1994, Mark Boyns and Mark Scott.  No  guarantees
+       or  warranties  or anything are provided or implied in any
+       way whatsoever.  Use this program at your own risk.   Per-
+       mission  to  use this program for any purpose is given, as
+       long as the copyright is kept intact.
+
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Mark Boyns (<I>boyns@sdsu.edu</I>)
+
+       Mark Scott (<I>mscott@mcd.mot.com</I>)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

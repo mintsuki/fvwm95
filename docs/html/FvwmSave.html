@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FvwmSave - the FVWM desktop-layout saving module
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       FvwmSave is spawned by fvwm, so no command line invocation
+       will work.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       When called, this module will attempt to save your current
+       desktop  layout  into  a file called new.xinitrc. Ideally,
+       this file will look just like .xinitrc,  but  in  reality,
+       you  will  have to edit it to get a useable configuration,
+       so be sure to keep a backup of your old .xinitrc.
+
+       Your applications must supply certain hints to the X  win-
+       dow  system.   Emacs,  for  example, does not, so FvwmSave
+       can't get any information from it.
+
+       Also, FvwmSave assumes that certain command  line  options
+       are  globally  accepted  by applications, which may not be
+       the case.
+
+
+
+</PRE>
+<H2>COPYRIGHTS</H2><PRE>
+       The NoClutter program, and  the  concept  for  interfacing
+       this  module  to the Window Manager, are all original work
+       by Robert Nation
+
+       Copyright 1994, Robert Nation. No guarantees or warranties
+       or anything are provided or implied in any way whatsoever.
+       Use this program at your own risk. Permission to use  this
+       program for any purpose is given, as long as the copyright
+       is kept intact.
+
+
+
+
+</PRE>
+<H2>INITIALIZATION</H2><PRE>
+       During initialization, <I>NoClutter</I> will eventually search  a
+       configuration  file  which  describes  the  time-outs  and
+       actions to take.  The configuration file is the same  file
+       that fvwm used during initialization.
+
+       If  the NoClutter executable is linked to another name, ie
+       ln -s NoClutter OtherClutter, then another  module  called
+       OtherClutter  can  be started, with a completely different
+       configuration than NoClutter, simply by changing the  key-
+       word   NoClutter  to OtherClutter. This way multiple clut-
+       ter-reduction programs can be used.
+
+
+
+</PRE>
+<H2>INVOCATION</H2><PRE>
+       NoClutter can be invoked by  inserting  the  line  'Module
+       fvwm's  initialization, or can be bound to a menu or mouse
+       button or keystroke to invoke it later. Fvwm  will  search
+       directory specified in the ModulePath configuration option
+       to attempt to locate NoClutter.
+
+
+
+</PRE>
+<H2>CONFIGURATION OPTIONS</H2><PRE>
+       NoClutter reads the same .fvwmrc file as fvwm  reads  when
+       it  starts  up, and looks for lines similar to "*NoClutter
+       3600 Iconify". The format of these  lines  is  "*NoClutter
+       [time] [command]", where command is any fvwm built-in com-
+       mand, and time is the time in seconds between when a  win-
+       dow looses focus and when the command is executed. At most
+       3 actions can be specified.
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Robert  Nation  and  Mr.  Per  Persson   &lt;pp@solace.mh.se&gt;
+       (Omnion on IRC)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

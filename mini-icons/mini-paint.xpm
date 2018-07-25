@@ -1,0 +1,29 @@
+/* XPM */
+static char *mini-paint[] = {
+/* width height num_colors chars_per_pixel */
+"    16    16       6            1",
+/* colors */
+"  c None s None",
+". c black",
+"# c #808080",
+"a c red",
+"i c white",
+"o c blue",
+/* pixels */
+"                ",
+"#########       ",
+"#iiiiiii#.      ",
+"#iiiiiii#i.    o",
+"#iiiiiii#...  oo",
+"#iiiiiiiiii. oo.",
+"#iiaiiiiiii.oo. ",
+"#iiiaaiiiiioo.  ",
+"#iiiiaaiiioo.   ",
+"#iiiaaaiioo.    ",
+"#iiaaaii#...    ",
+"#iiaaii#i.i.    ",
+"#iaaaaaa.ii.    ",
+"#iaaaaaiiii.    ",
+"............    ",
+"                "
+};
