@@ -1,13 +1,15 @@
 # fvwm95
 ---
-This is a fork of fvwm95 meant to be compilable on and play nice with newer versions of Debian (and possibly Ubuntu and other distros, needs testing).
+This is a fork of fvwm95 meant to be compilable on and play nice with newer Unix-like operating systems.
 
-It is based off the code from the source package in Debian Sarge, slightly modified so that it compiles without errors on modern Debian, and with a more sane configuration to adapt to modern day needs.
+It is based off the code from the source package in Debian Sarge, slightly modified so that it compiles without errors on modern OSes, and with a more sane configuration to adapt to modern day needs.
 
 ![Reference screenshot](/screenshot.png?raw=true "Reference screenshot")
 
 ## How to build
-The following packages are needed in order to build fvwm95 on Debian:
+The following packages are needed in order to build fvwm95:
+
+On Debian/Ubuntu:
 * xorg
 * build-essential
 * libx11-dev
@@ -20,9 +22,24 @@ The following packages are needed in order to build fvwm95 on Debian:
 * flex
 * autoconf
 
+On Arch:
+* xorg
+* xorg-xinit
+* xbitmaps
+* libx11
+* libxt
+* libxext
+* libxpm
+* readline
+* libxmu
+* bison
+* flex
+* autoconf
+
 The following packages are not necessary to build fvwm95 itself, but
 they are recommended to have:
 
+On Debian/Ubuntu and Arch:
 * xscreensaver
 * nitrogen
 * thunar
@@ -38,7 +55,7 @@ Sadly, fvwm95 does not seem to support UTF-8 locales at all, therefore, in order
 **This is something you might want to avoid, so think twice before deciding to install fvwm95 on a production machine.**
 
 ---
-To switch to a ISO-8859-1 locale on Debian, edit the file `/etc/locale.gen` (as root).
+To switch to a ISO-8859-1 locale on Debian/Ubuntu/Arch, edit the file `/etc/locale.gen` (as root).
 
 In this file, comment out any UTF-8 lines corresponding to your locale, and uncomment the ones that specify `ISO-8859-1`.
 
