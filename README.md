@@ -4,6 +4,8 @@ This is a fork of fvwm95 meant to be compilable on and play nice with newer vers
 
 It is based off the code from the source package in Debian Sarge, slightly modified so that it compiles without errors on modern Debian, and with a more sane configuration to adapt to modern day needs.
 
+![Reference screenshot](/screenshot.png?raw=true "Reference screenshot")
+
 ## How to build
 The following packages are needed in order to build fvwm95 on Debian:
 * xorg
