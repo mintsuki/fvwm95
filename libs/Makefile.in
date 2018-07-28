@@ -14,7 +14,7 @@ fvwm_icons=@fvwm_icons@
 fvwm_rc=@fvwm_rc@
 fvwm_name=@fvwm_name@
 
-EXTRA_DEFINES=-DXPM -DSHAPE -DI18N
+EXTRA_DEFINES=-DXPM -DSHAPE 
 CC=@CC@
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ ${EXTRA_DEFINES}

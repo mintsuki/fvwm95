@@ -19,7 +19,7 @@ fvwm_dir=${prefix}/lib/X11/@fvwm_name@
 man_dir=${prefix}/man/man1
 
 PATH_DEFINES = -DFVWMDIR=\"${fvwm_dir}\"
-EXTRA_DEFINES=${PATH_DEFINES} -DXPM -DSHAPE -DI18N
+EXTRA_DEFINES=${PATH_DEFINES} -DXPM -DSHAPE 
 
 #
 # Libs

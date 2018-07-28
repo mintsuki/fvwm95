@@ -48,36 +48,6 @@ On Debian/Ubuntu and Arch:
 * pulseaudio
 * pavucontrol
 
-## Switching locales
-
-Sadly, fvwm95 does not seem to support UTF-8 locales at all, therefore, in order to run it, you'll have to switch to a ISO-8859-1 locale.
-
-**This is something you might want to avoid, so think twice before deciding to install fvwm95 on a production machine.**
-
----
-To switch to a ISO-8859-1 locale on Debian/Ubuntu/Arch, edit the file `/etc/locale.gen` (as root).
-
-In this file, comment out any UTF-8 lines corresponding to your locale, and uncomment the ones that specify `ISO-8859-1`.
-
-For instance, assuming the locale you use is en_US:
-
-Find
-```en_US.UTF-8 UTF-8 ```
-and make it into
-```# en_US.UTF-8 UTF-8 ```.
-
-Then, find
-```# en_US ISO-8859-1 ```
-and make it into
-```en_US ISO-8859-1 ```.
-
-Once that's done, save the file, then run:
-```
-sudo locale-gen
-```
-
-**You must now log out and back in to apply these settings, or simply reboot.**
-
 ## Actually installing
 After all the dependencies are satisfied, configure, build, and
 install fvwm95 by running:

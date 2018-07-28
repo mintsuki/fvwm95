@@ -32,7 +32,7 @@ PATH_DEFINES=-DFVWM_ICONDIR=\"${fvwm_icons}\" \
                -DFVWMDIR=\"${fvwm_dir}\" \
                -DPLUGINS=\"${plugins}\"
 
-EXTRA_DEFINES=-DXPM -DSHAPE ${PATH_DEFINES} -DI18N -DDEFAULT_MAIL_PATH=\"${mailpath}\"
+EXTRA_DEFINES=-DXPM -DSHAPE ${PATH_DEFINES}  -DDEFAULT_MAIL_PATH=\"${mailpath}\"
 CC=@CC@ -pipe
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ ${EXTRA_DEFINES}

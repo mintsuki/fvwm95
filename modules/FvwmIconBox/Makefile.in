@@ -29,7 +29,7 @@ LIBS=-L${top_srcdir}/libs ${x_libraries} ${FVWM_LIBRARY} ${XPM_LIBRARY} ${XEXT_L
 PATH_DEFINES=-DFVWM_ICONDIR=\"${fvwm_icons}\" \
                -DFVWMDIR=\"${fvwm_dir}\"
 
-EXTRA_INCLUDES=-DXPM -DSHAPE ${PATH_DEFINES} -DI18N
+EXTRA_INCLUDES=-DXPM -DSHAPE ${PATH_DEFINES} 
 CC=@CC@
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ ${EXTRA_INCLUDES} 
