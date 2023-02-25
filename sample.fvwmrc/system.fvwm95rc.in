@@ -74,9 +74,7 @@ StickyColors    grey51 LightBlue
 
 Style "*" NoIcon
 Style "*" ClickToFocus
-Style "*" MWMFunctions
 Style "*" HintOverride
-Style "*" MWMDecor
 Style "*" OLDecor
 
 OpaqueMoveSize 10
