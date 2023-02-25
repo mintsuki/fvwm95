@@ -130,7 +130,7 @@ IconPath   @prefix@/lib/X11/mini-icons/
 # Default border and handle widths - and then some style definitions
 #------------------------------------------------------------------------------
 
-Style "*" BorderWidth 5, HandleWidth 5
+Style "*" BorderWidth 4, HandleWidth 4
 
 Style "Fvwm*"        NoTitle, Sticky, WindowListSkip
 Style "FvwmPager"    Title, Sticky, WindowListHit
