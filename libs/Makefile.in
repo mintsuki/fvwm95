@@ -40,7 +40,6 @@ SRCS=GetFdWidth.c \
        findIconFile.c \
        getostype.c \
        safemalloc.c \
-       sleep.c \
        strutils.c \
        wild.c
 
@@ -57,7 +56,6 @@ OBJS=GetFdWidth.o \
        findIconFile.o \
        getostype.o \
        safemalloc.o \
-       sleep.o \
        strutils.o \
        wild.o
 

@@ -46,7 +46,7 @@ void HandlePaging(int HorWarpSize, int VertWarpSize, int *xl, int *yt,
   total = 0;
   while(total < Scr.ScrollResistance)
     {
-      sleep_a_little(10000);
+      usleep(10000);
       total+=10;
       if(XCheckWindowEvent(dpy,Scr.PanFrameTop.win,
 			   LeaveWindowMask,&Event))

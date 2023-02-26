@@ -3,7 +3,6 @@
 char *safemalloc(int length);
 void DeadPipe(int nonsense);
 void GetTargetWindow(Window *app_win);
-void sleep_a_little(int n);
 void CopyString(char **dest, char *source);
 char *CatString2(char *a, char *b);
 void nocolor(char *a, char *b);

@@ -204,7 +204,6 @@ void RelieveButton(FvwmWindow *, Window, int, int, int, int, GC, GC, int);
 #define LEFT_HILITE   0x0008
 #define FULL_HILITE   0x000F
 
-extern void       sleep_a_little(int);
 void Maximize(XEvent *eventp,Window w,FvwmWindow *tmp_win,
 	      unsigned long context, char *action, int *Module);
 extern void       RaiseWindow(FvwmWindow *t);

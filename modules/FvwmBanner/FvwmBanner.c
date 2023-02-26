@@ -211,7 +211,7 @@ int main(int argc, char **argv)
   XMapWindow(dpy,win);
   XSync(dpy,0);
 #if 0
-  sleep_a_little(timeout);
+  usleep(timeout);
 #else
   XSelectInput(dpy,win,ButtonReleaseMask);
   /* Display the window */

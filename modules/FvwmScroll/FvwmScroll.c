@@ -194,7 +194,7 @@ void GetTargetWindow(Window *app_win)
 		       CurrentTime);
       if(val != GrabSuccess)
 	{
-	  sleep_a_little(1000);
+	  usleep(1000);
 	}
       trials++;
     }

@@ -24,7 +24,6 @@ char *safemalloc(int);
 char *findIconFile(char *icon, char *pathlist, int type);
 int ReadFvwmPacket(int fd, unsigned long *header, unsigned long **body);
 void CopyString(char **dest, char *source);
-void sleep_a_little(int n);
 int GetFdWidth(void);
 void *GetConfigLine(int *fd, char **tline);
 void SetMessageMask(int *fd, unsigned long mask);
