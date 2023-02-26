@@ -404,39 +404,6 @@ void KillModuleByName(char *name)
 }
 
 
-void Broadcast(unsigned long event_type, unsigned long num_datum,
-	       unsigned long data1, unsigned long data2, unsigned long data3, 
-	       unsigned long data4, unsigned long data5, unsigned long data6,
-	       unsigned long data7)
-{
-  int i;
-  unsigned long body[11];
-  extern Time lastTimestamp;
-
-  body[0] = START_FLAG;
-  body[1] = event_type;
-  body[2] = num_datum+HEADER_SIZE;
-  body[3] = lastTimestamp;
-  if(num_datum>0)
-    body[HEADER_SIZE] = data1;
-  if(num_datum>1)
-    body[HEADER_SIZE+1] = data2;
-  if(num_datum>2)
-    body[HEADER_SIZE+2] = data3;
-  if(num_datum>3)
-    body[HEADER_SIZE+3] = data4;
-  if(num_datum>4)
-    body[HEADER_SIZE+4] = data5;
-  if(num_datum>5)
-    body[HEADER_SIZE+5] = data6;
-  if(num_datum>6)
-    body[HEADER_SIZE+6] = data7;
-
-  for(i=0;i<npipes;i++)   
-    PositiveWrite(i,body, (num_datum+4)*sizeof(body[0]));
-}
-
-
 
 
 void SendPacket(int module, unsigned long event_type, unsigned long num_datum,
@@ -467,6 +434,23 @@ void SendPacket(int module, unsigned long event_type, unsigned long num_datum,
     body[HEADER_SIZE+6] = data7;
   PositiveWrite(module,body,(num_datum+4)*sizeof(body[0]));
 }
+
+
+void Broadcast(unsigned long event_type, unsigned long num_datum,
+	       unsigned long data1, unsigned long data2, unsigned long data3, 
+	       unsigned long data4, unsigned long data5, unsigned long data6,
+	       unsigned long data7)
+{
+  int i;
+
+  for(i=0;i<npipes;i++)
+  {
+    SendPacket(i,event_type,num_datum,
+               data1,data2,data3,data4,data5,data6,data7);
+  }
+}
+
+
 
 void SendConfig(int module, unsigned long event_type, FvwmWindow *t)
 {
@@ -508,74 +492,10 @@ void SendConfig(int module, unsigned long event_type, FvwmWindow *t)
 
 void BroadcastConfig(unsigned long event_type, FvwmWindow *t)
 {
-  unsigned long body[MAX_BODY_SIZE+HEADER_SIZE];
   int i;
-  extern Time lastTimestamp;
-
-  body[0] = START_FLAG;
-  body[1] = event_type;
-  body[2] = HEADER_SIZE+24;
-  body[3] = lastTimestamp;
-  body[HEADER_SIZE] = t->w;
-  body[HEADER_SIZE+1] = t->frame;
-  body[HEADER_SIZE+2] = (unsigned long)t;
-  body[HEADER_SIZE+3] = t->frame_x;
-  body[HEADER_SIZE+4] = t->frame_y;
-  body[HEADER_SIZE+5] = t->frame_width;
-  body[HEADER_SIZE+6] = t->frame_height;
-  body[HEADER_SIZE+7] = t->Desk;
-  body[HEADER_SIZE+8] = t->flags;
-  body[HEADER_SIZE+9] = t->title_height;
-  body[HEADER_SIZE+10] = t->boundary_width;
-  body[HEADER_SIZE+11] = t->hints.base_width;
-  body[HEADER_SIZE+12] = t->hints.base_height;
-  body[HEADER_SIZE+13] = t->hints.width_inc;
-  body[HEADER_SIZE+14] = t->hints.height_inc;
-  body[HEADER_SIZE+15] = t->hints.min_width;
-  body[HEADER_SIZE+16] = t->hints.min_height;
-  body[HEADER_SIZE+17] = t->hints.max_width;
-  body[HEADER_SIZE+18] = t->hints.max_height;
-  body[HEADER_SIZE+19] = t->icon_w;
-  body[HEADER_SIZE+20] = t->icon_pixmap_w;
-  body[HEADER_SIZE+21] = t->hints.win_gravity;
-  body[HEADER_SIZE+22] = t->TextPixel;
-  body[HEADER_SIZE+23] = t->BackPixel;
 
   for(i=0;i<npipes;i++)   
-    {  
-      PositiveWrite(i,body,(HEADER_SIZE+24)*sizeof(body[0]));
-    }
-}
-
-void BroadcastName(unsigned long event_type, unsigned long data1,
-		   unsigned long data2, unsigned long data3, char *name)
-{
-  int l,i;
-  unsigned long *body;
-  extern Time lastTimestamp;
-
-
-  if(name==NULL)
-    return;
-  l=strlen(name)/(sizeof(*body))+HEADER_SIZE+4;
-  body = (unsigned long *)safemalloc(l*sizeof(*body));
-
-  body[0] = START_FLAG;
-  body[1] = event_type;
-  body[2] = l;
-  body[3] = lastTimestamp;
-
-  body[HEADER_SIZE] = data1;
-  body[HEADER_SIZE+1] = data2;
-  body[HEADER_SIZE+2] = data3; 
-  strcpy((char *)&body[HEADER_SIZE+3],name);
-
-
-  for(i=0;i<npipes;i++)   
-    PositiveWrite(i,(unsigned long *)body, l*sizeof(*body));
-      
-  free(body);
-
+    SendConfig(i,event_type,t);
 }
 
 
@@ -605,6 +525,15 @@ void SendName(int module, unsigned long event_type,
   PositiveWrite(module,(unsigned long *)body, l*sizeof(unsigned long));
 
   free(body);
+}
+
+void BroadcastName(unsigned long event_type, unsigned long data1,
+		   unsigned long data2, unsigned long data3, char *name)
+{
+  int i;
+
+  for(i=0;i<npipes;i++)
+    SendName(i,event_type,data1,data2,data3,name);
 }
 
 
