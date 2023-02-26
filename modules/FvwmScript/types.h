@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <time.h>
 #include <sys/time.h>
 
 #define XK_MISCELLANY
