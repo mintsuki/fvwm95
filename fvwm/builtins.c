@@ -750,7 +750,8 @@ void exec_function(XEvent *eventp,Window w,FvwmWindow *tmp_win,
   /* Thought I'd try vfork and _exit() instead of regular fork().
    * The man page says that its better. */
   /* Not everyone has vfork! */
-  if (!(fork())) /* child process */
+  /* We do now */
+  if (!(vfork())) /* child process */
     {
     if (execl(exec_shell_name, exec_shell_name, "-c", cmd, NULL)==-1)
       {

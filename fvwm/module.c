@@ -200,7 +200,8 @@ void executeModule(XEvent *eventp,Window w,FvwmWindow *tmp_win,
   /* Try vfork instead of fork. The man page says that vfork is better! */
   /* Also, had to change exit to _exit() */
   /* Not everyone has vfork! */
-  val = fork();
+  /* We do now */
+  val = vfork();
   if(val > 0)
     {
       /* This fork remains running fvwm */
