@@ -220,7 +220,7 @@ void executeModule(XEvent *eventp,Window w,FvwmWindow *tmp_win,
 
       /* make the PositiveWrite pipe non-blocking. Don't want to jam up
 	 fvwm because of an uncooperative module */
-      fcntl(writePipes[i],F_SETFL,O_NDELAY);
+      fcntl(writePipes[i],F_SETFL,O_NONBLOCK);
       /* Mark the pipes close-on exec so other programs
        * won`t inherit them */
       if (fcntl(readPipes[i], F_SETFD, 1) == -1) 
