@@ -224,7 +224,7 @@ static char *cpp_defs(Display *display, const char *host, char *cpp_options, cha
     exit(0377);
   }
     
-  mygethostname(client,MAXHOSTNAME);
+  gethostname(client,MAXHOSTNAME);
   
   mygetostype  (ostype, sizeof ostype);
   

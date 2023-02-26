@@ -17,7 +17,6 @@ char *strerror(int num);
 #endif
 char *CatString3(char *a, char *b, char *c);
 int StrEquals(char *s1,char *s2);
-int mygethostname(char *client, int namelen);
 int mygetostype(char *buf, int max);
 void SendText(int *fd,char *message,unsigned long window);
 void SendInfo(int *fd,char *message,unsigned long window);

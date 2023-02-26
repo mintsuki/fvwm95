@@ -247,7 +247,7 @@ static char *m4_defs(Display *display, const char *host, char *m4_options, char 
     exit(0377);
   }
     
-  mygethostname(client,MAXHOSTNAME);
+  gethostname(client,MAXHOSTNAME);
   
   mygetostype  (ostype, sizeof ostype);
   

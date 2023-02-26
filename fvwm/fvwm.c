@@ -292,7 +292,7 @@ int main(int argc, char **argv)
   if(strncmp(display_string,"DISPLAY=:",9)==0)
   {
     char client[MAXHOSTNAME], *rdisplay_string;
-    mygethostname(client,MAXHOSTNAME);
+    gethostname(client,MAXHOSTNAME);
     rdisplay_string = safemalloc(len+14 + strlen(client));
     sprintf(rdisplay_string,"HOSTDISPLAY=%s:%s",client,&display_string[9]);
     putenv(rdisplay_string);
@@ -300,7 +300,7 @@ int main(int argc, char **argv)
   else if(strncmp(display_string,"DISPLAY=unix:",13)==0)
   {
     char client[MAXHOSTNAME], *rdisplay_string;
-    mygethostname(client,MAXHOSTNAME);
+    gethostname(client,MAXHOSTNAME);
     rdisplay_string = safemalloc(len+14 + strlen(client));
     sprintf(rdisplay_string,"HOSTDISPLAY=%s:%s",client,
             &display_string[13]);
