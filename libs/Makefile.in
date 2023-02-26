@@ -38,7 +38,7 @@ SRCS=GetFdWidth.c \
        SetMask.c \
        envvar.c \
        findIconFile.c \
-       mygetostype.c \
+       getostype.c \
        safemalloc.c \
        sleep.c \
        strutils.c \
@@ -55,7 +55,7 @@ OBJS=GetFdWidth.o \
        SetMask.o \
        envvar.o \
        findIconFile.o \
-       mygetostype.o \
+       getostype.o \
        safemalloc.o \
        sleep.o \
        strutils.o \

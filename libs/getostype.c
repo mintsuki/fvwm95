@@ -5,7 +5,7 @@
 #include <sys/utsname.h>
 
 /* return a string indicating the OS type (i.e. "Linux", "SINIX-D", ... ) */
-int mygetostype(char *buf, int max)
+int getostype(char *buf, int max)
 {
   struct utsname sysname;
   int ret;
@@ -17,7 +17,7 @@ int mygetostype(char *buf, int max)
   return ret;
 }
 #else
-int mygetostype(char *buf, int max)
+int getostype(char *buf, int max)
 {
   strcpy (buf,"");
   return -1;

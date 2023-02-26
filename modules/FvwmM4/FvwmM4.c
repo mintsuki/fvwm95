@@ -249,7 +249,7 @@ static char *m4_defs(Display *display, const char *host, char *m4_options, char 
     
   gethostname(client,MAXHOSTNAME);
   
-  mygetostype  (ostype, sizeof ostype);
+  getostype  (ostype, sizeof ostype);
   
   /* Change the quoting characters, if specified */
   

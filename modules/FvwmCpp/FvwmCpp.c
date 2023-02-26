@@ -226,7 +226,7 @@ static char *cpp_defs(Display *display, const char *host, char *cpp_options, cha
     
   gethostname(client,MAXHOSTNAME);
   
-  mygetostype  (ostype, sizeof ostype);
+  getostype  (ostype, sizeof ostype);
   
   hostname = gethostbyname(client);
   strcpy(server, XDisplayName(host));
