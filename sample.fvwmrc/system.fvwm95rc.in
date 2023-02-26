@@ -541,8 +541,6 @@ AddToMenu "Module-Popup" \
 #+ "Configure%mini-hammer.xpm%"		Module FvwmConfig
 + "Console%mini-term.xpm%"		Module FvwmConsole -sb 
 + "Debug%mini-bug2.xpm%"		Module FvwmDebug
-+ "IconBox%mini-maxwide.xpm%"		Module FvwmIconBox
-+ "IconMan%mini-ball.xpm%"		Module FvwmIconMan
 + "Identify%mini-question.xpm%"		Module FvwmIdent
 + "Pager%mini-pager.xpm%"		Module FvwmPager 0 3
 + "Save Desktop%mini-desktop.xpm%"	Module FvwmSaveDesk
@@ -550,7 +548,6 @@ AddToMenu "Module-Popup" \
 + "FormTalk%mini-telnet.xpm%"		Module FvwmForm MyFvwmTalk
 + "TaskBar%mini-exp.xpm"		Module FvwmTaskBar
 + "Window List%mini-windows.xpm%"	Module FvwmWinList
-+ "Wharf%mini-ball.xpm%"		Module FvwmWharf
 
 
 
@@ -1252,42 +1249,6 @@ Style "FvwmTaskBar" NoTitle,BorderWidth 4,HandleWidth 4,Sticky, \
 *FvwmWinListUseSkipList
 *FvwmWinListGeometry +0-1
 
-
-
-#------------------------------------------------------------------------------
-#------------------ FvwmWharf
-#------------------------------------------------------------------------------
-
-Style "FvwmWharf"  NoTitle, NoHandles, Sticky, WindowListSkip,\
-                     BorderWidth 4,CirculateSkip
-
-*FvwmWharfAnimate
-*FvwmWharfAnimateMain
-*FvwmWharfGeometry -1+0
-*FvwmWharfColumns 1 
-*FvwmWharfBgcolor Grey 
-#*FvwmWharfForceSize
-*FvwmWharfFullPush
-
-*FvwmWharfTextureType 1
-*FvwmWharfTextureColor WhiteSmoke DarkGrey
-
-*FvwmWharf X smallx.xpm Folder
-*FvwmWharf Exit  exit.xpm  Quit
-*FvwmWharf xlock Jxlock.xpm Exec xlock -nice 10 -mode random 
-*FvwmWharf ~Folder
-*FvwmWharf clock nil MaxSwallow "xclock" xclock -padding 0 -bg grey  
-*FvwmWharf xview xv.color.xpm  Exec  xv 
-*FvwmWharf xterm rterm.xpm   Exec xterm  
-*FvwmWharf xemacs xemacs-icon.xpm Exec xemacs 
-*FvwmWharf gimp wilber.xpm Exec gimp 
-*FvwmWharf GV gv.xpm  Exec  ghostviewv
-*FvwmWharf kill   bomb_3d.xpm     Destroy
-*FvwmWharf pager nil MaxSwallowModule "Linux'95" Module FvwmPager 0 0
-*FvwmWharf xload nil  MaxSwallow "xload" nice -16 \
-		xload -nolabel -update 4  -bg grey59 -geometry -1500-1500
-*FvwmWharf xsysinfo nil  MaxSwallow "xsysinfo" xsysinfo
-*FvwmWharf Recycler  recycler.xpm  Restart " " 
 
 
 

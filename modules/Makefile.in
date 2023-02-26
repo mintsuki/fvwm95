@@ -6,9 +6,9 @@ SHELL=/bin/sh
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 subdirs=FvwmAudio FvwmAuto FvwmBacker FvwmBanner FvwmButtons FvwmConsole \
-	FvwmCpp FvwmDebug FvwmForm FvwmIconBox FvwmIconMan FvwmIdent FvwmM4 \
+	FvwmCpp FvwmDebug FvwmForm FvwmIdent FvwmM4 \
 	FvwmPager FvwmSave FvwmSaveDesk FvwmScript FvwmScroll FvwmTalk \
-	FvwmTaskBar FvwmWinList FvwmWharf
+	FvwmTaskBar FvwmWinList
 modules_dir=${prefix}/lib/X11/@fvwm_name@
 
 all:
