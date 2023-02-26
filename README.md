@@ -52,6 +52,7 @@ On Debian/Ubuntu and Arch:
 After all the dependencies are satisfied, configure, build, and
 install fvwm95 by running:
 ```
+autoconf
 ./configure --prefix=/usr/local
 make
 sudo make install

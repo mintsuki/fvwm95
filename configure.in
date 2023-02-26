@@ -218,8 +218,6 @@ AC_OUTPUT(Makefile \
           modules/FvwmCpp/Makefile \
           modules/FvwmDebug/Makefile \
           modules/FvwmForm/Makefile \
-          modules/FvwmIconBox/Makefile \
-          modules/FvwmIconMan/Makefile \
           modules/FvwmIdent/Makefile \
           modules/FvwmM4/Makefile \
           modules/FvwmPager/Makefile \
@@ -232,7 +230,6 @@ AC_OUTPUT(Makefile \
           modules/FvwmScroll/Makefile \
           modules/FvwmTalk/Makefile \
           modules/FvwmTaskBar/Makefile \
-          modules/FvwmWharf/Makefile \
           modules/FvwmWinList/Makefile)
 
 
