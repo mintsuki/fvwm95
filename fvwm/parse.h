@@ -78,6 +78,8 @@
 #define F_MENUCOLORS            60
 #define F_CURRENT 		61
 #define F_WINDOWID 		62
+#define F_CURSOR_STYLE          63
+
 /* Functions which require a target window */
 #define F_RESIZE		100
 #define F_RAISE			101

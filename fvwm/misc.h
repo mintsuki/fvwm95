@@ -328,6 +328,8 @@ void SetEdgeResistance(XEvent *eventp,Window w,FvwmWindow *tmp_win,
 		     unsigned long context, char *action,int *Module);
 void ButtonStyle(XEvent *eventp,Window w,FvwmWindow *tmp_win,
 		 unsigned long context, char *action,int *Module);
+void CursorStyle(XEvent *eventp,Window junk,FvwmWindow *tmp_win,
+                 unsigned long context, char *action,int* Module);
 void SetColormapFocus(XEvent *eventp,Window w,FvwmWindow *tmp_win,
 		      unsigned long context, char *action,int* Module);
 inline void DrawPattern(Window, GC, GC, int, int,int);

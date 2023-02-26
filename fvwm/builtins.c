@@ -1699,6 +1699,89 @@ void ButtonStyle(XEvent *eventp,Window junk,FvwmWindow *tmp_win,
 #endif
 }
 
+void SafeDefineCursor(Window w, Cursor cursor)
+{
+  if (w) XDefineCursor(dpy,w,cursor);
+}
+
+void CursorStyle(XEvent *eventp,Window junk,FvwmWindow *tmp_win,
+                 unsigned long context, char *action,int* Module)
+{
+  char *cname=NULL, *newcursor=NULL;
+  int index,nc,i;
+  FvwmWindow *fw;
+  MenuRoot *mr;
+
+  action = GetNextToken(action,&cname);
+  action = GetNextToken(action,&newcursor);
+  if (!cname || !newcursor)
+  {
+    fvwm_msg(ERR,"CursorStyle","Bad cursor style");
+    return;
+  }
+  if (StrEquals("POSITION",cname)) index = POSITION;
+  else if (StrEquals("DEFAULT",cname)) index = DEFAULT;
+  else if (StrEquals("SYS",cname)) index = SYS;
+  else if (StrEquals("TITLE",cname)) index = TITLE_CURSOR;
+  else if (StrEquals("MOVE",cname)) index = MOVE;
+  else if (StrEquals("MENU",cname)) index = MENU;
+  else if (StrEquals("WAIT",cname)) index = WAIT;
+  else if (StrEquals("SELECT",cname)) index = SELECT;
+  else if (StrEquals("DESTROY",cname)) index = DESTROY;
+  else if (StrEquals("LEFT",cname)) index = LEFT;
+  else if (StrEquals("RIGHT",cname)) index = RIGHT;
+  else if (StrEquals("TOP",cname)) index = TOP;
+  else if (StrEquals("BOTTOM",cname)) index = BOTTOM;
+  else if (StrEquals("TOP_LEFT",cname)) index = TOP_LEFT;
+  else if (StrEquals("TOP_RIGHT",cname)) index = TOP_RIGHT;
+  else if (StrEquals("BOTTOM_LEFT",cname)) index = BOTTOM_LEFT;
+  else if (StrEquals("BOTTOM_RIGHT",cname)) index = BOTTOM_RIGHT;
+  else
+  {
+    fvwm_msg(ERR,"CursorStyle","Unknown cursor name %s",cname);
+    return;
+  }
+  nc = atoi(newcursor);
+  if ((nc < 0) || (nc >= XC_num_glyphs) || ((nc % 2) != 0))
+  {
+    fvwm_msg(ERR,"CursorStyle","Bad cursor number %s",newcursor);
+    return;
+  }
+
+  /* replace the cursor defn */
+  if (Scr.FvwmCursors[index]) XFreeCursor(dpy,Scr.FvwmCursors[index]);
+  Scr.FvwmCursors[index] = XCreateFontCursor(dpy,nc);
+
+  /* redefine all the windows using cursors */
+  fw = Scr.FvwmRoot.next;
+  while(fw != NULL)
+  {
+    for (i=0;i<4;i++)
+    {
+      SafeDefineCursor(fw->corners[i],Scr.FvwmCursors[TOP_LEFT+i]);
+      SafeDefineCursor(fw->sides[i],Scr.FvwmCursors[TOP+i]);
+    }
+    for (i=0;i<Scr.nr_left_buttons;i++)
+    {
+      SafeDefineCursor(fw->left_w[i],Scr.FvwmCursors[SYS]);
+    }
+    for (i=0;i<Scr.nr_right_buttons;i++)
+    {
+      SafeDefineCursor(fw->right_w[i],Scr.FvwmCursors[SYS]);
+    }
+    SafeDefineCursor(fw->title_w, Scr.FvwmCursors[TITLE_CURSOR]);      
+    fw = fw->next;
+  }
+
+  /* Do the menus for good measure */
+  mr = Scr.AllMenus;
+  while(mr != NULL)
+  {
+    SafeDefineCursor(mr->w,Scr.FvwmCursors[MENU]);
+    mr = mr->next;
+  }
+}
+
 /**************************************************************************
  *
  * Direction = 1 ==> "Next" operation

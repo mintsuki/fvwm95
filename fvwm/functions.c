@@ -46,6 +46,7 @@ struct functions func_config[] =
   {"ColormapFocus",SetColormapFocus, F_COLORMAP_FOCUS,      FUNC_NO_WINDOW},
   {"Current",      CurrentFunc,      F_CURRENT,             FUNC_NO_WINDOW},
   {"CursorMove",   movecursor,       F_MOVECURSOR,          FUNC_NO_WINDOW},
+  {"CursorStyle",  CursorStyle,      F_CURSOR_STYLE,        FUNC_NO_WINDOW},
   {"DefaultColors",SetStdColor,      F_BORDERCOLOR,         FUNC_NO_WINDOW},
   {"Delete",       delete_function,  F_DELETE,              FUNC_NEEDS_WINDOW},
   {"Desk",         changeDesks_func, F_DESK,                FUNC_NO_WINDOW},
