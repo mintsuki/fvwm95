@@ -943,13 +943,22 @@ void PopDownMenu()
     return;
   
   menu_on--;
+  
+  if (menu_on == 0)
+    PrevActiveMenuX = -1;
   if (ActiveItem)
     ActiveItem->state = 0;
   
   XUnmapWindow(dpy, ActiveMenu->w);
 
   UninstallRootColormap();
+  if(!menu_on)
+  {
+    UngrabEm();
+    WaitForButtonsUp();
+  }
   XFlush(dpy);
+  XSync(dpy,0);
   if (Context & (C_WINDOW | C_FRAME | C_TITLE | C_SIDEBAR))
     menuFromFrameOrWindowOrTitlebar = TRUE;
   else
