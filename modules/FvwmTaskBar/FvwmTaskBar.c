@@ -91,7 +91,7 @@ XFontStruct *ButtonFont, *SelButtonFont;
 #ifdef I18N
 XFontSet ButtonFontset, SelButtonFontset;
 #endif
-int fontheight;
+int font_height;
 static Atom wm_del_win;
 Atom MwmAtom = None;
 
@@ -1161,10 +1161,10 @@ void StartMeUp()
    }
 #endif
    
-   fontheight = SelButtonFont->ascent + SelButtonFont->descent;
+   font_height = SelButtonFont->ascent + SelButtonFont->descent;
 
    NRows = 1;
-   RowHeight = fontheight + 8;
+   RowHeight = font_height + 8;
 
    win_border = 4; /* default border width */
    win_height = RowHeight;
