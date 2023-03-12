@@ -359,7 +359,7 @@ AddToFunc WarpOrExec	   "I" Next [$0] Iconify -1
 
 DestroyMenu "StartMenu"
 AddToMenu "StartMenu@fvwm-menu.xpm@^#808080^" \
-  "&Terminal%mini-term.xpm%"		Exec x-terminal-emulator
+  "&Terminal%mini-term.xpm%"		Exec xterm
 + "&Web browser%mini-nscape.xpm%"	Exec x-www-browser
 + "&File manager%mini-filemgr.xpm%"	Exec thunar
 + ""				Nop
