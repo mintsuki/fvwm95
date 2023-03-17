@@ -4,10 +4,13 @@
 #
 #-------------------------------------------------------------------
 
-AC_INIT()
-AC_PREREQ(2.4)
+AC_INIT
+AC_PREREQ([2.69])
 
-AC_CONFIG_HEADER(include/FVWMconfig.h)
+SRCDIR="$(cd "$srcdir" && pwd -P)"
+AC_SUBST([SRCDIR])
+
+AC_CONFIG_HEADERS([include/FVWMconfig.h])
 
 #CFLAGS=-O
 
@@ -62,7 +65,7 @@ AC_PROG_CC
 #
 #-------------------------------------------------------------------
 
-AC_AIX
+AC_USE_SYSTEM_EXTENSIONS
 
 
 #-------------------------------------------------------------------
@@ -119,13 +122,6 @@ AC_CHECK_FUNC(gethostbyname, , AC_CHECK_LIB(nsl, main, [LIBS="$LIBS -lnsl"]))
 AC_CHECK_LIB(readline, readline, READLINE_LIBRARIES="-lreadline"
  AC_DEFINE(HAVE_READLINE), READLINE_LIBRARIES="")
 AC_SUBST(READLINE_LIBRARIES)
-#-------------------------------------------------------------------
-#
-# Checks for header files.
-#
-#-------------------------------------------------------------------
-
-AC_HEADER_STDC
 
 
 #-------------------------------------------------------------------
@@ -199,7 +195,7 @@ AC_SUBST(fvwm_rc)
 #
 #-------------------------------------------------------------------
 
-AC_OUTPUT(Makefile \
+AC_CONFIG_FILES([Makefile \
           fvwm/Makefile \
           icons/Makefile \
           libs/Makefile \
@@ -233,7 +229,8 @@ AC_OUTPUT(Makefile \
           modules/FvwmTalk/Makefile \
           modules/FvwmTaskBar/Makefile \
           modules/FvwmWharf/Makefile \
-          modules/FvwmWinList/Makefile)
+          modules/FvwmWinList/Makefile])
+AC_OUTPUT
 
 
 #-------------------------------------------------------------------

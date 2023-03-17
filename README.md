@@ -10,8 +10,8 @@ It is based off the code from the source package in Debian Sarge, slightly modif
 The following packages are needed in order to build fvwm95:
 
 On Debian/Ubuntu:
-* xorg
 * build-essential
+* xorg
 * libx11-dev
 * libxt-dev
 * libxext-dev
@@ -23,6 +23,7 @@ On Debian/Ubuntu:
 * autoconf
 
 On Arch:
+* base-devel
 * xorg
 * xorg-xinit
 * xbitmaps
@@ -52,6 +53,7 @@ On Debian/Ubuntu and Arch:
 After all the dependencies are satisfied, configure, build, and
 install fvwm95 by running:
 ```
+autoreconf -fvi
 ./configure --prefix=/usr/local
 make
 sudo make install

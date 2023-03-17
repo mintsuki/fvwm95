@@ -45,3 +45,13 @@ distclean:
 	done
 	rm -f config.cache config.status config.log sample.fvwmrc/system.fvwm95rc
 	find . -name Makefile -exec rm {} \; -print
+
+maintainer-clean: distclean
+	rm -rf '@SRCDIR@/autom4te.cache' \
+	       '@SRCDIR@/configure' \
+	       '@SRCDIR@/configure~' \
+	       '@SRCDIR@/include/FVWMconfig.h' \
+	       '@SRCDIR@/include/FVWMconfig.h.in' \
+	       '@SRCDIR@/include/FVWMconfig.h.in~' \
+	       '@SRCDIR@/install-sh' \
+	       '@SRCDIR@/install-sh~'
