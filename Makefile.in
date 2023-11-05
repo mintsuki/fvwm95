@@ -53,5 +53,6 @@ maintainer-clean: distclean
 	       '@SRCDIR@/include/FVWMconfig.h' \
 	       '@SRCDIR@/include/FVWMconfig.h.in' \
 	       '@SRCDIR@/include/FVWMconfig.h.in~' \
-	       '@SRCDIR@/install-sh' \
-	       '@SRCDIR@/install-sh~'
+	       '@SRCDIR@/INSTALL' \
+	       '@SRCDIR@/aclocal.m4' \
+	       '@SRCDIR@/build-aux'

@@ -7,42 +7,22 @@
 AC_INIT
 AC_PREREQ([2.69])
 
+AC_CONFIG_AUX_DIR([build-aux])
+
 SRCDIR="$(cd "$srcdir" && pwd -P)"
 AC_SUBST([SRCDIR])
 
+AC_DEFUN([PROG_ABSPATH], [
+    case "$$1" in
+        .*) $1="$(cd "$(dirname "$$1")" && pwd -P)/$(basename "$$1")" ;;
+    esac
+])
+
+test "x$CFLAGS" = "x" && CFLAGS='-g -O2 -pipe'
+
 AC_CONFIG_HEADERS([include/FVWMconfig.h])
 
-#CFLAGS=-O
-
-#-------------------------------------------------------------------
-#
-# Remove the ./config.cache file and rerun configure if
-# the cache file belong to a different architecture
-#
-#-------------------------------------------------------------------
-
-AC_CHECK_PROG(UNAME, uname -a, [uname -a], "")
-if test "$UNAME" = ""; then
-    AC_CHECK_PROG(UNAME, uname, [uname], "")
-fi
-
-if test "$UNAME" != ""; then
-    uname=`$UNAME`
-    AC_MSG_CHECKING('checking cached value of \$uname')
-    AC_CACHE_VAL(ac_cv_prog_uname, [nocached=1 ac_cv_prog_uname=`$UNAME`])
-    if test "$nocached" = "1"; then
-        AC_MSG_RESULT(no)
-    else
-        AC_MSG_RESULT(yes)
-    fi
-
-    if test "$uname" != "$ac_cv_prog_uname"; then
-        echo "Running on a different architecture. Can't use cached values"
-        echo "Removing config.cache and running configure again"
-        rm -f config.cache
-        exec $CMDLINE
-    fi
-fi
+AC_PROG_MAKE_SET
 
 
 #-------------------------------------------------------------------
@@ -51,12 +31,20 @@ fi
 #
 #-------------------------------------------------------------------
 
-AC_CHECK_PROG(AR, ar, ar cr, ar cr)
-AC_CHECK_PROG(MAKEDEPEND, makedepend, makedepend, makedepend)
-AC_CHECK_PROG(RM, rm, rm -f, rm -f)
-AC_PROG_RANLIB
-AC_PROG_MAKE_SET
+AC_LANG([C])
 AC_PROG_CC
+PROG_ABSPATH([CC])
+
+AC_CHECK_PROG([RM], [rm], [rm -f], [rm -f])
+PROG_ABSPATH([RM])
+
+AC_CHECK_PROG([AR], [ar], [ar cr], [ar cr])
+PROG_ABSPATH([AR])
+
+AC_PROG_RANLIB
+PROG_ABSPATH([RANLIB])
+
+PKG_PROG_PKG_CONFIG
 
 
 #-------------------------------------------------------------------
@@ -74,11 +62,10 @@ AC_USE_SYSTEM_EXTENSIONS
 #
 #-------------------------------------------------------------------
 
-AC_PROG_CPP
-AC_PROG_YACC
-AC_PROG_LEX
 AC_PROG_INSTALL
+PROG_ABSPATH([INSTALL])
 AC_PROG_LN_S
+PROG_ABSPATH([LN_S])
 
 
 #-------------------------------------------------------------------
@@ -104,24 +91,26 @@ AC_PROG_LN_S
 #
 #-------------------------------------------------------------------
 
-AC_CHECK_LIB(Xbsd, main, [LIBS="$LIBS -lXbsd"])
+AC_CHECK_LIB([Xbsd], [main], [LIBS="$LIBS -lXbsd"])
 
 fvwm95_checkBoth=0
-AC_CHECK_FUNC(connect, fvwm95_checkSocket=0, fvwm95_checkSocket=1)
+AC_CHECK_FUNC([connect], [fvwm95_checkSocket=0], [fvwm95_checkSocket=1])
 if test "$fvwm95_checkSocket" = 1; then
-    AC_CHECK_LIB(socket, main, LIBS="$LIBS -lsocket", fvwm95_checkBoth=1)
+    AC_CHECK_LIB([socket], [main], [LIBS="$LIBS -lsocket"], [fvwm95_checkBoth=1])
 fi
 if test "$fvwm95_checkBoth" = 1; then
     fvwm95_oldLibs=$LIBS
     LIBS="$LIBS -lsocket -lnsl"
-    AC_CHECK_FUNC(accept, fvwm95_checkNsl=0, [LIBS=$fvwm95_oldLibs])
+    AC_CHECK_FUNC([accept], [fvwm95_checkNsl=0], [LIBS=$fvwm95_oldLibs])
 fi
-AC_CHECK_FUNC(gethostbyname, , AC_CHECK_LIB(nsl, main, [LIBS="$LIBS -lnsl"]))
+AC_CHECK_FUNC([gethostbyname], [], [AC_CHECK_LIB([nsl], [main], [LIBS="$LIBS -lnsl"])])
 
 # For FvwmConsole
-AC_CHECK_LIB(readline, readline, READLINE_LIBRARIES="-lreadline"
- AC_DEFINE(HAVE_READLINE), READLINE_LIBRARIES="")
-AC_SUBST(READLINE_LIBRARIES)
+READLINE_LIBRARIES="$($PKG_CONFIG --libs readline 2>/dev/null)"
+if ! test -z "$READLINE_LIBRARIES"; then
+    AC_DEFINE([HAVE_READLINE], [1], [readline library presence])
+fi
+AC_SUBST([READLINE_LIBRARIES])
 
 
 #-------------------------------------------------------------------
@@ -141,8 +130,8 @@ AC_C_INLINE
 #-------------------------------------------------------------------
 
 # AC_CHECK_FUNCS(select)
-AC_CHECK_FUNCS(gethostname waitpid sysconf uname)
-AC_CHECK_FUNCS(strerror strcasecmp strncasecmp strtoul)
+AC_CHECK_FUNCS([gethostname waitpid sysconf uname])
+AC_CHECK_FUNCS([strerror strcasecmp strncasecmp strtoul])
 
 
 #===================================================================
@@ -180,12 +169,11 @@ fi
 #
 #-------------------------------------------------------------------
 
-AC_SUBST(LIBS)
-AC_SUBST(x_libraries)
-AC_SUBST(x_includes)
-AC_SUBST(fvwm_icons)
-AC_SUBST(fvwm_name)
-AC_SUBST(fvwm_rc)
+AC_SUBST([x_libraries])
+AC_SUBST([x_includes])
+AC_SUBST([fvwm_icons])
+AC_SUBST([fvwm_name])
+AC_SUBST([fvwm_rc])
 
 
 #-------------------------------------------------------------------

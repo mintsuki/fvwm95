@@ -21,7 +21,6 @@ LIBS=${x_libraries} ${XPM_LIBRARY} ${X_LIBRARY}
 CC=@CC@
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ -fcommon ${PATH_DEFINES} 
-MAKEDEPEND=@MAKEDEPEND@
 INSTALL=@INSTALL@
 INSTALL_PROGRAM=@INSTALL_PROGRAM@
 INSTALL_DATA=@INSTALL_DATA@
@@ -33,9 +32,6 @@ SRCS = xpmroot.c
 OBJS = xpmroot.o
 
 all: ${PROG}
-
-depend:
-	${MAKEDEPEND} ${CFLAGS} ${SRCS}
 
 install: all
 	${INSTALL_PROGRAM} ${PROG} ${bin_dir}

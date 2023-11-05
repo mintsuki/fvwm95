@@ -37,7 +37,6 @@ CC=@CC@ -pipe
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ -fcommon ${EXTRA_DEFINES}
 LDFLAGS= @LDFLAGS@ -rdynamic
-MAKEDEPEND=@MAKEDEPEND@
 INSTALL=@INSTALL@
 INSTALL_PROGRAM=@INSTALL_PROGRAM@
 INSTALL_DATA=@INSTALL_DATA@
@@ -76,9 +75,6 @@ MODULES=CheckLockModule.so \
 
 
 all: ${PROG} modules
-
-depend:
-	${MAKEDEPEND} ${CFLAGS} ${SRCS}
 
 install: all
 	mkdir -p ${fvwm_dir}/plugins

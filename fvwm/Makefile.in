@@ -35,7 +35,6 @@ EXTRA_DEFINES=-DXPM -DSHAPE ${PATH_DEFINES}
 CC=@CC@
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ -fcommon ${EXTRA_DEFINES} 
-MAKEDEPEND=@MAKEDEPEND@
 INSTALL=@INSTALL@
 INSTALL_PROGRAM=@INSTALL_PROGRAM@
 INSTALL_DATA=@INSTALL_DATA@
@@ -92,9 +91,6 @@ OBJS=add_window.o \
        windows.o
 
 all: ${PROG}
-
-depend:
-	${MAKEDEPEND} ${CFLAGS} ${SRCS}
 
 install: all
 	mkdir -p ${bin_dir}

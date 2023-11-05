@@ -18,7 +18,6 @@ EXTRA_DEFINES=-DXPM -DSHAPE
 CC=@CC@
 INCLUDES=-I${top_srcdir}/include ${x_includes}
 CFLAGS=${INCLUDES} @CFLAGS@ -fcommon ${EXTRA_DEFINES}
-MAKEDEPEND=@MAKEDEPEND@
 INSTALL=@INSTALL@
 INSTALL_DATA=@INSTALL_DATA@
 RM=@RM@
@@ -65,9 +64,6 @@ OBJS=GetFdWidth.o \
 
 
 all: ${STATIC_LIB}
-
-depend:
-	${MAKEDEPEND} ${CFLAGS} ${SRCS}
 
 install: all
 	mkdir -p ${lib_dir}
