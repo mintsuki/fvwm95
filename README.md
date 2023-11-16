@@ -11,12 +11,12 @@ The following packages are needed in order to build fvwm95:
 
 On Debian/Ubuntu:
 ```sh
-sudo apt-get install build-essential autoconf automake libtool pkg-config xorg xinit xbitmaps libx11-dev libxt-dev libxext-dev libxpm-dev libreadline-dev libxmu-headers
+sudo apt-get install build-essential autoconf automake pkg-config xorg xinit xbitmaps libx11-dev libxt-dev libxext-dev libxpm-dev libreadline-dev libxmu-headers
 ```
 
 On Arch:
 ```sh
-sudo pacman -S --needed base-devel autoconf automake libtool pkgconf xorg xorg-xinit xbitmaps libx11 libxt libxext libxpm readline libxmu
+sudo pacman -S --needed base-devel autoconf automake pkgconf xorg xorg-xinit xbitmaps libx11 libxt libxext libxpm readline libxmu
 ```
 
 The following packages are not necessary to build fvwm95 itself, but
